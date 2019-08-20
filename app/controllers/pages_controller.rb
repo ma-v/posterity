@@ -18,6 +18,6 @@ class PagesController < ApplicationController
   	@activity_id = @activities.first["id"]
 
   	@activity = JSON.parse(RestClient.get("https://www.strava.com/api/v3/activities/#{@activity_id}?include_all_efforts=false", {Authorization: "Bearer #{@access_token}"}))
-  	@polyline = @activity["map"]["polyline"]
+  	@polyline = @activity["map"]["summary_polyline"]
   end
 end
