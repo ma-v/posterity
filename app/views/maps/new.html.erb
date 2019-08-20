@@ -2,12 +2,20 @@
 <p><%= @access_token %></p>
 <p><%= @athlete_id %></p>
 <p>Biggest Ride : <%= @biggest_ride %></p>
-
-<ul>
-<% @activities.first(10).each do |activity|%>
-<li class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>"><%= activity["name"] %></li>
-<% end %>
-</ul>
+  <div class="row">
+  <!-- <div class="col-sm-6"> -->
+    <% @activities.first(10).each do |activity|%>
+    <div class="card m-5 text-center">
+        <div class="card-body card-trip p-5">
+            <img src="<%= @athlete_pic %>" class="card-trip-user avatar-bordered" />
+          <h5 class="card-title"><li class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>"><%= activity["name"] %></li></h5>
+          <p class="card-text"><%= activity["distance"]/1000  %> Km</p>
+          <p class="card-text"> Date: <%= activity["start_date"]  %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
 
 <p>first activity details</p>
 
