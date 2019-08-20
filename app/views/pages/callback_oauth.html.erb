@@ -1,0 +1,13 @@
+<h1><%= @token %></h1>
+<p><%= @access_token %></p>
+<p><%= @athlete_id %></p>
+<p>Biggest Ride : <%= @biggest_ride %></p>
+
+<ul>
+<% @activities.first(10).each do |activity|%>
+<li><%= activity["name"] %></li>
+<% end %>
+</ul>
+
+<p>first activity details</p>
+<%= @polyline %>
