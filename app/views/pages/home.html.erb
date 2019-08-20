@@ -6,4 +6,21 @@
   </div>
 </div>
 
+<h1>Pages#home</h1>
+<p>Find me in app/views/pages/home.html.erb</p>
+
+<button id="button">TEST DRAW</button>
+
+<div id="map" style="height: 500px" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
 <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=http://localhost:3000/callback_oauth&approval_prompt=force&scope=read,activity:read"><div class="btn btn-primary" id="test">Connect your strava account</div></a>
+
+<form id="searchForm">
+        <input type="text" id="address" class="form-control" placeholder="Type an address">
+        <input type="submit" value="Geocode!" class="btn btn-default">
+</form>
+
+<a href="" id="api_mapbox"><div class="btn btn-primary" id="test-1">Wanna see a cool map of France?</div></a>
+
+<p id="coordinates"></p>
+<div id="map" style="height: 300px"></div>
