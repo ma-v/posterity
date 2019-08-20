@@ -95,7 +95,7 @@ const AddTracking = (map) => {
           "line-width": 8
         }
       });
-    });  
+    });
   }
 };
 
