@@ -1,18 +1,18 @@
 import "bootstrap";
 import { selectRide } from '../components/select-rides';
 
-selectRide();
+
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import mapboxgl from 'mapbox-gl';
 
 import { injectCoordinates} from '../components/geocode';
-import { initMapbox } from '../plugins/init_mapbox';
-import { AddTracking } from '../plugins/init_mapbox';
+import { initMapbox } from '../components/select-rides';
+// import { selectRide } from '../components/select-rides';
 
 var map = initMapbox();
-AddTracking(map);
+selectRide(map);
 
 const formElement = document.getElementById('searchForm');
 if (formElement) {
@@ -31,5 +31,5 @@ if (formElement) {
 	      };
 	      injectCoordinates(coordinates);
 	      });
-	});	
+	});
 }
