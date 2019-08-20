@@ -5,9 +5,10 @@
 
 <ul>
 <% @activities.first(10).each do |activity|%>
-<li><%= activity["name"] %></li>
+<li class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>"><%= activity["name"] %></li>
 <% end %>
 </ul>
 
 <p>first activity details</p>
-<%= @polyline %>
+
+<p id="coordinates"></p>
