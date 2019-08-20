@@ -1,17 +1,22 @@
 import "bootstrap";
-import { injectCoordinates} from '../components/geocode';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
 import mapboxgl from 'mapbox-gl';
 
+import { injectCoordinates} from '../components/geocode';
+import { initMapbox } from '../plugins/init_mapbox';
+import { AddTracking } from '../plugins/init_mapbox';
+
+var map = initMapbox();
+AddTracking(map);
 
 const formElement = document.getElementById('searchForm');
 formElement.addEventListener('submit', (event) => {
-  // prevent form's default behavior
+
   event.preventDefault();
 
-  // get input value
   const address = document.getElementById('address').value;
   const mapboxKey = 'yourApiKey';
-  // trigger request to Google Maps API
   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ`)
     .then(response => response.json())
     .then((data) => {
@@ -22,5 +27,3 @@ formElement.addEventListener('submit', (event) => {
       injectCoordinates(coordinates);
       });
 });
-
-

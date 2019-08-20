@@ -2,6 +2,7 @@
   "name": "rides",
   "private": true,
   "dependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.1.2",
     "@rails/webpacker": "^4.0.7",
     "bootstrap": "^4.3.1",
     "geocoder": "^0.2.3",
