@@ -5,21 +5,19 @@ import "bootstrap";
 
 import { injectCoordinates} from '../components/geocode';
 import { initMapbox } from '../components/select-rides';
+import { printMap } from '../components/select-rides';
 import { selectRide } from '../components/select-rides';
 
-var map = initMapbox();
-selectRide(map);
-// loadImage(coordinates);
-// var mymap = L.map('mapid').setView([51.505, -0.09], 8);
-// const mapElement = document.getElementById('map');
-//   if (mapElement) {
-//     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
-//     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-//       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//       maxZoom: 18,
-//       id: 'mapbox.streets',
-//       accessToken: 'your.mapbox.access.token'
-//     }).addTo(mymap);
-// };
+initMapbox();
+selectRide();
+
+//Queryselector sur le bouton avec id print
+const mapToPrint = document.querySelector("#print-map");
+//addEventListener au click
+  printMap();
+mapToPrint.addEventListener("click", (e) => {
+  document.printer.printMap('CurrentSize', 'MyManualPrint');
+});
+// Et on appele la fonction printMap(mapWithTrace)
 
 
