@@ -2,17 +2,17 @@
   <p style="display: none;" id="coordinates"></p>
   <div class="row">
     <div class="col-5 my-auto mx-auto">
-      <div id="map" style="height: 600px; border: 20px solid white; box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      <div id="mapid" style="height: 600px; border: 20px solid white; box-shadow: 0 0 15px rgba(0,0,0,0.2);
 " data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
     <div class="col-2">
       <% @activities.first(10).each do |activity|%>
         <div class="card text-center m-4">
-            <div class="card-body card-trip">
-              <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= activity["name"] %>"><button class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>">Ride</button></h5>
-              <p class="card-text"><%= activity["distance"]/1000  %> Km</p>
-              <p class="card-text"> Date: <%= activity["start_date"]  %></p>
-            </div>
+          <div class="card-body card-trip">
+            <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= activity["name"] %>"><button class="btn-posterity" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>" data-title="<%= activity["name"] %>" data-image="<%= activity["type"] %>">Ride</button></h5>
+            <p class="card-text"><%= activity["distance"]/1000  %> Km</p>
+            <p class="card-text"> Date: <%= activity["start_date"]  %></p>
+          </div>
         </div>
       <% end %>
     </div>
@@ -32,3 +32,11 @@
     </div>
   </div>
 </div>
+
+<%= simple_form_for(@map) do |f| %>
+  <%= f.input :title, as: :hidden %>
+  <%= f.input :image, as: :hidden %>
+  <%= f.submit class: "btn-posterity"%>
+<% end %>
+
+

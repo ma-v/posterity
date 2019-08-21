@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl';
 
 const injectCoordinates = (coordinates) => {
-  const paragraphElement = document.getElementById('coordinates');
+  const paragraphElement = document.getElementById('map');
   paragraphElement.innerText = `${coordinates.lat}, ${coordinates.lng}`;
   const mapboxRequest = document.getElementById('api_mapbox');
     mapboxRequest.addEventListener('click', (event) => {

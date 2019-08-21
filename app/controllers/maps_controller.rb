@@ -13,5 +13,22 @@ class MapsController < ApplicationController
 
 	  	@activity = JSON.parse(RestClient.get("https://www.strava.com/api/v3/activities/#{@activity_id}?include_all_efforts=false", {Authorization: "Bearer #{@access_token}"}))
 	  	@polyline = @activity["map"]["summary_polyline"]
+
+	  	@map = Map.new
+	end
+
+	def create
+		@map = Map.new(map_params)
+		if @map.save 
+			redirect_to root_path
+		else 
+			render :new
+		end
+	end
+
+	private 
+
+	def map_params
+		params.require(:map).permit(:title, :image)
 	end
 end
