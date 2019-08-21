@@ -2,4 +2,16 @@
 
 body {
   margin: 0;
+  text-align: center;
+}
+
+.HIW {
+	display: flex;
+	align-items: top;
+	justify-content: space-around;
+	padding: 15px;
+}
+
+.section-1 {
+	height: 90vh;
 }
