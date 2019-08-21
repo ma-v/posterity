@@ -6,6 +6,8 @@ const polyline = require('@mapbox/polyline');
 const selectRide = (map) => {
 	let coordinates = [];
 	const displayCoordinates = document.querySelector("#coordinates");
+  const imageInput = document.querySelector("#map_image")
+  const titleInput = document.querySelector("#map_title")
   	for (var i = 0; i <= 9; i++) {
     		const button_i = document.querySelector(`#activity_${i}`);
         let j = i;
@@ -22,6 +24,10 @@ const selectRide = (map) => {
             console.log(myCoordinates.coordinates.slice(0,10))
             // passer les coord a AddTracking
             AddTracking(map,myCoordinates.coordinates, j)
+
+            // add title and image to form input values
+            titleInput.value = button_i.dataset.title
+            imageInput.value = button_i.dataset.image
       		})
         }
   	}
