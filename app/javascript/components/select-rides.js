@@ -1,7 +1,9 @@
 import mapboxgl from 'mapbox-gl';
 import mapboxDraw from '@mapbox/mapbox-gl-draw';
+import 'leaflet/dist/leaflet';
 
 const polyline = require('@mapbox/polyline');
+// var polyUtil = require('polyline-encoded');
 
 const selectRide = (map) => {
 	let coordinates = [];
@@ -14,14 +16,19 @@ const selectRide = (map) => {
 
         if (button_i) {
       		button_i.addEventListener("click", function() {
-            const polyline_i = button_i.dataset.polyline;
-      			coordinates[j] = polyline.toGeoJSON(`${polyline_i}`);
-      			displayCoordinates.innerText = coordinates[j]["coordinates"];
-            let myCoordinates = coordinates[j];
+            var polyline_i = button_i.dataset.polyline;
+            coordinates[j] = polyline.toGeoJSON(`${polyline_i}`);
+            let myCoordinates = coordinates[j].coordinates;
+            const newArray = myCoordinates.map(function(ar) {
+              const newAr = [];
+              newAr[0] = ar[1];
+              newAr[1] = ar[0];
+              return newAr
+            });
 
-            // centrer la map sur les coordonnees
-            map.flyTo({center: myCoordinates.coordinates[0]});
-            console.log(myCoordinates.coordinates.slice(0,10))
+            var trace = L.polyline(newArray, {color: 'red'}).addTo(map);
+            map.fitBounds(trace.getBounds());
+
             // passer les coord a AddTracking
             AddTracking(map,myCoordinates.coordinates, j)
 
@@ -36,84 +43,19 @@ const selectRide = (map) => {
 
 
 const initMapbox = () => {
-  const mapElement = document.getElementById('map');
+  var map = L.map('mapid').setView([43.305, -1.5], 8);
+  if (map) {
 
-  if (mapElement) {
-    mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v10',
-      center: [2.213749,46.227638],
-      zoom: 8
-    });
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      maxZoom: 18,
+      id: 'mapbox.satellite',
+      accessToken: 'pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ'
+    }).addTo(map);
   }
     return map;
 };
 
-const AddTracking = (map, coordinates, i) => {
-  const button = document.querySelector("#button");
-  // var scale = EXTENT / coordinates.extent;
-  // var geometry = coordinates.loadGeometry();
-
-  // map.addlayer({});
-
-      map.addLayer({
-        "id": `route_${i}`,
-        "type": "line",
-        "source": {
-          "type": "geojson",
-          "data": {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-              "type": "LineString",
-              "coordinates": coordinates
-            }
-          }
-        },
-        "layout": {
-          "line-join": "round",
-          "line-cap": "round"
-        },
-        "paint": {
-          "line-color": "#888",
-          "line-width": 8
-        }
-      });
-};
-
-
-// var toggleableLayerIds = [ 'contours', 'museums' ];
-
-// for (var i = 0; i < toggleableLayerIds.length; i++) {
-// var id = toggleableLayerIds[i];
-
-// var link = document.createElement('a');
-// link.href = '#';
-// link.className = 'active';
-// link.textContent = id;
-
-// link.onclick = function (e) {
-// var clickedLayer = this.textContent;
-// e.preventDefault();
-// e.stopPropagation();
-
-// var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-
-// if (visibility === 'visible') {
-// map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-// this.className = '';
-// } else {
-// this.className = 'active';
-// map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-// }
-// };
 
 export { initMapbox };
-export { AddTracking };
-
-
-
-
-
 export {selectRide};
+

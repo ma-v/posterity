@@ -11,6 +11,7 @@
           <h5 class="card-title"><li class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>" data-title="<%= activity["name"] %>" data-image="<%= activity["type"] %>"><%= activity["name"] %></li></h5>
           <p class="card-text"><%= activity["distance"]/1000  %> Km</p>
           <p class="card-text"> Date: <%= activity["start_date"]  %></p>
+          <a href="" id="api_mapbox"> Test</a>
         </div>
       </div>
       <% end %>
@@ -26,8 +27,4 @@
   <%= f.submit class: "btn btn-primary"%>
 <% end %>
 
-
-<div id="map" style="height: 500px" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-
-
-
+<div id="mapid" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
