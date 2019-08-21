@@ -1,24 +1,34 @@
-<h1><%= @token %></h1>
-<p><%= @access_token %></p>
-<p><%= @athlete_id %></p>
-<p>Biggest Ride : <%= @biggest_ride %></p>
+<div class="container-fluid">
+  <p style="display: none;" id="coordinates"></p>
   <div class="row">
-  <!-- <div class="col-sm-6"> -->
-    <% @activities.first(10).each do |activity|%>
-    <div class="card m-5 text-center">
-        <div class="card-body card-trip p-5">
-            <img src="<%= @athlete_pic %>" class="card-trip-user avatar-bordered" />
-          <h5 class="card-title"><li class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>"><%= activity["name"] %></li></h5>
-          <p class="card-text"><%= activity["distance"]/1000  %> Km</p>
-          <p class="card-text"> Date: <%= activity["start_date"]  %></p>
+    <div class="col-5 my-auto mx-auto">
+      <div id="map" style="height: 600px; border: 20px solid white; box-shadow: 0 0 15px rgba(0,0,0,0.2);
+" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+    </div>
+    <div class="col-2">
+      <% @activities.first(10).each do |activity|%>
+        <div class="card text-center m-4">
+            <div class="card-body card-trip">
+              <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= activity["name"] %>"><button class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>">Ride</button></h5>
+              <p class="card-text"><%= activity["distance"]/1000  %> Km</p>
+              <p class="card-text"> Date: <%= activity["start_date"]  %></p>
+            </div>
         </div>
-      </div>
       <% end %>
     </div>
+    <div class="col-5 my-auto ml-auto">
+      <div class="map-styles">
+        <p class="bg-white"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum et laudantium iusto aut, esse excepturi, dolor vitae amet similique labore quisquam ipsam fugit sunt alias! Placeat ipsam, ut reprehenderit repellat.</span>
+        <span>Totam nam ipsa vel expedita non consectetur odit rem. Totam necessitatibus natus laudantium aliquam ipsa dolore doloribus adipisci. Similique eveniet saepe nam enim fugiat deleniti, perferendis voluptates commodi dolorum temporibus.</span>
+        <span>Mollitia, eaque. Dolores iure excepturi repudiandae doloremque deleniti quaerat at officia qui? Suscipit similique eius corrupti voluptatum sapiente, pariatur, asperiores modi omnis minus praesentium veniam ea? Saepe distinctio modi excepturi.</span>
+        <span>Cumque dolorum cum qui id harum voluptate officia tempore asperiores, veniam, iure ipsa repudiandae, minima, nisi quae architecto rerum blanditiis! Aliquid reiciendis voluptas et eius dolor quos omnis dolore totam.</span>
+        <span>Totam repellat ab, sint maiores nisi perspiciatis quibusdam, ducimus excepturi ea fuga cum quaerat cupiditate blanditiis vero. Iste adipisci, autem amet laboriosam. Culpa placeat adipisci sequi non necessitatibus vero eum!</span>
+        <span>Voluptatum tempore aspernatur eaque cumque recusandae aut suscipit dignissimos veniam, nihil quod voluptatibus aliquam inventore numquam molestias sunt minus iure et ea! Qui, rerum quos? Est saepe reprehenderit, nisi non.</span>
+        <span>Incidunt nostrum nesciunt deleniti pariatur, aliquid, dolore cumque quisquam reiciendis eum cum delectus. Sequi natus fugit cumque delectus, veritatis excepturi facere quasi iste? Quidem vero velit rerum cupiditate dolor vitae?</span>
+        <span>Fugiat odio ipsa eum non quaerat nihil officia eaque iste pariatur autem odit in, architecto corporis quas? Minus repudiandae, necessitatibus numquam sapiente, minima at ad ab temporibus rem obcaecati sunt?</span>
+        <span>Adipisci laudantium minus, obcaecati nulla doloribus, fugiat alias quos aliquid consequatur officia voluptatum quaerat. Hic error quae ut ipsum in nihil at laborum aperiam, quam reprehenderit natus totam, omnis architecto!</span>
+        <span>Maiores, dignissimos, neque. Adipisci similique tempora labore molestiae aliquid mollitia deleniti quasi quos ullam placeat suscipit autem, maxime cum sapiente officiis excepturi voluptatem possimus quam est saepe, veritatis iusto incidunt.</span></p>
+      </div>
+    </div>
   </div>
-
-<p>first activity details</p>
-
-<p id="coordinates"></p>
-
-<div id="map" style="height: 500px" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+</div>
