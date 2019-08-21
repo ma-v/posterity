@@ -7,8 +7,10 @@ import { injectCoordinates} from '../components/geocode';
 import { initMapbox } from '../components/select-rides';
 import { selectRide } from '../components/select-rides';
 
+
 var map = initMapbox();
 selectRide(map);
+
 // loadImage(coordinates);
 // var mymap = L.map('mapid').setView([51.505, -0.09], 8);
 // const mapElement = document.getElementById('map');
