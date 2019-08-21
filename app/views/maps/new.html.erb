@@ -4,11 +4,11 @@
 <p>Biggest Ride : <%= @biggest_ride %></p>
   <div class="row">
   <!-- <div class="col-sm-6"> -->
-    <% @activities.first(10).each do |activity|%>
-    <div class="card m-5 text-center">
+    <% @activities.first(3).each do |activity|%>
+    <div class="card m-1 text-center">
         <div class="card-body card-trip p-5">
             <img src="<%= @athlete_pic %>" class="card-trip-user avatar-bordered" />
-          <h5 class="card-title"><li class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>"><%= activity["name"] %></li></h5>
+          <h5 class="card-title"><li class="btn btn-primary" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>" data-title="<%= activity["name"] %>" data-image="<%= activity["type"] %>"><%= activity["name"] %></li></h5>
           <p class="card-text"><%= activity["distance"]/1000  %> Km</p>
           <p class="card-text"> Date: <%= activity["start_date"]  %></p>
           <a href="" id="api_mapbox"> Test</a>
@@ -21,7 +21,10 @@
 <p>first activity details</p>
 
 <p id="coordinates"></p>
+<%= simple_form_for(@map) do |f| %>
+  <%= f.input :title, as: :hidden %>
+  <%= f.input :image, as: :hidden %>
+  <%= f.submit class: "btn btn-primary"%>
+<% end %>
 
-<!-- <div id="map" style="height: 500px" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div> -->
 <div id="mapid" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-

@@ -8,13 +8,14 @@ const polyline = require('@mapbox/polyline');
 const selectRide = (map) => {
 	let coordinates = [];
 	const displayCoordinates = document.querySelector("#coordinates");
+  const imageInput = document.querySelector("#map_image")
+  const titleInput = document.querySelector("#map_title")
   	for (var i = 0; i <= 9; i++) {
     		const button_i = document.querySelector(`#activity_${i}`);
         let j = i;
 
         if (button_i) {
       		button_i.addEventListener("click", function() {
-
             var polyline_i = button_i.dataset.polyline;
             coordinates[j] = polyline.toGeoJSON(`${polyline_i}`);
             let myCoordinates = coordinates[j].coordinates;
@@ -24,20 +25,16 @@ const selectRide = (map) => {
               newAr[1] = ar[0];
               return newAr
             });
-            // console.log(newArray)
+
             var trace = L.polyline(newArray, {color: 'red'}).addTo(map);
             map.fitBounds(trace.getBounds());
 
+            // passer les coord a AddTracking
+            AddTracking(map,myCoordinates.coordinates, j)
 
-
-
-      			// displayCoordinates.innerText = coordinates[j]["coordinates"];
-
-         //    // centrer la map sur les coordonnees
-         //    map.flyTo({center: myCoordinates.coordinates[0]});
-         //    console.log(myCoordinates.coordinates.slice(0,10))
-         //    // passer les coord a AddTracking
-         //    AddTracking(map,myCoordinates.coordinates, j)
+            // add title and image to form input values
+            titleInput.value = button_i.dataset.title
+            imageInput.value = button_i.dataset.image
       		})
         }
   	}
@@ -58,52 +55,7 @@ const initMapbox = () => {
     return map;
 };
 
-const AddTracking = (map, coordinates, i) => {
-  const button = document.querySelector("#button");
-  // var scale = EXTENT / coordinates.extent;
-  // var geometry = coordinates.loadGeometry();
-
-  // map.addlayer({});
-
-      map.addLayer({
-        "id": `route_${i}`,
-        "type": "line",
-        "source": {
-          "type": "geojson",
-          "data": {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-              "type": "LineString",
-              "coordinates": coordinates
-            }
-          }
-        },
-        "layout": {
-          "line-join": "round",
-          "line-cap": "round"
-        },
-        "paint": {
-          "line-color": "#888",
-          "line-width": 8
-        }
-      });
-      console.log(coordinates);
-      // loadImage(coordinates)
-};
-
-
-// const loadImage = (coordinates) => {
-//    const mapboxRequest = document.querySelector('#api_mapbox');
-//     console.log("Coucou")
-//     mapboxRequest.addEventListener('click', (event) => {
-//     mapboxRequest.href = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${coordinates.lng},${coordinates.lat},10,14,4/1280x1280?access_token=pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ&attribution=false&logo=false`;
-//      });
-//   };
-
 
 export { initMapbox };
-export { AddTracking };
-// export { loadImage };
 export {selectRide};
 
