@@ -2,6 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import mapboxDraw from '@mapbox/mapbox-gl-draw';
 
 const polyline = require('@mapbox/polyline');
+// var polyUtil = require('polyline-encoded');
 
 const selectRide = (map) => {
 	let coordinates = [];
@@ -12,16 +13,29 @@ const selectRide = (map) => {
 
         if (button_i) {
       		button_i.addEventListener("click", function() {
-            const polyline_i = button_i.dataset.polyline;
-      			coordinates[j] = polyline.toGeoJSON(`${polyline_i}`);
-      			displayCoordinates.innerText = coordinates[j]["coordinates"];
-            let myCoordinates = coordinates[j];
 
-            // centrer la map sur les coordonnees
-            map.flyTo({center: myCoordinates.coordinates[0]});
-            console.log(myCoordinates.coordinates.slice(0,10))
-            // passer les coord a AddTracking
-            AddTracking(map,myCoordinates.coordinates, j)
+            var polyline_i = button_i.dataset.polyline;
+            coordinates[j] = polyline.toGeoJSON(`${polyline_i}`);
+            let myCoordinates = coordinates[j].coordinates;
+            // var latlngs = polyUtil.decode(encoded);
+
+            // var latlngs = [
+            //     polyline.toGeoJSON(`${polyline_i}`)
+            // ];
+            console.log(myCoordinates)
+            var trace = L.polyline(myCoordinates, {color: 'red'}).addTo(map);
+            map.fitBounds(trace.getBounds())
+
+
+
+
+      			// displayCoordinates.innerText = coordinates[j]["coordinates"];
+
+         //    // centrer la map sur les coordonnees
+         //    map.flyTo({center: myCoordinates.coordinates[0]});
+         //    console.log(myCoordinates.coordinates.slice(0,10))
+         //    // passer les coord a AddTracking
+         //    AddTracking(map,myCoordinates.coordinates, j)
       		})
         }
   	}
@@ -30,16 +44,14 @@ const selectRide = (map) => {
 
 
 const initMapbox = () => {
-  const mapElement = document.getElementById('map');
+  var map = L.map('mapid').setView([43.305, -1.5], 8);
+  if (map) {
 
-  if (mapElement) {
-    mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v10',
-      center: [2.213749,46.227638],
-      zoom: 8
-    });
+      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+      maxZoom: 18,
+      id: 'mapbox.satellite',
+      accessToken: 'pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ'
+    }).addTo(map);
   }
     return map;
 };
@@ -75,20 +87,21 @@ const AddTracking = (map, coordinates, i) => {
         }
       });
       console.log(coordinates);
-      loadImage(coordinates)
+      // loadImage(coordinates)
 };
 
 
-const loadImage = (coordinates) => {
-   const mapboxRequest = document.querySelector('#api_mapbox');
-    console.log("Coucou")
-    mapboxRequest.addEventListener('click', (event) => {
-    mapboxRequest.href = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${coordinates.lng},${coordinates.lat},10,14,4/1280x1280?access_token=pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ&attribution=false&logo=false`;
-     });
-  };
+// const loadImage = (coordinates) => {
+//    const mapboxRequest = document.querySelector('#api_mapbox');
+//     console.log("Coucou")
+//     mapboxRequest.addEventListener('click', (event) => {
+//     mapboxRequest.href = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${coordinates.lng},${coordinates.lat},10,14,4/1280x1280?access_token=pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ&attribution=false&logo=false`;
+//      });
+//   };
 
 
 export { initMapbox };
 export { AddTracking };
-export { loadImage };
+// export { loadImage };
 export {selectRide};
+
