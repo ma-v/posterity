@@ -1,6 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 import mapboxDraw from '@mapbox/mapbox-gl-draw';
-import L from 'leaflet'
+import 'leaflet/dist/leaflet';
 
 const polyline = require('@mapbox/polyline');
 // var polyUtil = require('polyline-encoded');
@@ -24,13 +24,7 @@ const selectRide = (map) => {
               newAr[1] = ar[0];
               return newAr
             });
-            // var latlngs = polyUtil.decode(encoded);
-
-            // var latlngs = [
-            //     polyline.toGeoJSON(`${polyline_i}`)
-            // ];
-            console.log(newArray)
-            // var test = L.coordsToLatLngs(newArray);
+            // console.log(newArray)
             var trace = L.polyline(newArray, {color: 'red'}).addTo(map);
             map.fitBounds(trace.getBounds());
 
