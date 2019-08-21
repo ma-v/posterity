@@ -1,20 +1,29 @@
 .banner {
   background-size: cover;
-  background-position: center;
-  padding: 150px 0;
+  background-position: top;
+  padding: 37vh 0;
 }
 
 .banner h1 {
   margin: 0;
   color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   font-size: 32px;
-  font-weight: bold;
+  padding-bottom: 8px;
 }
 
 .banner p {
+  font-weight: 300;
   font-size: 20px;
   color: white;
-  opacity: .7;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  opacity: .9;
+  padding-bottom: 8px;
+}
+
+.bottom-banner {
+  background-size: cover;
+  background-position: top;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }

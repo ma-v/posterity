@@ -1,13 +1,13 @@
 .footer {
   width: 100%;
   bottom: 0;
-  background: white;
+  background: $main-blue;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100px;
+  height: 50px;
   padding: 0px 50px;
-  color: $main-blue;
+  color: white; 
   z-index: 1000;
 }
 .footer-links {
@@ -15,7 +15,7 @@
   align-items: center;
 }
 .footer-links a {
-  color: $main-blue;
+  color: white;
   opacity: 0.15;
   text-decoration: none;
   font-size: 24px;
