@@ -8,8 +8,8 @@ const polyline = require('@mapbox/polyline');
 const selectRide = (map) => {
 	let coordinates = [];
 	const displayCoordinates = document.querySelector("#coordinates");
-  const imageInput = document.querySelector("#map_image")
-  const titleInput = document.querySelector("#map_title")
+  const imageInput = document.querySelector("#map_image");
+  const titleInput = document.querySelector("#map_title");
   	for (var i = 0; i <= 9; i++) {
     		const button_i = document.querySelector(`#activity_${i}`);
         let j = i;
@@ -23,18 +23,15 @@ const selectRide = (map) => {
               const newAr = [];
               newAr[0] = ar[1];
               newAr[1] = ar[0];
-              return newAr
+              return newAr;
             });
 
             var trace = L.polyline(newArray, {color: 'red'}).addTo(map);
             map.fitBounds(trace.getBounds());
 
-            // passer les coord a AddTracking
-            AddTracking(map,myCoordinates.coordinates, j)
-
             // add title and image to form input values
-            titleInput.value = button_i.dataset.title
-            imageInput.value = button_i.dataset.image
+            titleInput.value = button_i.dataset.title;
+            imageInput.value = button_i.dataset.image;
       		})
         }
   	}
