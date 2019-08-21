@@ -74,40 +74,21 @@ const AddTracking = (map, coordinates, i) => {
           "line-width": 8
         }
       });
+      console.log(coordinates);
+      loadImage(coordinates)
 };
 
 
-// var toggleableLayerIds = [ 'contours', 'museums' ];
+const loadImage = (coordinates) => {
+   const mapboxRequest = document.querySelector('#api_mapbox');
+    console.log("Coucou")
+    mapboxRequest.addEventListener('click', (event) => {
+    mapboxRequest.href = `https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/${coordinates.lng},${coordinates.lat},10,14,4/1280x1280?access_token=pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ&attribution=false&logo=false`;
+     });
+  };
 
-// for (var i = 0; i < toggleableLayerIds.length; i++) {
-// var id = toggleableLayerIds[i];
-
-// var link = document.createElement('a');
-// link.href = '#';
-// link.className = 'active';
-// link.textContent = id;
-
-// link.onclick = function (e) {
-// var clickedLayer = this.textContent;
-// e.preventDefault();
-// e.stopPropagation();
-
-// var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
-
-// if (visibility === 'visible') {
-// map.setLayoutProperty(clickedLayer, 'visibility', 'none');
-// this.className = '';
-// } else {
-// this.className = 'active';
-// map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
-// }
-// };
 
 export { initMapbox };
 export { AddTracking };
-
-
-
-
-
+export { loadImage };
 export {selectRide};
