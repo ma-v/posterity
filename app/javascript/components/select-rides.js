@@ -10,6 +10,7 @@ const selectRide = (map) => {
 	const displayCoordinates = document.querySelector("#coordinates");
   const imageInput = document.querySelector("#map_image");
   const titleInput = document.querySelector("#map_title");
+  var traces = L.featureGroup();
   	for (var i = 0; i <= 9; i++) {
     		const button_i = document.querySelector(`#activity_${i}`);
         let j = i;
@@ -26,8 +27,11 @@ const selectRide = (map) => {
               return newAr;
             });
 
-            var trace = L.polyline(newArray, {color: 'red'}).addTo(map);
-            map.fitBounds(trace.getBounds());
+            var trace = L.polyline(newArray, {color: 'red'});
+            trace.addTo(map);
+            traces.addLayer(trace);
+            
+            map.fitBounds(traces.getBounds());
 
             // add title and image to form input values
             titleInput.value = button_i.dataset.title;
