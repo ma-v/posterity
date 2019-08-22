@@ -13,7 +13,7 @@ const selectRide = () => {
   const imageInput = document.querySelector("#map_image");
   const titleInput = document.querySelector("#map_title");
   const traces = L.featureGroup();
-  	for (var i = 0; i <= 9; i++) {
+  	for (var i = 1; i <= 10; i++) {
     		const button_i = document.querySelector(`#activity_${i}`);
         let j = i;
 
