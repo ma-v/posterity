@@ -11,8 +11,6 @@ import { selectRide } from '../components/select-rides';
 initMapbox();
 selectRide();
 
-
-
 //Queryselector sur le bouton avec id print
 const mapToPrint = document.querySelector("#print-map");
 //addEventListener au click

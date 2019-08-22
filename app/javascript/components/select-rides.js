@@ -10,30 +10,43 @@ const polyline = require('@mapbox/polyline');
 const selectRide = () => {
 	let coordinates = [];
 	const displayCoordinates = document.querySelector("#coordinates");
-  const imageInput = document.querySelector("#map_image")
-  const titleInput = document.querySelector("#map_title")
+  const imageInput = document.querySelector("#map_image");
+  const titleInput = document.querySelector("#map_title");
+  const traces = L.featureGroup();
   	for (var i = 0; i <= 9; i++) {
     		const button_i = document.querySelector(`#activity_${i}`);
         let j = i;
 
         if (button_i) {
       		button_i.addEventListener("click", function() {
+            event.currentTarget.classList.toggle("pressed");
             var polyline_i = button_i.dataset.polyline;
             coordinates[j] = polyline.toGeoJSON(`${polyline_i}`);
             let myCoordinates = coordinates[j].coordinates;
             const newArray = myCoordinates.map(function(ar) {
-              const newAr = [];
-              newAr[0] = ar[1];
-              newAr[1] = ar[0];
-              return newAr
-            });
-
-            var trace = L.polyline(newArray, {color: 'red'}).addTo(document.map);
-            document.map.fitBounds(trace.getBounds());
+                const newAr = [];
+                newAr[0] = ar[1];
+                newAr[1] = ar[0];
+                return newAr;
+              });
+            if (event.currentTarget.classList.contains("pressed")) { 
+              var trace_i = L.polyline(newArray, {color: 'red'});
+              trace_i["_leaflet_id"] = j;
+              trace_i.addTo(document.map);
+              traces.addLayer(trace_i);
+              console.log(traces);
+            }
+            else {
+              const traceToRm = traces["_layers"][j];
+              document.map.removeLayer(traceToRm);
+              traces.removeLayer(traceToRm);
+            }
+            
+            document.map.fitBounds(traces.getBounds());
 
             // add title and image to form input values
-            titleInput.value = button_i.dataset.title
-            imageInput.value = button_i.dataset.image
+            titleInput.value = button_i.dataset.title;
+            imageInput.value = button_i.dataset.image;
       		})
         }
   	};

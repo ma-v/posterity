@@ -1,33 +1,23 @@
+<p style="display: none;" id="coordinates"></p>
 <div class="container-fluid">
-  <p style="display: none;" id="coordinates"></p>
   <div class="row">
     <div class="col-5 my-auto mx-auto">
-      <div id="mapid" style="height: 600px; border: 20px solid white; box-shadow: 0 0 15px rgba(0,0,0,0.2);
-" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-    </div>
-    <div class="col-2">
-      <% @activities.first(10).each do |activity|%>
-        <div class="card text-center m-4">
-          <div class="card-body card-trip">
-            <h5 class="card-title" data-toggle="tooltip" data-placement="top" title="<%= activity["name"] %>"><button class="btn-posterity" id="activity_<%= @activities.index(activity) %>" data-polyline="<%= activity['map']['summary_polyline'] %>" data-title="<%= activity["name"] %>" data-image="<%= activity["type"] %>">Ride</button></h5>
-            <p class="card-text"><%= activity["distance"]/1000  %> Km</p>
-            <p class="card-text"> Date: <%= activity["start_date"]  %></p>
-          </div>
-        </div>
-      <% end %>
+      <div id="mapid" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
     <div class="col-5 my-auto ml-auto">
       <div class="map-styles">
+        <h1>Give some style to your map:</h1>
         <p class="bg-white"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum et laudantium iusto aut, esse excepturi, dolor vitae amet similique labore quisquam ipsam fugit sunt alias! Placeat ipsam, ut reprehenderit repellat.</span>
         <span>Totam nam ipsa vel expedita non consectetur odit rem. Totam necessitatibus natus laudantium aliquam ipsa dolore doloribus adipisci. Similique eveniet saepe nam enim fugiat deleniti, perferendis voluptates commodi dolorum temporibus.</span>
-        <span>Mollitia, eaque. Dolores iure excepturi repudiandae doloremque deleniti quaerat at officia qui? Suscipit similique eius corrupti voluptatum sapiente, pariatur, asperiores modi omnis minus praesentium veniam ea? Saepe distinctio modi excepturi.</span>
-        <span>Cumque dolorum cum qui id harum voluptate officia tempore asperiores, veniam, iure ipsa repudiandae, minima, nisi quae architecto rerum blanditiis! Aliquid reiciendis voluptas et eius dolor quos omnis dolore totam.</span>
-        <span>Totam repellat ab, sint maiores nisi perspiciatis quibusdam, ducimus excepturi ea fuga cum quaerat cupiditate blanditiis vero. Iste adipisci, autem amet laboriosam. Culpa placeat adipisci sequi non necessitatibus vero eum!</span>
-        <span>Voluptatum tempore aspernatur eaque cumque recusandae aut suscipit dignissimos veniam, nihil quod voluptatibus aliquam inventore numquam molestias sunt minus iure et ea! Qui, rerum quos? Est saepe reprehenderit, nisi non.</span>
-        <span>Incidunt nostrum nesciunt deleniti pariatur, aliquid, dolore cumque quisquam reiciendis eum cum delectus. Sequi natus fugit cumque delectus, veritatis excepturi facere quasi iste? Quidem vero velit rerum cupiditate dolor vitae?</span>
-        <span>Fugiat odio ipsa eum non quaerat nihil officia eaque iste pariatur autem odit in, architecto corporis quas? Minus repudiandae, necessitatibus numquam sapiente, minima at ad ab temporibus rem obcaecati sunt?</span>
-        <span>Adipisci laudantium minus, obcaecati nulla doloribus, fugiat alias quos aliquid consequatur officia voluptatum quaerat. Hic error quae ut ipsum in nihil at laborum aperiam, quam reprehenderit natus totam, omnis architecto!</span>
-        <span>Maiores, dignissimos, neque. Adipisci similique tempora labore molestiae aliquid mollitia deleniti quasi quos ullam placeat suscipit autem, maxime cum sapiente officiis excepturi voluptatem possimus quam est saepe, veritatis iusto incidunt.</span></p>
+        <span>Mollitia, eaque. Dolores iure excepturi repudiandae doloremque deleniti quaerat at officia qui? Suscipit similique eius corrupti voluptatum sapiente, pariatur, asperiores modi omnis minus praesentium veniam ea? Saepe distinctio modi excepturi.</span></p>
+
+        <% if @activities %>
+          <% @activities.first(10).each do |activity|%>
+           <button class="btn-path rounded-circle" id="activity_<%= @activities.index(activity) %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></button>
+          <% end %>
+        <% else %>
+          <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
+        <% end %>
       </div>
     </div>
   </div>
@@ -40,5 +30,7 @@
 <% end %>
 
 <button id="print-map">PRINT MY MAP</button>
+
+
 
 
