@@ -11,13 +11,20 @@ import { selectRide } from '../components/select-rides';
 initMapbox();
 selectRide();
 
+
+
 //Queryselector sur le bouton avec id print
 const mapToPrint = document.querySelector("#print-map");
 //addEventListener au click
-  printMap();
+printMap();
 mapToPrint.addEventListener("click", (e) => {
-  document.printer.printMap('CurrentSize', 'MyManualPrint');
+  var a3Size = {
+  width: 2339,
+  height: 3308,
+  className: 'a3CssClass',
+  tooltip: 'A custom A3 size'
+}
+  document.printer.printMap("a3CssClass", 'MyManualPrint');
 });
 // Et on appele la fonction printMap(mapWithTrace)
-
 
