@@ -30,7 +30,7 @@ const selectRide = () => {
                 return newAr;
               });
             if (event.currentTarget.classList.contains("pressed")) { 
-              var trace_i = L.polyline(newArray, {color: 'red'});
+              var trace_i = L.polyline(newArray, {color: '#0214BB'});
               trace_i["_leaflet_id"] = j;
               trace_i.addTo(document.map);
               traces.addLayer(trace_i);
