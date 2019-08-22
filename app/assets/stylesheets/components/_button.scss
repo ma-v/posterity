@@ -4,11 +4,20 @@
     border: 1px solid $main-blue;
     background: transparent;
     padding: 13px 25px;
-		&:hover {
+	&:hover {
 		background: $main-blue;
 		color: white;
 	}
+	&.pressed {
+		background: $main-blue;
+		color: white;
+		&:hover {
+			background: transparent;
+			color: $main-blue;
+		}
+	}
 }
+
 
 a {
 	text-decoration: none !important;
