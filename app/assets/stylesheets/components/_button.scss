@@ -8,7 +8,24 @@
 		background: $main-blue;
 		color: white;
 	}
-	&.pressed {
+}
+
+
+a {
+	text-decoration: none !important;
+}
+
+.btn-path {
+  font-size: 20px;
+  padding: 5px 10px;
+  color: $main-blue;
+  border: 1px solid $main-blue;
+  background: transparent;
+    &:hover {
+      background: $main-blue;
+      color: white;
+  	}	
+  	&.pressed {
 		background: $main-blue;
 		color: white;
 		&:hover {
@@ -16,9 +33,4 @@
 			color: $main-blue;
 		}
 	}
-}
-
-
-a {
-	text-decoration: none !important;
 }
