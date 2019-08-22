@@ -1,6 +1,7 @@
 class MapsController < ApplicationController
 	def new
-		@token = params[:code]
+    if @token = params[:code]
+
 	  	@response = JSON.parse(RestClient.post("https://www.strava.com/oauth/token?client_id=38164&client_secret=0b227c9387f9b5a8ce9b9833387192004098d95c&code=#{@token}&grant_type=authorization_code", {}))
 	  	@access_token = @response["access_token"]
 	  	@athlete_id = @response["athlete"]["id"]
@@ -15,18 +16,22 @@ class MapsController < ApplicationController
 	  	@polyline = @activity["map"]["summary_polyline"]
 
 	  	@map = Map.new
+    else
+      @map =Map.new
+    end
+
 	end
 
 	def create
 		@map = Map.new(map_params)
-		if @map.save 
+		if @map.save
 			redirect_to root_path
-		else 
+		else
 			render :new
 		end
 	end
 
-	private 
+	private
 
 	def map_params
 		params.require(:map).permit(:title, :image)
