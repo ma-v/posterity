@@ -1,14 +1,15 @@
 .btn-posterity {
 	font-family: 'Abril Fatface', cursive;
-  color: $main-blue;
-  border: 1px solid $main-blue;
-  background: transparent;
-  padding: 13px 25px;
-		&:hover {
-  		background: $main-blue;
-  		color: white;
+    color: $main-blue;
+    border: 1px solid $main-blue;
+    background: transparent;
+    padding: 13px 25px;
+	&:hover {
+		background: $main-blue;
+		color: white;
 	}
 }
+
 
 a {
 	text-decoration: none !important;
@@ -23,5 +24,13 @@ a {
     &:hover {
       background: $main-blue;
       color: white;
-  }
+  	}	
+  	&.pressed {
+		background: $main-blue;
+		color: white;
+		&:hover {
+			background: transparent;
+			color: $main-blue;
+		}
+	}
 }
