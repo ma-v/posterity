@@ -29,7 +29,7 @@ const selectRide = () => {
                 newAr[1] = ar[0];
                 return newAr;
               });
-            if (event.currentTarget.classList.contains("pressed")) { 
+            if (event.currentTarget.classList.contains("pressed")) {
               var trace_i = L.polyline(newArray, {color: 'red'});
               trace_i["_leaflet_id"] = j;
               trace_i.addTo(document.map);
@@ -41,7 +41,7 @@ const selectRide = () => {
               document.map.removeLayer(traceToRm);
               traces.removeLayer(traceToRm);
             }
-            
+
             document.map.fitBounds(traces.getBounds());
 
             // add title and image to form input values
@@ -52,19 +52,23 @@ const selectRide = () => {
   	};
   }
 
-
-const initMapbox = () => {
-
-  document.map = L.map('mapid').setView([43.305, -1.5], 8);
-  if (document.map) {
-
-      L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+const setLayer = (layerName) => {
+  return L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
       maxZoom: 18,
       tileSize: 512,
       zoomOffset: -1,
-      id: 'mapbox.satellite',
+      id: layerName,
       accessToken: 'pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ'
-    }).addTo(document.map);
+    })
+}
+
+var darkLayer = setLayer('mapbox.dark');
+var lightLayer = setLayer("mapbox.light")
+
+const initMapbox = () => {
+  document.map = L.map('mapid').setView([43.305, -1.5], 8);
+  if (document.map) {
+    darkLayer.addTo(document.map);
   }
 };
 
@@ -86,7 +90,17 @@ const printMap = () => {
 
 }
 
+  let styleMap = document.querySelector(".btn-success");
+    styleMap.addEventListener("click", event => {
 
+        document.map.removeLayer(darkLayer);
+        document.map.addLayer(lightLayer)
+
+      // document.map["_layers"]["26"]["options"]["id"] = "mapbox.light";
+
+  });
+
+export { styleMap };
 export { initMapbox };
 export { printMap };
 export { selectRide };

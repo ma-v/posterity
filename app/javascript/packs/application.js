@@ -7,6 +7,7 @@ import { injectCoordinates} from '../components/geocode';
 import { initMapbox } from '../components/select-rides';
 import { printMap } from '../components/select-rides';
 import { selectRide } from '../components/select-rides';
+import { styleMap } from '../components/select-rides';
 
 initMapbox();
 selectRide();
