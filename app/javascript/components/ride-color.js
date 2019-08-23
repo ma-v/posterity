@@ -5,6 +5,7 @@ const changeRideColor = () => {
 	const blueRide = document.querySelector("#blue-ride");
 	const redRide = document.querySelector("#red-ride");
 	const yellowRide = document.querySelector("#yellow-ride");
+	const rideColorPicker = document.querySelector("#ride-color-picker");
 	const blueTrace = "#0214BB";
 	const redTrace = "red";
 	const yellowTrace = "yellow";
@@ -21,6 +22,11 @@ const changeRideColor = () => {
 			}
 		});
 	}
+
+	rideColorPicker.addEventListener("change", function(){
+		changeLayerColor(event.currentTarget.value);
+		document.currentTraceColor = event.currentTarget.value;
+	});
 
 	blueRide.addEventListener("click", function(){
 		changeLayerColor(blueTrace);
