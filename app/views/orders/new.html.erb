@@ -1,10 +1,15 @@
-<h1>Your Poster Order</h1>
+<div class="container">
+  <div class="row">
+  <h1>Your Poster Order</h1>
 
-<%= simple_form_for(@order) do |f| %>
+<%= simple_form_for([@map, @order]) do |f| %>
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <%= f.input :address %>
-    <%= f.input :price, as: :radio_buttons, collection: ["A3 - 39€","A2 - 59€"], wrapper: :vertical_collection_inline %>
-
+    <%= f.label :format, "Price :" %> <%= @map.price %> €
+    <br>
     <%= f.button :submit, class: "btn-primary" %>
 <% end %>
+</div>
+
+</div>

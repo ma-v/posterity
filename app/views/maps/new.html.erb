@@ -26,6 +26,7 @@
 <%= simple_form_for(@map) do |f| %>
   <%= f.input :title, as: :hidden %>
   <%= f.input :image, as: :hidden %>
+  <%= f.input :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'] %>
   <%= f.submit class: "btn-posterity"%>
 <% end %>
 
