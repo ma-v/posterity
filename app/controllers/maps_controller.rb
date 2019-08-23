@@ -24,8 +24,13 @@ class MapsController < ApplicationController
 
 	def create
 		@map = Map.new(map_params)
+    if map_params[:format] == "A3 - 39€"
+      @map.price = 39
+    elsif map_params[:format] == "A2 - 59€"
+      @map.price = 59
+    end
 		if @map.save
-			redirect_to root_path
+			redirect_to new_map_order_path(@map)
 		else
 			render :new
 		end
@@ -34,6 +39,6 @@ class MapsController < ApplicationController
 	private
 
 	def map_params
-		params.require(:map).permit(:title, :image)
+		params.require(:map).permit(:title, :image, :format)
 	end
 end
