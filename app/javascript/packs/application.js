@@ -1,7 +1,7 @@
 import "bootstrap";
-// import 'mapbox-gl/dist/mapbox-gl.css';
-// import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
-// import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
+import mapboxgl from 'mapbox-gl';
 
 import { injectCoordinates} from '../actions/geocode';
 import { initMapbox } from '../actions/init-mapbox';

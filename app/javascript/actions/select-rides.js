@@ -1,8 +1,7 @@
+
 import mapboxgl from 'mapbox-gl';
 import mapboxDraw from '@mapbox/mapbox-gl-draw';
 import 'leaflet/dist/leaflet';
-import 'leaflet-easyprint/dist/bundle';
-
 
 const polyline = require('@mapbox/polyline');
 // var polyUtil = require('polyline-encoded');
