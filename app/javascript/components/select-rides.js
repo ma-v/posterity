@@ -30,14 +30,13 @@ const selectRide = () => {
                 return newAr;
               });
             if (event.currentTarget.classList.contains("pressed")) { 
-              var trace_i = L.polyline(newArray, {color: '#0214BB'});
-              trace_i["_leaflet_id"] = j;
+              var trace_i = L.polyline(newArray, {color: document.currentTraceColor});
+              trace_i["_leaflet_id"] = `id_${j}`;
               trace_i.addTo(document.map);
               traces.addLayer(trace_i);
-              console.log(traces);
             }
             else {
-              const traceToRm = traces["_layers"][j];
+              const traceToRm = traces["_layers"][`id_${j}`];
               document.map.removeLayer(traceToRm);
               traces.removeLayer(traceToRm);
             }
