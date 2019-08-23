@@ -7,15 +7,17 @@ import { injectCoordinates} from '../components/geocode';
 import { initMapbox } from '../components/select-rides';
 import { printMap } from '../components/select-rides';
 import { selectRide } from '../components/select-rides';
+import { addTitle } from '../components/select-rides';
 
 initMapbox();
 selectRide();
+addTitle();
 
 //Queryselector sur le bouton avec id print
 const mapToPrint = document.querySelector("#print-map");
 //addEventListener au click
 printMap();
-mapToPrint.addEventListener("click", (e) => {
+mapToPrint.addEventListener("title", (e) => {
   var a3Size = {
   width: 2339,
   height: 3308,

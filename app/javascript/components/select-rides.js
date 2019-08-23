@@ -29,7 +29,11 @@ const selectRide = () => {
                 newAr[1] = ar[0];
                 return newAr;
               });
-            if (event.currentTarget.classList.contains("pressed")) { 
+            console.log(newArray[0]);
+             // var marker = new L.marker(newArray[0], { opacity: 0.01 }); //opacity may be set to zero
+             // marker.bindTooltip(`${button_i.dataset.title}`, {permanent: true, className: "my-label", offset: [0, 0], sticky: true, direction: 'bottom'});
+             // marker.addTo(document.map);
+            if (event.currentTarget.classList.contains("pressed")) {
               var trace_i = L.polyline(newArray, {color: 'red'});
               trace_i["_leaflet_id"] = j;
               trace_i.addTo(document.map);
@@ -41,7 +45,7 @@ const selectRide = () => {
               document.map.removeLayer(traceToRm);
               traces.removeLayer(traceToRm);
             }
-            
+
             document.map.fitBounds(traces.getBounds());
 
             // add title and image to form input values
@@ -66,6 +70,9 @@ const initMapbox = () => {
       accessToken: 'pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ'
     }).addTo(document.map);
   }
+  var mmap = document.querySelector('#mapid')
+  mmap.insertAdjacentHTML('beforeend','<div class="map-title"></div>')
+  // <p class="titlet" data-title="<%= activity["name"] %></p>
 };
 
 var a3Size = {
@@ -86,8 +93,18 @@ const printMap = () => {
 
 }
 
+const addTitle = () => {
+  var titleFrame = document.querySelector('.map-title');
+  // var titleButton = document.querySelector('.btn-path');
+  var titleField = document.querySelector('.ride-title');
+  titleField.addEventListener('keyup', (event) => {
+    titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
+  });
+};
+
 
 export { initMapbox };
 export { printMap };
 export { selectRide };
+export { addTitle };
 

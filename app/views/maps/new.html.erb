@@ -2,14 +2,15 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-5 my-auto mx-auto">
-      <div id="mapid" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      <div id="mapid" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
     </div>
     <div class="col-5 my-auto ml-auto">
       <div class="map-styles">
         <h1>Give some style to your map:</h1>
         <p class="bg-white"><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum et laudantium iusto aut, esse excepturi, dolor vitae amet similique labore quisquam ipsam fugit sunt alias! Placeat ipsam, ut reprehenderit repellat.</span>
         <span>Totam nam ipsa vel expedita non consectetur odit rem. Totam necessitatibus natus laudantium aliquam ipsa dolore doloribus adipisci. Similique eveniet saepe nam enim fugiat deleniti, perferendis voluptates commodi dolorum temporibus.</span>
-        <span>Mollitia, eaque. Dolores iure excepturi repudiandae doloremque deleniti quaerat at officia qui? Suscipit similique eius corrupti voluptatum sapiente, pariatur, asperiores modi omnis minus praesentium veniam ea? Saepe distinctio modi excepturi.</span></p>
+        <span>Mollitia, eaque. Dolores iure excepturi repudiandae doloremque deleniti quaerat at officia qui? Suscipit similique eius corrupti voluptatum sapiente, pariatur, asperiores modi omnis minus praesentium veniam ea? Saepe distinctio modi excepturi.</span><input class="ride-title" type="text" name="ride-title"></p>
 
         <% if @activities %>
           <% @activities.first(10).each do |activity|%>

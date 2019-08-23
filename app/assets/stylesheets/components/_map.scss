@@ -3,6 +3,7 @@
   height: 600px;
   border: 20px solid white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  position: relative;
 
 }
 
@@ -13,3 +14,27 @@
 .easyPrintHolder .a3CssClass {
   //background-image: url(data:image/svg+xml;utf8;base64,PD9...go=);
 }
+
+.my-label {
+    width:1000px;
+    font-size:20px;
+}
+
+.map-title {
+  position: absolute;
+  bottom: 0px;
+  background-color: white;
+  height: 50px;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  // opacity: 0.6;
+}
+.legend-title {
+    padding-top: 15px;
+    color: black;
+    font-family: "Abril Fatface", "Helvetica", "sans-serif";
+    font-size: 24px;
+  }
