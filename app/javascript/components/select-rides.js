@@ -62,8 +62,12 @@ const setLayer = (layerName) => {
     })
 }
 
-var darkLayer = setLayer('mapbox.dark');
-var lightLayer = setLayer("mapbox.light")
+const darkLayer = setLayer('mapbox.dark');
+const lightLayer = setLayer("mapbox.light");
+const outdoorsLayer = setLayer("mapbox.outdoors");
+const streetsLayer = setLayer("mapbox.streets");
+
+const layers = [darkLayer, lightLayer, outdoorsLayer, streetsLayer]
 
 const initMapbox = () => {
   document.map = L.map('mapid').setView([43.305, -1.5], 8);
@@ -90,17 +94,43 @@ const printMap = () => {
 
 }
 
-  let styleMap = document.querySelector(".btn-success");
-    styleMap.addEventListener("click", event => {
+  let styleMapDark = document.querySelector(".btn-style-dark");
+    styleMapDark.addEventListener("click", event => {
+      layers.forEach(function(layer) {
+        document.map.removeLayer(layer)
+        document.map.addLayer(darkLayer)
+      });
+    });
 
-        document.map.removeLayer(darkLayer);
+  let styleMapLight = document.querySelector(".btn-style-light");
+    styleMapLight.addEventListener("click", event => {
+      layers.forEach(function(layer) {
+        document.map.removeLayer(layer)
         document.map.addLayer(lightLayer)
+      });
+    });
 
-      // document.map["_layers"]["26"]["options"]["id"] = "mapbox.light";
+  let styleMapStreets = document.querySelector(".btn-style-streets");
+    styleMapStreets.addEventListener("click", event => {
+      layers.forEach(function(layer) {
+        document.map.removeLayer(layer)
+        document.map.addLayer(streetsLayer)
+      });
+    });
 
-  });
+  let styleMapOutdoors = document.querySelector(".btn-style-outdoors");
+    styleMapOutdoors.addEventListener("click", event => {
+      layers.forEach(function(layer) {
+        document.map.removeLayer(layer)
+        document.map.addLayer(outdoorsLayer)
+      });
+    });
 
-export { styleMap };
+
+export { styleMapDark };
+export { styleMapLight };
+export { styleMapStreets };
+export { styleMapOutdoors };
 export { initMapbox };
 export { printMap };
 export { selectRide };

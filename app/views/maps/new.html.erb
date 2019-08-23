@@ -18,7 +18,11 @@
         <% else %>
           <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
         <% end %>
-        <button class="btn btn-success btn-style">test</button>
+        <button class="btn btn-success btn-style-dark">Dark</button>
+        <button class="btn btn-danger btn-style-light">Light</button>
+        <button class="btn btn-warning btn-style-outdoors">Outdoors</button>
+        <button class="btn btn-success btn-style-streets">Streets</button>
+
       </div>
     </div>
   </div>
