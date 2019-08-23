@@ -26,3 +26,5 @@ mapToPrint.addEventListener("click", (e) => {
 });
 // Et on appele la fonction printMap(mapWithTrace)
 
+import {changeRideColor} from '../components/ride-color';
+changeRideColor();

@@ -12,9 +12,21 @@
         <span>Mollitia, eaque. Dolores iure excepturi repudiandae doloremque deleniti quaerat at officia qui? Suscipit similique eius corrupti voluptatum sapiente, pariatur, asperiores modi omnis minus praesentium veniam ea? Saepe distinctio modi excepturi.</span></p>
 
         <% if @activities %>
-          <% @activities.first(10).each do |activity|%>
-           <span class="btn-path rounded-circle" id="activity_<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
-          <% end %>
+          <div class="traces">
+            <div class="traces-list">
+              <% @activities.first(10).each do |activity|%>
+               <span class="btn-path rounded-circle" id="activity_<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
+              <% end %>
+            </div>
+            <div class="traces-color">
+              <input type="color" id="ride-color-picker" name="head"
+           value="#e66465">
+              <span class="btn-path rounded-circle" id="blue-ride"></span>
+              <span class="btn-path rounded-circle" id="red-ride"></span>
+              <span class="btn-path rounded-circle" id="yellow-ride"></span>
+            </div>
+          </div>
+
         <% else %>
           <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
         <% end %>
