@@ -25,7 +25,7 @@ class MapsController < ApplicationController
 	def create
 		@map = Map.new(map_params)
 		if @map.save
-			redirect_to root_path
+			redirect_to new_order_path
 		else
 			render :new
 		end
