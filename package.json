@@ -8,10 +8,8 @@
     "bootstrap": "^4.3.1",
     "geocoder": "^0.2.3",
     "jquery": "^3.4.1",
-    "leaflet": "^1.5.1",
-    "leaflet-easyprint": "^2.1.9",
     "mapbox-gl": "^1.2.1",
-    "mapbox-gl-leaflet": "^0.0.8",
+    "mapbox-print-pdf": "^0.4.3",
     "polyline-encoded": "0.0.8",
     "popper.js": "^1.15.0"
   },
