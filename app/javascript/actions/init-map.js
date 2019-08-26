@@ -49,6 +49,7 @@ if (layerList) {
     .portrait() // Unnecessary since it's the default but it's included for clarity.
     .print(map, mapboxgl)
     .then(function (pdf) {
+      // Cloudinary::Uploader.upload(pdf);
       pdf.save('map.pdf');
     });
 };
