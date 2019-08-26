@@ -1,7 +1,5 @@
 import mapboxgl from 'mapbox-gl';
 import mapboxDraw from '@mapbox/mapbox-gl-draw';
-import 'leaflet/dist/leaflet';
-import 'leaflet-easyprint/dist/bundle';
 
 
 const polyline = require('@mapbox/polyline');
@@ -29,7 +27,7 @@ const selectRide = () => {
                 newAr[1] = ar[0];
                 return newAr;
               });
-            if (event.currentTarget.classList.contains("pressed")) { 
+            if (event.currentTarget.classList.contains("pressed")) {
               var trace_i = L.polyline(newArray, {color: document.currentTraceColor});
               trace_i["_leaflet_id"] = `id_${j}`;
               trace_i.addTo(document.map);
@@ -40,7 +38,7 @@ const selectRide = () => {
               document.map.removeLayer(traceToRm);
               traces.removeLayer(traceToRm);
             }
-            
+
             document.map.fitBounds(traces.getBounds());
 
             // add title and image to form input values
