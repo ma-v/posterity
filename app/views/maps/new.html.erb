@@ -16,7 +16,7 @@
                     <div class="traces-list m-4">
                       <h5>Your latests traces :</h5>
                       <% @activities.first(10).each do |activity|%>
-                       <span class="btn-path rounded-circle" id="activity_<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
+                       <span class="btn-path rounded-circle activity-btn" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
                       <% end %>
                     </div>
                   </div>
@@ -74,7 +74,7 @@
                             <%= orders_form.input :last_name %>
                             <%= orders_form.input :address %>
                           <% end %>
-                      <%= f.button :submit, class: "btn-posterity" %>
+                    <%= f.button :submit, class: "btn-posterity" %>
                   <% end %>
                 </div>
             </div>
