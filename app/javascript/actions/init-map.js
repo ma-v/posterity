@@ -13,7 +13,7 @@ const initMap = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     map = new mapboxgl.Map({
       container: 'mapid',
-      style: 'mapbox://styles/mapbox/streets-v10',
+      style: 'mapbox://styles/boboldo/cjzscv5r74lgd1cnmzxjxrht1',
       center: [5.400000, 43.300000],//[5.400000, 43.300000],
       zoom: 15
     });
@@ -24,6 +24,24 @@ const initMap = () => {
   selectRide();
   return map;
 };
+
+let layerList = document.getElementById('menu');
+if (layerList) {
+  let inputs = layerList.getElementsByTagName('input');
+
+  function switchLayer(layer) {
+    let layerId = layer.target.id;
+    map.setStyle('mapbox://styles/boboldo/' + layerId);
+
+  }
+
+  for (let i = 0; i < inputs.length; i++) {
+  inputs[i].onclick = switchLayer;
+  }  
+}
+
+
+
 
  const printMap = () => {
   printPdf.build()
@@ -63,6 +81,7 @@ const initMap = () => {
         //     return newAr;
         //   });
         if (event.currentTarget.classList.contains("pressed")) {
+
 
           // if (typeof mapLayer !== 'undefined') {
           //   map.setLayoutProperty(`route_${j}`, 'visibility', 'visible');

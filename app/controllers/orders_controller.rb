@@ -1,19 +1,5 @@
 class OrdersController < ApplicationController
   before_action :set_map
-  def new
-    @order = Order.new
-  end
-
-  def create
-    @order = Order.new(order_params)
-    @order.map = @map
-    if @order.save
-      redirect_to map_orders_confirmation_path
-    else
-      render :new
-    end
-  end
-
   def show
   end
 
