@@ -16,7 +16,7 @@ class MapsController < ApplicationController
 		  	@polyline = @activity["map"]["summary_polyline"]
 
 		  	@map = Map.new
-		  	@map.orders.build
+		  	@map.orders << Order.new
 	    else
 	      @map =Map.new
 	    end
