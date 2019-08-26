@@ -12,12 +12,14 @@ const switchToCheckout = () => {
 		checkout.classList.toggle("active");
 	}
 
-	orderButton.addEventListener("click", function() {
-		togglePills();
-		mapFormat.value = document.querySelector(".form-check :checked").value;
-	});
-	
-	backButton.addEventListener("click", togglePills);
-}
+	if (orderButton) {
+		orderButton.addEventListener("click", function() {
+			togglePills();
+			mapFormat.value = document.querySelector(".form-check :checked").value;
+		});
+		
+		backButton.addEventListener("click", togglePills);
+		}
+	}
 
 export {switchToCheckout};
