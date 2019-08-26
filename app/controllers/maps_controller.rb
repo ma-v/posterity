@@ -30,7 +30,8 @@ class MapsController < ApplicationController
 	      @map.price = 59
 	    end
 		if @map.save
-			redirect_to map_orders_confirmation_path(@map)
+      # redirect_to map_orders_confirmation_path(@map)
+      render json: @map
 		else
 			render :new
 		end

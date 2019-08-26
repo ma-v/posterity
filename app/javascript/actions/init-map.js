@@ -2,6 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import printPdf from 'mapbox-print-pdf';
 import mapboxDraw from '@mapbox/mapbox-gl-draw';
 import polyline from '@mapbox/polyline';
+import axios from 'axios';
 
 let map = null;
 
@@ -21,6 +22,33 @@ const initMap = () => {
   // eventListener sur le bouton print
   const printButton = document.querySelector("#print-map");
   printButton.addEventListener("click", (e) => { printMap(); });
+
+  document.getElementById('submit_map').addEventListener('click', (event) => {
+    printPdf.build()
+      .format('a3') // valeur à récuperer dans le DOM
+      .portrait() // Unnecessary since it's the default but it's included for clarity.
+      .print(map, mapboxgl)
+      .then(function (pdf) {
+        // pdf.save('map.pdf');
+        let mydata = {
+          map: {
+            first_name: document.getElementById('map_orders_attributes_0_first_name').value,
+            image: pdf
+          }
+        }
+
+        axios({
+          method: 'POST',
+          url: '/maps',
+          data: mydata,
+          headers: {
+            'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+          }
+        }).then(function (response) { window.location.href = `/confirmation/${response.data.id}` })
+        // .catch(function (error) {...}
+      })
+
+  }, false);
   selectRide();
   return map;
 };
