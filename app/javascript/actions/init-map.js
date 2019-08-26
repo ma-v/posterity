@@ -26,17 +26,22 @@ const initMap = () => {
 };
 
 let layerList = document.getElementById('menu');
-let inputs = layerList.getElementsByTagName('input');
+if (layerList) {
+  let inputs = layerList.getElementsByTagName('input');
 
-function switchLayer(layer) {
-  let layerId = layer.target.id;
-  map.setStyle('mapbox://styles/boboldo/' + layerId);
+  function switchLayer(layer) {
+    let layerId = layer.target.id;
+    map.setStyle('mapbox://styles/boboldo/' + layerId);
 
+  }
+
+  for (let i = 0; i < inputs.length; i++) {
+  inputs[i].onclick = switchLayer;
+  }  
 }
 
-for (let i = 0; i < inputs.length; i++) {
-inputs[i].onclick = switchLayer;
-}
+
+
 
  const printMap = () => {
   printPdf.build()
