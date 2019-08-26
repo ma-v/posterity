@@ -16,6 +16,7 @@ class MapsController < ApplicationController
 		  	@polyline = @activity["map"]["summary_polyline"]
 
 		  	@map = Map.new
+		  	@map.orders.build
 	    else
 	      @map =Map.new
 	    end
@@ -29,7 +30,7 @@ class MapsController < ApplicationController
 	      @map.price = 59
 	    end
 		if @map.save
-			redirect_to new_map_order_path(@map)
+			redirect_to map_orders_confirmation_path(@map)
 		else
 			render :new
 		end
@@ -38,6 +39,6 @@ class MapsController < ApplicationController
 	private
 
 	def map_params
-		params.require(:map).permit(:title, :image, :format, :orders)
+		params.require(:map).permit(:title, :image, :format, orders_attributes:[:first_name, :last_name, :address])
 	end
 end

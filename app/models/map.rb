@@ -1,5 +1,6 @@
 class Map < ApplicationRecord
-	validates :image, presence: true
-	validates :title, presence: true
+  validates :title, presence: true
   has_many :orders
+
+  accepts_nested_attributes_for :orders
 end
