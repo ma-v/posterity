@@ -20,7 +20,7 @@ const initMap = () => {
   }
   // eventListener sur le bouton print
   const printButton = document.querySelector("#print-map");
-  printButton.addEventListener("click", (e) => { printMap() });
+  printButton.addEventListener("click", (e) => { printMap(); });
   selectRide();
   return map;
 };
@@ -33,11 +33,11 @@ const initMap = () => {
     .then(function (pdf) {
       pdf.save('map.pdf');
     });
-}
+};
 
  const selectRide = () => {
   let coordinates = [];
-  let allCoordinates = [];
+  // let allCoordinates = [];
   const displayCoordinates = document.querySelector("#coordinates");
   const imageInput = document.querySelector("#map_image");
   const titleInput = document.querySelector("#map_title");
@@ -53,7 +53,7 @@ const initMap = () => {
         var polyline_i = button_i.dataset.polyline;
         coordinates[j] = polyline.toGeoJSON(`${polyline_i}`);
         let myCoordinates = coordinates[j].coordinates;
-        allCoordinates.push(myCoordinates)
+        // allCoordinates.push(myCoordinates);
         // console.log(allCoordinates[0]);
 
         // const newArray = myCoordinates.map(function(ar) {
@@ -63,42 +63,48 @@ const initMap = () => {
         //     return newAr;
         //   });
         if (event.currentTarget.classList.contains("pressed")) {
-          map.addLayer({
-            "id": `route_${j}`,
-            "type": "line",
-            "source": {
-              "type": "geojson",
-              "data": {
-                "type": "Feature",
-                "properties": {},
-                "geometry": {
-                  "type": "LineString",
-                  "coordinates": myCoordinates
-                  }
+
+          // if (typeof mapLayer !== 'undefined') {
+          //   map.setLayoutProperty(`route_${j}`, 'visibility', 'visible');
+          // }
+
+            map.addLayer({
+              "id": `route_${j}`,
+              "type": "line",
+              "source": {
+                "type": "geojson",
+                "data": {
+                  "type": "Feature",
+                  "properties": {},
+                  "geometry": {
+                    "type": "LineString",
+                    "coordinates": myCoordinates
+                    }
+                }
+              },
+              "layout": {
+                "line-join": "round",
+                "line-cap": "round",
+                "visibility": "visible"
+              },
+              "paint": {
+                "line-color": "#0214BB",
+                "line-width": 5
               }
-            },
-            "layout": {
-              "line-join": "round",
-              "line-cap": "round"
-            },
-            "paint": {
-              "line-color": "#0214BB",
-              "line-width": 5
-            }
-          })
-        // else {
-        //   console.log('test');
-        // }
+            });
+            // map.setLayoutProperty(`route_${j}`, 'visibility', 'visible')
+          }
+          else {
+            map.setLayoutProperty(`route_${j}`, 'visibility', 'none');
+            map.removeLayer(`route_${j}`);
+            map.removeSource(`route_${j}`);
+          }
+
         // const reducer = (accumulator, currentValue) => accumulator + currentValue;
         // allCoordinates = allCoordinates.reduce(reducer);
         var bounds = myCoordinates.reduce(function(bounds, coord) {
         return bounds.extend(coord);
         }, new mapboxgl.LngLatBounds(myCoordinates[0], myCoordinates[0]));
-        console.log(bounds);
-        console.log(allCoordinates);
-        console.log(allCoordinates[0]);
-
-
 
         map.fitBounds(bounds, {
           padding: 20
@@ -107,10 +113,9 @@ const initMap = () => {
         //document.map.fitBounds(traces.getBounds());
         titleInput.value = button_i.dataset.title;
         imageInput.value = button_i.dataset.image;
-      }
-      });
+        }
+      );
     }
-  };
-};
-
+  }
+ };
  export { initMap };
