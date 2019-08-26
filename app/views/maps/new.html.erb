@@ -1,55 +1,83 @@
-<p style="display: none;" id="coordinates"></p>
-<div class="container-fluid mt-5">
-  <div class="row">
-    <div class="display-map col-5 my-auto ml-auto">
-      <div id="mapid" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-    </div>
-    <div class="customize-map col-5 d-flex align-middle">
-      <div class="map-styles">
-        <h2>Give some style to your map:</h2>
-        <div class="container">
-          <% if @activities %>
-            <div class="row justify-content-center">
-              <div class="traces-list m-4">
-                <h5>Your latests traces :</h5>
-                <% @activities.first(10).each do |activity|%>
-                 <span class="btn-path rounded-circle" id="activity_<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
-                <% end %>
+<div id="new-map-body">
+  <p style="display: none;" id="coordinates"></p>
+  <div class="container-fluid py-5">
+    <div class="row">
+      <div class="display-map col-5 my-auto ml-auto">
+        <div id="mapid" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </div>
+      <div id="customize-map" class="col-5 d-flex align-middle mr-auto">
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-customize-map" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div class="map-styles">
+              <h2>Give some style to your map:</h2>
+              <div class="container">
+                <% if @activities %>
+                  <div class="row justify-content-center">
+                    <div class="traces-list m-4">
+                      <h5>Your latests traces :</h5>
+                      <% @activities.first(10).each do |activity|%>
+                       <span class="btn-path rounded-circle" id="activity_<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
+                      <% end %>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row justify-content-center">
+                    <div class="traces-color m-4">
+                      <h5>Pick a color for your trace(s):</h5>
+                      <input type="color" id="ride-color-picker" name="head" value="#e66465">
+                      <span class="btn-path rounded-circle" id="blue-ride"></span>
+                      <span class="btn-path rounded-circle" id="red-ride"></span>
+                      <span class="btn-path rounded-circle" id="yellow-ride"></span>
+                    </div>
+                  </div>
+                  <% else %>
+                  <div class="row">
+                      <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
+                  </div>
+                  <% end %>
+                  <div class="row justify-content-center m-4">
+                    <h5>Chose a style for your map:</h5>
+                  </div>
+                  <div class="row justify-content-center m-4">
+                    <h5>Chose a format for your poster:</h5>
+                  </div>
+                  <%= simple_form_for(@map) do |f| %>
+                      <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], :checked => ['A3 - 39€', 'A2 - 59€'].first %>
+                  <% end %>
+                  <% if @activities %>
+                    <div id="order-button" class="btn-posterity">Order your poster</div>
+                  <% end %>
               </div>
             </div>
-            <br>
-            <div class="row justify-content-center">
-              <div class="traces-color m-4">
-                <h5>Pick a color for your trace(s):</h5>
-                <input type="color" id="ride-color-picker" name="head" value="#e66465">
-                <span class="btn-path rounded-circle" id="blue-ride"></span>
-                <span class="btn-path rounded-circle" id="red-ride"></span>
-                <span class="btn-path rounded-circle" id="yellow-ride"></span>
-              </div>
+          </div>
+          <div class="tab-pane fade" id="pills-checkout" role="tabpanel" aria-labelledby="pills-profile-tab">
+              <div class="row">
+                <div class="row justify-content-center m-4">
+                  <h5>Chose a style for your map:</h5>
+                </div>
+                <div class="row justify-content-center m-4">
+                  <div id="back-button" class="btn-posterity">Back to custom</div>
+                  <%= simple_form_for(@map) do |f| %>
+                      <%= f.input :format, :as => :hidden, :input_html => { :value => "" } %>
+                      <%= f.input :title, :as => :hidden, :input_html => { :value => "Test" } %>
+                        <%= f.simple_fields_for :orders do |orders_form| %>
+                            <%= orders_form.input :first_name %>
+                            <%= orders_form.input :last_name %>
+                            <%= orders_form.input :address %>
+                          <% end %>
+                      <%= f.button :submit, class: "btn-posterity" %>
+                  <% end %>
+                </div>
+                
             </div>
-            <div class="row justify-content-center m-4">
-              <h5>Chose a style for your map:</h5>
-            </div>
-            <div class="row">
-              <% else %>
-                <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
-              <% end %>
-            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <button id="print-map"> PRINT MY MAP</button>
 </div>
-
-<%= simple_form_for(@map) do |f| %>
-  <%= f.input :title, as: :hidden %>
-  <%= f.input :image, as: :hidden %>
-  <%= f.input :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'] %>
-  <%= f.submit class: "btn-posterity"%>
-<% end %>
-
-<button id="print-map"> PRINT MY MAP</button>
-
 
 
 
