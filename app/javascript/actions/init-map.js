@@ -17,11 +17,14 @@ const initMap = () => {
       center: [5.400000, 43.300000],//[5.400000, 43.300000],
       zoom: 15
     });
+    let frame = document.querySelector('#mapid');
+    frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div>')
   }
   // eventListener sur le bouton print
   const printButton = document.querySelector("#print-map");
   printButton.addEventListener("click", (e) => { printMap(); });
   selectRide();
+  addTitle();
   return map;
 };
 
@@ -37,11 +40,17 @@ if (layerList) {
 
   for (let i = 0; i < inputs.length; i++) {
   inputs[i].onclick = switchLayer;
-  }  
+  }
 }
 
 
-
+const addTitle = () => {
+  let titleFrame = document.querySelector('.map-title');
+  let titleField = document.querySelector('.ride-title');
+  titleField.addEventListener('keyup', (event) => {
+    titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
+  });
+}
 
  const printMap = () => {
   printPdf.build()
