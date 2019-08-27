@@ -14,8 +14,8 @@ const initMap = () => {
     map = new mapboxgl.Map({
       container: 'mapid',
       style: 'mapbox://styles/boboldo/cjzscv5r74lgd1cnmzxjxrht1',
-      center: [5.400000, 43.300000],//[5.400000, 43.300000],
-      zoom: 15
+      center: [5.400000, 43.300000],
+      zoom: 10
     });
   }
   // eventListener sur le bouton print
@@ -37,7 +37,7 @@ if (layerList) {
 
   for (let i = 0; i < inputs.length; i++) {
   inputs[i].onclick = switchLayer;
-  }  
+  }
 }
 
 
@@ -54,87 +54,107 @@ if (layerList) {
 };
 
  const selectRide = () => {
-  let coordinates = [];
-  // let allCoordinates = [];
-  const displayCoordinates = document.querySelector("#coordinates");
-  const imageInput = document.querySelector("#map_image");
-  const titleInput = document.querySelector("#map_title");
-  // const traces = L.featureGroup(); --> BOUNDS LIMITS
 
-  for (var i = 1; i <= 10; i++) {
-    const button_i = document.querySelector(`#activity_${i}`);
-    let j = i;
+  const allCoordinates = [];
 
-     if (button_i) {
-      button_i.addEventListener("click", function () {
-        event.currentTarget.classList.toggle("pressed");
-        var polyline_i = button_i.dataset.polyline;
-        coordinates[j] = polyline.toGeoJSON(`${polyline_i}`);
-        let myCoordinates = coordinates[j].coordinates;
-        // allCoordinates.push(myCoordinates);
-        // console.log(allCoordinates[0]);
+  document.querySelectorAll('.activity-btn').forEach(activityBtn => {
+    const id = activityBtn.dataset.id
+    let polyline_i = activityBtn.dataset.polyline;
+    allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+  });
 
-        // const newArray = myCoordinates.map(function(ar) {
-        //     const newAr = [];
-        //     newAr[0] = ar[1];
-        //     newAr[1] = ar[0];
-        //     return newAr;
-        //   });
-        if (event.currentTarget.classList.contains("pressed")) {
+  // const displayCoordinates = document.querySelector("#coordinates");
+  // const imageInput = document.querySelector("#map_image");
+  // const titleInput = document.querySelector("#map_title");
 
+  document.querySelectorAll('.activity-btn').forEach(activityBtn => {
+    activityBtn.addEventListener("click", () => {
+      event.currentTarget.classList.toggle("pressed");
 
-          // if (typeof mapLayer !== 'undefined') {
-          //   map.setLayoutProperty(`route_${j}`, 'visibility', 'visible');
-          // }
-
-            map.addLayer({
-              "id": `route_${j}`,
-              "type": "line",
-              "source": {
-                "type": "geojson",
-                "data": {
-                  "type": "Feature",
-                  "properties": {},
-                  "geometry": {
-                    "type": "LineString",
-                    "coordinates": myCoordinates
-                    }
+      const id = activityBtn.dataset.id
+      if (activityBtn.classList.contains("pressed")) {
+        map.addLayer({
+          "id": `route_${id}`,
+          "type": "line",
+          "source": {
+            "type": "geojson",
+            "data": {
+              "type": "Feature",
+              "properties": {},
+              "geometry": {
+                "type": "LineString",
+                "coordinates": allCoordinates[id]
                 }
-              },
-              "layout": {
-                "line-join": "round",
-                "line-cap": "round",
-                "visibility": "visible"
-              },
-              "paint": {
-                "line-color": "#0214BB",
-                "line-width": 5
-              }
-            });
-            // map.setLayoutProperty(`route_${j}`, 'visibility', 'visible')
+            }
+          },
+          "layout": {
+            "line-join": "round",
+            "line-cap": "round",
+            "visibility": "visible"
+          },
+          "paint": {
+            "line-color": "#0214BB",
+            "line-width": 5
           }
-          else {
-            map.setLayoutProperty(`route_${j}`, 'visibility', 'none');
-            map.removeLayer(`route_${j}`);
-            map.removeSource(`route_${j}`);
-          }
-
-        // const reducer = (accumulator, currentValue) => accumulator + currentValue;
-        // allCoordinates = allCoordinates.reduce(reducer);
-        var bounds = myCoordinates.reduce(function(bounds, coord) {
-        return bounds.extend(coord);
-        }, new mapboxgl.LngLatBounds(myCoordinates[0], myCoordinates[0]));
-
-        map.fitBounds(bounds, {
-          padding: 20
         });
+      } else {
+        map.setLayoutProperty(`route_${id}`, 'visibility', 'none');
+        map.removeLayer(`route_${id}`);
+        map.removeSource(`route_${id}`);
+      }
+      let selectedCoordinates = [];
+      document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
+        let id = btn.dataset.id
+        allCoordinates[id].forEach(c => selectedCoordinates.push(c))
+      })
 
-        //document.map.fitBounds(traces.getBounds());
-        titleInput.value = button_i.dataset.title;
-        imageInput.value = button_i.dataset.image;
-        }
-      );
-    }
-  }
- };
+      let bounds = selectedCoordinates.reduce((bounds, coord) => bounds.extend(coord),
+        new mapboxgl.LngLatBounds(selectedCoordinates[0], selectedCoordinates[0]));
+
+      if (bounds !== []) { map.fitBounds(bounds, { padding: 20 }); }
+    });
+  });
+};
+
+  // for (var i = 1; i <= 10; i++) {
+  //   const button_i = document.querySelector(`#activity_${i}`);
+  //   let j = i;
+
+     // if (button_i) {
+     //  button_i.addEventListener("click", function () {
+
+
+ //        let myCoordinates = coordinates[j].coordinates;
+ //        // allCoordinates.push(myCoordinates);
+ //        // console.log(allCoordinates[0]);
+
+ //        // const newArray = myCoordinates.map(function(ar) {
+ //        //     const newAr = [];
+ //        //     newAr[0] = ar[1];
+ //        //     newAr[1] = ar[0];
+ //        //     return newAr;
+ //        //   });
+ //        if (event.currentTarget.classList.contains("pressed")) {
+
+
+ //          // if (typeof mapLayer !== 'undefined') {
+ //          //   map.setLayoutProperty(`route_${j}`, 'visibility', 'visible');
+ //          // }
+
+
+ //        // const reducer = (accumulator, currentValue) => accumulator + currentValue;
+ //        // allCoordinates = allCoordinates.reduce(reducer);
+
+ //        map.fitBounds(bounds, {
+ //          padding: 20
+ //        });
+
+ //        //document.map.fitBounds(traces.getBounds());
+ //        titleInput.value = button_i.dataset.title;
+ //        imageInput.value = button_i.dataset.image;
+ //        }
+ //      );
+ //    }
+ //  }
+ // };
  export { initMap };
