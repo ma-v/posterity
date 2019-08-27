@@ -49,6 +49,10 @@ const selectColor = () => {
     currentTraceColor = yellowTrace;
   });
 
+  rideColorPicker.addEventListener("change", function(){
+    currentTraceColor = event.currentTarget.value;
+  });
+
   // document.querySelectorAll('.btn-color').forEach(BtnColor => {
   //   BtnColor.addEventListener("click", () => {
   //     event.currentTarget.classList.toggle("pressed");
