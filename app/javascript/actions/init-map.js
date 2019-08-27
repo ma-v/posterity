@@ -39,6 +39,12 @@ const selectColor = () => {
 
   redRide.addEventListener("click", function(){
     currentTraceColor = redTrace;
+    // map.getStyle('line-color', redTrace).layers;
+    console.log(map.setPaintProperty(`route_${id}`, 'line-color', "red"));
+
+    // map.removeLayer(`route_${id}`);
+    // map.removeSource(`route_${id}`);
+
   });
 
   blueRide.addEventListener("click", function(){
@@ -52,23 +58,7 @@ const selectColor = () => {
   rideColorPicker.addEventListener("change", function(){
     currentTraceColor = event.currentTarget.value;
   });
-
-  // document.querySelectorAll('.btn-color').forEach(BtnColor => {
-  //   BtnColor.addEventListener("click", () => {
-  //     event.currentTarget.classList.toggle("pressed");
-
-  //     const id = activityBtn.dataset.id
-  //     redRide.addEventListener("click", () => {
-  //     map.setPaintProperty(activityBtn, 'line-color', "red");
-  //   });
-  // });
-
-
 }
-
-
-
-
 
 let layerList = document.getElementById('menu');
 if (layerList) {
@@ -134,6 +124,14 @@ if (layerList) {
             "line-color": currentTraceColor,
             "line-width": 5
           }
+
+
+
+
+
+
+
+
         });
       } else {
         map.setLayoutProperty(`route_${id}`, 'visibility', 'none');
