@@ -1,10 +1,27 @@
-<h1>Thank you for your Order</h1>
-<%= cl_image_tag "#{@map.image.url}", height: 400, width: 300, crop: :fill %>
+<div id="new-map-body">
+  <div class="container d-flex justify-content-center">
+    <div class="card m-5" style="max-width: 540px;">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src='<%= cl_image_tag '#{@map.image.url}', height: 400, width: 300, crop: :fill %>' class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body ">
+            <h5 class="card-title border border-success p-2">Thank you for your order</h5>
+            <p class="card-text shadow-sm p-3 mb-5 bg-white rounded">It's done, you will receive it soon, Here is a Recap of your order :</p>
+            <p class="card-text shadow-sm p-3 mb-5 bg-white rounded">Your command number is : #<%= @map.price %></p>
+            <p class="card-text shadow-sm p-3 mb-5 bg-white rounded">Your address : <%= @map.orders.first.address %></p>
+            <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<h2>Your command number is : <%= @map.price %> </h2>
-<p>Afficher le Numéro : <%= @map.orders.first.address %></p>
-
-<h3>Here is a Recap of your order :</h3>
-
-<p>Affficher le recap</p>
-
+  <div class="alert alert-success" role="alert">
+   🥇 Congrats, you will receive your poster soon 🥇
+   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
