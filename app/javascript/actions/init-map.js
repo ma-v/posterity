@@ -4,11 +4,12 @@ import mapboxDraw from '@mapbox/mapbox-gl-draw';
 import polyline from '@mapbox/polyline';
 
 let map = null;
-
+let currentTraceColor = "#0214BB";
 
  // créer la map avec Mapbox
 const initMap = () => {
   const mapElement = document.getElementById('mapid');
+
   if (mapElement) {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     map = new mapboxgl.Map({
@@ -22,8 +23,48 @@ const initMap = () => {
   const printButton = document.querySelector("#print-map");
   printButton.addEventListener("click", (e) => { printMap(); });
   selectRide();
+  selectColor();
   return map;
 };
+
+const selectColor = () => {
+  const blueRide = document.querySelector("#blue-ride");
+  const redRide = document.querySelector("#red-ride");
+  const yellowRide = document.querySelector("#yellow-ride");
+  const rideColorPicker = document.querySelector("#ride-color-picker");
+  const blueTrace = "#0214BB";
+  const redTrace = "red";
+  const yellowTrace = "yellow";
+
+
+  redRide.addEventListener("click", function(){
+    currentTraceColor = redTrace;
+  });
+
+  blueRide.addEventListener("click", function(){
+    currentTraceColor = blueTrace;
+  });
+
+  yellowRide.addEventListener("click", function(){
+    currentTraceColor = yellowTrace;
+  });
+
+  // document.querySelectorAll('.btn-color').forEach(BtnColor => {
+  //   BtnColor.addEventListener("click", () => {
+  //     event.currentTarget.classList.toggle("pressed");
+
+  //     const id = activityBtn.dataset.id
+  //     redRide.addEventListener("click", () => {
+  //     map.setPaintProperty(activityBtn, 'line-color', "red");
+  //   });
+  // });
+
+
+}
+
+
+
+
 
 let layerList = document.getElementById('menu');
 if (layerList) {
@@ -39,9 +80,6 @@ if (layerList) {
   inputs[i].onclick = switchLayer;
   }
 }
-
-
-
 
  const printMap = () => {
   printPdf.build()
@@ -62,10 +100,6 @@ if (layerList) {
     let polyline_i = activityBtn.dataset.polyline;
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
   });
-
-  // const displayCoordinates = document.querySelector("#coordinates");
-  // const imageInput = document.querySelector("#map_image");
-  // const titleInput = document.querySelector("#map_title");
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
     activityBtn.addEventListener("click", () => {
@@ -93,7 +127,7 @@ if (layerList) {
             "visibility": "visible"
           },
           "paint": {
-            "line-color": "#0214BB",
+            "line-color": currentTraceColor,
             "line-width": 5
           }
         });
@@ -116,45 +150,4 @@ if (layerList) {
   });
 };
 
-  // for (var i = 1; i <= 10; i++) {
-  //   const button_i = document.querySelector(`#activity_${i}`);
-  //   let j = i;
-
-     // if (button_i) {
-     //  button_i.addEventListener("click", function () {
-
-
- //        let myCoordinates = coordinates[j].coordinates;
- //        // allCoordinates.push(myCoordinates);
- //        // console.log(allCoordinates[0]);
-
- //        // const newArray = myCoordinates.map(function(ar) {
- //        //     const newAr = [];
- //        //     newAr[0] = ar[1];
- //        //     newAr[1] = ar[0];
- //        //     return newAr;
- //        //   });
- //        if (event.currentTarget.classList.contains("pressed")) {
-
-
- //          // if (typeof mapLayer !== 'undefined') {
- //          //   map.setLayoutProperty(`route_${j}`, 'visibility', 'visible');
- //          // }
-
-
- //        // const reducer = (accumulator, currentValue) => accumulator + currentValue;
- //        // allCoordinates = allCoordinates.reduce(reducer);
-
- //        map.fitBounds(bounds, {
- //          padding: 20
- //        });
-
- //        //document.map.fitBounds(traces.getBounds());
- //        titleInput.value = button_i.dataset.title;
- //        imageInput.value = button_i.dataset.image;
- //        }
- //      );
- //    }
- //  }
- // };
  export { initMap };
