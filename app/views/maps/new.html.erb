@@ -13,21 +13,21 @@
               <div class="container">
                 <% if @activities %>
                   <div class="row justify-content-center">
-                    <div class="traces-list m-4">
+                    <div class="traces-list m-3">
                       <h5>Your latests traces :</h5>
                       <% @activities.first(10).each do |activity|%>
-                       <span class="btn-path rounded-circle" id="activity_<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
+                       <span class="btn-path rounded-circle activity-btn" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
                       <% end %>
                     </div>
                   </div>
                   <br>
                   <div class="row justify-content-center">
-                    <div class="traces-color m-4">
+                    <div class="traces-color m-3">
                       <h5>Pick a color for your trace(s):</h5>
                       <input type="color" id="ride-color-picker" name="head" value="#e66465">
-                      <span class="btn-path rounded-circle" id="blue-ride"></span>
-                      <span class="btn-path rounded-circle" id="red-ride"></span>
-                      <span class="btn-path rounded-circle" id="yellow-ride"></span>
+                      <span class="btn-path rounded-circle btn-color" id="blue-ride"></span>
+                      <span class="btn-path rounded-circle btn-color" id="red-ride"></span>
+                      <span class="btn-path rounded-circle btn-color" id="yellow-ride"></span>
                     </div>
                   </div>
                   <% else %>
@@ -35,8 +35,8 @@
                       <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
                   </div>
                   <% end %>
-                  <div class="row justify-content-center m-4">
-                    <div class="m-4"  id='menu'>
+                  <div class="row justify-content-center m-3">
+                    <div class="m-3"  id='menu'>
                     <h5>Chose a style for your map:</h5>
                       <input class="btn btn-white" id='cjzntfday07bs1cop5ja6cf09' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="White">
 
@@ -53,24 +53,24 @@
                         <input class="ride-title form-control" type="text" name="ride-title">
                       </div>
                   </div>
-                  <div class="row justify-content-center m-4">
+                  <div class="row justify-content-center m-3">
                     <h5>Chose a format for your poster:</h5>
                   </div>
                   <%= simple_form_for(@map) do |f| %>
                       <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], :checked => ['A3 - 39€', 'A2 - 59€'].first %>
                   <% end %>
                   <% if @activities %>
-                    <div id="order-button" class="btn-posterity">Order your poster</div>
+                    <div id="order-button" class="btn-posterity">Checkout</div>
                   <% end %>
               </div>
             </div>
           </div>
           <div class="tab-pane fade" id="pills-checkout" role="tabpanel" aria-labelledby="pills-profile-tab">
               <div class="row">
-                <div class="row justify-content-center m-4">
+                <div class="row justify-content-center m-3">
                   <h5>Chose a style for your map:</h5>
                 </div>
-                <div class="row justify-content-center m-4">
+                <div class="row justify-content-center m-3">
                   <div id="back-button" class="btn-posterity">Back to custom</div>
                   <%= simple_form_for(@map) do |f| %>
                       <%= f.input :format, :as => :hidden, :input_html => { :value => "" } %>
@@ -79,9 +79,9 @@
                             <%= orders_form.input :first_name %>
                             <%= orders_form.input :last_name %>
                             <%= orders_form.input :address %>
-                          <% end %>
-                      <%= f.button :submit, class: "btn-posterity" %>
+                        <% end %>
                   <% end %>
+                  <button class="btn-posterity" id="submit_map">Get your poster</button>
                 </div>
             </div>
           </div>
