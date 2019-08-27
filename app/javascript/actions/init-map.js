@@ -93,9 +93,9 @@ const initMap = () => {
               headers: {
                 'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
               }
-            }).then(function (response) { window.location.href = `/maps/${response.data.id}/orders/confirmation` })
+            }).then(function (response) { window.location.href = `/maps/${response.data.id}/orders/confirmation` });
             // .catch(function (error) {...}
-          })
+          });
 
        }, false);
 
@@ -116,26 +116,43 @@ const selectColor = () => {
   const yellowTrace = "yellow";
 
 
-  redRide.addEventListener("click", function(){
-    currentTraceColor = redTrace;
-    // map.getStyle('line-color', redTrace).layers;
-    console.log(map.setPaintProperty(`route_${id}`, 'line-color', "red"));
+  document.querySelectorAll('.activity-btn').forEach(activityBtn => {
 
-    // map.removeLayer(`route_${id}`);
-    // map.removeSource(`route_${id}`);
+    if (redRide) {
+    redRide.addEventListener("click", function(){
+      currentTraceColor = redTrace;
+      if (activityBtn.classList.contains("pressed")) {
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', redTrace);
+      }
+    });
+    }
 
-  });
+    if (blueRide) {
+    blueRide.addEventListener("click", function(){
+      currentTraceColor = blueTrace;
+      if (activityBtn.classList.contains("pressed")) {
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', blueTrace);
+      }
+    });
+    }
 
-  blueRide.addEventListener("click", function(){
-    currentTraceColor = blueTrace;
-  });
+    if (yellowRide) {
+    yellowRide.addEventListener("click", function(){
+      currentTraceColor = yellowTrace;
+      if (activityBtn.classList.contains("pressed")) {
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', yellowTrace);
+      }
+    });
+    }
 
-  yellowRide.addEventListener("click", function(){
-    currentTraceColor = yellowTrace;
-  });
-
-  rideColorPicker.addEventListener("change", function(){
-    currentTraceColor = event.currentTarget.value;
+    if (rideColorPicker) {
+    rideColorPicker.addEventListener("change", function(){
+      currentTraceColor = event.currentTarget.value;
+      if (activityBtn.classList.contains("pressed")) {
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', event.currentTarget.value);
+      }
+    });
+    }
   });
 }
 
@@ -161,7 +178,7 @@ const addTitle = () => {
   titleField.addEventListener('keyup', (event) => {
     titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
   });
-}
+};
 
  const printMap = () => {
   printPdf.build()
@@ -213,14 +230,6 @@ const addTitle = () => {
             "line-color": currentTraceColor,
             "line-width": 5
           }
-
-
-
-
-
-
-
-
         });
       } else {
         map.setLayoutProperty(`route_${id}`, 'visibility', 'none');
