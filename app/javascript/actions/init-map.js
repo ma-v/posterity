@@ -69,9 +69,10 @@ const initMap = () => {
             let myData = new FormData();
             myData.append("title", "test");
             myData.append("image", rawData, "map.pdf");
+            myData.append("format", document.getElementById('map_format').value);
             //myData.append("orders_attributes[]", );
             document.myData = myData;
-            let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value};
+            let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value, address: document.getElementById('map_orders_attributes_0_address').value};
             myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
             /*let mydata = {
               map: {
@@ -89,7 +90,7 @@ const initMap = () => {
               headers: {
                 'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
               }
-            }).then(function (response) { window.location.href = `/maps/${response.data.id}/orders/confirmations` })
+            }).then(function (response) { window.location.href = `/maps/${response.data.id}/orders/confirmation` })
             // .catch(function (error) {...}
           })
 

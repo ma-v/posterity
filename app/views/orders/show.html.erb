@@ -1,4 +1,5 @@
 <h1>Thank you for your Order</h1>
+<%= cl_image_tag "#{@map.image.url}", height: 400, width: 300, crop: :fill %>
 
 <h2>Your command number is : <%= @map.price %> </h2>
 <p>Afficher le Numéro : <%= @map.orders.first.address %></p>
