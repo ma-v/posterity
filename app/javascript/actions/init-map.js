@@ -137,6 +137,9 @@ if (layerList) {
   function switchLayer(layer) {
     let layerId = layer.id;
     map.setStyle('mapbox://styles/boboldo/' + layerId);
+    map.on('style.load', function() {
+      addLayersOnStyleLoad();
+    })
   }
 
   const addLayersOnStyleLoad = () => {
@@ -146,9 +149,6 @@ if (layerList) {
         const id = activityBtn.dataset.id
         let polyline_i = activityBtn.dataset.polyline;
         allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
-        debugger
-        map.removeLayer(`route_${id}`);
-        map.removeSource(`route_${id}`);
         map.addLayer({
             "id": `route_${id}`,
             "type": "line",
@@ -173,6 +173,18 @@ if (layerList) {
               "line-width": 5
             }
           });
+        console.log(map.getLayer(`route_${id}`));
+
+        let selectedCoordinates = [];
+        document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
+          let id = btn.dataset.id
+          allCoordinates[id].forEach(c => selectedCoordinates.push(c))
+        })
+
+        let bounds = selectedCoordinates.reduce((bounds, coord) => bounds.extend(coord),
+          new mapboxgl.LngLatBounds(selectedCoordinates[0], selectedCoordinates[0]));
+
+        if (bounds !== []) { map.fitBounds(bounds, { padding: 20 }); }
       }
     });
   }
@@ -180,9 +192,10 @@ if (layerList) {
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener("click", (event) => {
       switchLayer(event.currentTarget);
-      addLayersOnStyleLoad();
     });
   }
+
+
 }
 
 const addTitle = () => {
