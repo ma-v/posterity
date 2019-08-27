@@ -22,38 +22,25 @@ const initMap = () => {
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div>')
   }
-  // eventListener sur le bouton print
-  var objectToFormData = function(obj, form, namespace) {
-      
+  var objectToFormData = function(obj, form, namespace) {    
     var fd = form || new FormData();
-    var formKey;
-    
+    var formKey;  
     for(var property in obj) {
-      if(obj.hasOwnProperty(property)) {
-        
+      if(obj.hasOwnProperty(property)) {   
         if(namespace) {
           formKey = namespace + '[' + property + ']';
         } else {
           formKey = property;
         }
-       
-        // if the property is an object, but not a File,
-        // use recursivity.
-        if(typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
-          
+        if(typeof obj[property] === 'object' && !(obj[property] instanceof File)) {      
           objectToFormData(obj[property], fd, property);
           
         } else {
-          
-          // if it's a string or a File object
           fd.append(formKey, obj[property]);
         }
-        
       }
-    }
-    
-    return fd;
-      
+    } 
+    return fd;  
   };
 
   const submitMap = document.getElementById('submit_map');
@@ -64,27 +51,14 @@ const initMap = () => {
           .portrait() // Unnecessary since it's the default but it's included for clarity.
           .print(map, mapboxgl)
           .then(function (pdf) {
-            // pdf.save('map.pdf');
-            
             var rawData = pdf.output("blob");
-            document.blob = rawData;
-            document.pdf = pdf;
             let myData = new FormData();
             myData.append("title", "test");
             myData.append("image", rawData, "map.pdf");
             myData.append("format", document.getElementById('map_format').value);
-            //myData.append("orders_attributes[]", );
-            document.myData = myData;
+
             let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value, address: document.getElementById('map_orders_attributes_0_address').value};
             myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
-            /*let mydata = {
-              map: {
-                title: "test", 
-                image: rawData,
-                orders_attributes: [{first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value}]    
-              }
-            }*/
-            //document.mydata = mydata;
 
              axios({
               method: 'POST',
@@ -161,16 +135,55 @@ if (layerList) {
   let inputs = layerList.getElementsByTagName('input');
 
   function switchLayer(layer) {
-    let layerId = layer.target.id;
+    let layerId = layer.id;
     map.setStyle('mapbox://styles/boboldo/' + layerId);
+  }
 
+  const addLayersOnStyleLoad = () => {
+    const allCoordinates = [];
+    document.querySelectorAll('.activity-btn').forEach(activityBtn => {
+      if (activityBtn.classList.contains("pressed")) {
+        const id = activityBtn.dataset.id
+        let polyline_i = activityBtn.dataset.polyline;
+        allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+        debugger
+        map.removeLayer(`route_${id}`);
+        map.removeSource(`route_${id}`);
+        map.addLayer({
+            "id": `route_${id}`,
+            "type": "line",
+            "source": {
+              "type": "geojson",
+              "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                  "type": "LineString",
+                  "coordinates": allCoordinates[id]
+                  }
+              }
+            },
+            "layout": {
+              "line-join": "round",
+              "line-cap": "round",
+              "visibility": "visible"
+            },
+            "paint": {
+              "line-color": currentTraceColor,
+              "line-width": 5
+            }
+          });
+      }
+    });
   }
 
   for (let i = 0; i < inputs.length; i++) {
-  inputs[i].onclick = switchLayer;
+    inputs[i].addEventListener("click", (event) => {
+      switchLayer(event.currentTarget);
+      addLayersOnStyleLoad();
+    });
   }
 }
-
 
 const addTitle = () => {
   let titleFrame = document.querySelector('.map-title');
