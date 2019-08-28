@@ -16,7 +16,7 @@
       </div>
     </div>
   </div> -->
-<div class="order-page d-flex justify-content-center align-items-center rounded" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1475694867812-f82b8696d610?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1778&q=80;">
+<div class="order-page d-flex justify-content-center align-items-center rounded">
 
       <div class="card border-primary mb-3 order-card" style="max-width: 18rem;">
         <div class="card-header align-items-center">
@@ -31,6 +31,7 @@
           </div>
           <p class="card-text">Your command number is : #<%= @map.price %>.</p>
           <p class="card-text">You will receive your poster at : <%= @map.orders.first.address %></p>
+          <a href="" class="btn-posterity"> Back to Home</a>
         </div>
       </div>
 
