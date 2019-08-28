@@ -27,12 +27,13 @@
                         </div>
                         <div class='tab_right tab-track'>
 
-                              <% if @activities %>
                               <div class="row justify-content-center mr-0">
+                              <% if @activities %>
                                 <div class="traces-list flex-track">
                                   <% @activities.first(10).each do |activity|%>
                                    <div class="content"><span class="btn btn-track activity-btn p-2 m-2" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-bicycle"></i> <%= activity["name"] %></span></div>
                                   <% end %>
+                                  <a href="#" id="loadMore">Load More</a>
                                 </div>
 
                               <% else %>
@@ -40,7 +41,6 @@
                                   <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
                               </div>
                               <% end %>
-                              <a href="#" id="loadMore">Load More</a>
                           </div>
 
                         </div>
