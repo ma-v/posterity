@@ -15,9 +15,9 @@ const initMap = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     map = new mapboxgl.Map({
       container: 'mapid',
-      style: 'mapbox://styles/ma-v/cjzv1fkiq0iiy1cka8g7j39qp',
-      center: [5.400000, 43.300000],
-      zoom: 10
+      style: 'mapbox://styles/ma-v/cjzv3hkp30svs1cp5xeexv54g',
+      center: [5.380000, 43.300000],
+      zoom: 11.5
     });
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div>')
