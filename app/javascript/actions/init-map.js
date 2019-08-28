@@ -174,10 +174,10 @@ if (layerList) {
             }
           });
         console.log(map.getLayer(`route_${id}`));
-
         let selectedCoordinates = [];
         document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
           let id = btn.dataset.id
+          allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
           allCoordinates[id].forEach(c => selectedCoordinates.push(c))
         })
 
