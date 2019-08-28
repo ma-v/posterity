@@ -1,7 +1,7 @@
 <div class="order-page d-flex justify-content-center align-items-center rounded">
 
       <div class="card border-primary mb-3 order-card" style="max-width: 18rem;">
-        <div class="card-header align-items-center">
+        <div class="card-header align-items-center"><%= image_tag("rating.gif") %>
             Order Confirmed
             <i class="fas fa-check-circle"></i>
         </div>
@@ -9,7 +9,7 @@
           <h5 class="card-title border-success p-2">Thank you very much</h5>
           <p class="card-text"> Your order is on the way</p>
           <div>
-          <%= image_tag "logistics-delivery-truck-in-movement.png" %>
+          <%= image_tag("delivery-truck.svg") %>
           </div>
           <p class="card-text">Your command number is : #<%= @map.price %>.</p>
           <p class="card-text">You will receive your poster at : <%= @map.orders.first.address %></p>
@@ -25,4 +25,6 @@
     </button>
   </div>
 </div>
+
+<%=  cl_image_tag("@map.image", :format => :jpg) %>
 <%= render 'shared/footer' %>
