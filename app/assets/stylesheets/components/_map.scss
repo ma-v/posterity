@@ -1,9 +1,11 @@
 #mapid {
   width: 426px;
   height: 600px;
-  border: 20px solid white;
+  border: 15px solid black;
+  border-radius: 2px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   text-align: left !important;
+  position: relative;
 }
 
 #mapid a {
@@ -18,7 +20,7 @@
   position: absolute;
   bottom: 0px;
   background: linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 40%,#fff 0);
-  height: 50px;
+  height: 110px;
   width: 100%;
   z-index: 1000;
   display: flex;
@@ -27,7 +29,7 @@
   // opacity: 0.6;
 }
 .legend-title {
-    padding-top: 30px;
+    padding-top: 50px;
     color: black;
     font-family: "Abril Fatface", "Helvetica", "sans-serif";
     font-size: 24px;
