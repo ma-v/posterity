@@ -125,7 +125,10 @@
                             <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], :checked => ['A3 - 39€', 'A2 - 59€'].first %>
                         <% end %>
                         <% if @activities %>
-                          <div id="order-button" class="btn-posterity">Checkout</div>
+
+                            <div id="order-button" class="btn-posterity">Checkout</div>
+
+
                         <% end %>
                         </div>
                       </div>
@@ -155,7 +158,9 @@
                                       <%= orders_form.input :address %>
                                   <% end %>
                             <% end %>
-                            <button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
+                            <div class="checkout d-flex justify-content-around">
+                              <button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
+                            </div>
                           </div>
                         </div>
                       </label>
