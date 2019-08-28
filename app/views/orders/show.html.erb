@@ -18,8 +18,12 @@
   </div> -->
 <div class="order-page d-flex justify-content-center align-items-center" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1475694867812-f82b8696d610?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1778&q=80;">
 
-      <div class="card border-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Order Confirmed</div>
+      <div class="card border-primary mb-3 order-card" style="max-width: 18rem;">
+        <div class="card-header align-items-center">
+          <i class="fas fa-check-circle"></i>
+            Order Confirmed
+          <i class="fas fa-truck"></i>
+        </div>
         <div class="card-body">
           <h5 class="card-title border-success p-2">Thank you very much</h5>
           <p class="card-text">Your command number is : #<%= @map.price %>.</p>
