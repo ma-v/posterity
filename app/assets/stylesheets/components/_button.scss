@@ -63,6 +63,12 @@ a {
 .btn-track {
   color: #0214BB;
   border-color: #0214BB;
+  height: 42px;
+  width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  text-overflow: ellipsis;
     &:hover {
       background: $main-blue;
       color: white;
