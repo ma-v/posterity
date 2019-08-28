@@ -22,6 +22,7 @@ const initMap = () => {
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div>')
   }
+
   var objectToFormData = function(obj, form, namespace) {    
     var fd = form || new FormData();
     var formKey;  
@@ -32,9 +33,9 @@ const initMap = () => {
         } else {
           formKey = property;
         }
+
         if(typeof obj[property] === 'object' && !(obj[property] instanceof File)) {      
           objectToFormData(obj[property], fd, property);
-          
         } else {
           fd.append(formKey, obj[property]);
         }
@@ -225,6 +226,8 @@ const addTitle = () => {
     let polyline_i = activityBtn.dataset.polyline;
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
   });
+
+
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
     activityBtn.addEventListener("click", () => {

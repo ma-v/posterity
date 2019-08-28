@@ -5,92 +5,170 @@
       <div class="display-map col-5 my-auto ml-auto">
         <div id="mapid" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
       </div>
-      <div id="customize-map" class="col-5 mr-auto">
+      <div id="customize-map" class="col-5 my-auto mr-auto">
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-customize-map" role="tabpanel" aria-labelledby="pills-home-tab">
-            <div class="map-styles">
-              <h2>Give some style to your map:</h2>
-              <div class="container">
-                <% if @activities %>
-                  <div class="row justify-content-center">
-                    <div class="traces-list m-3">
-                      <h5>Your latests traces :</h5>
-                      <% @activities.first(10).each do |activity|%>
-                       <span class="btn-path rounded-circle activity-btn" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-route"></i></span>
-                      <% end %>
-                    </div>
-                  </div>
-                  <br>
-                  <div class="row justify-content-center">
-                    <div class="traces-color m-3">
-                      <h5>Pick a color for your trace(s):</h5>
-                      <input type="color" id="ride-color-picker" name="head" value="#e66465">
-                      <span class="btn-path rounded-circle btn-color" id="blue-ride"></span>
-                      <span class="btn-path rounded-circle btn-color" id="red-ride"></span>
-                      <span class="btn-path rounded-circle btn-color" id="yellow-ride"></span>
-                    </div>
-                  </div>
-                  <% else %>
-                  <div class="row justify-content-center">
-                      <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
-                  </div>
-                  <% end %>
-                  <div class="row justify-content-center m-3">
-                    <div class="m-3"  id='menu'>
-                    <h5>Chose a style for your map:</h5>
-                      <input class="btn btn-white" id='cjzntfday07bs1cop5ja6cf09' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="White">
+            <div id="accordion-style">
+              <div class='right'>
+                <div class='app'>
+                  <div class='app_inner'>
+                    <input checked='' id='tab-1' name='buttons' type='radio'>
+                    <label for='tab-1'>
+                      <div class='app_inner__tab'>
+                        <h2>
+                        <i class='icon fas fa-route'></i>
+                        Choose your track
+                        </h2>
+                        <div class='tab_left'>
+                           <i class='big icon fas fa-route'></i>
+                          <div class='tab_left__image'>
+                            <i class='icon fas fa-route'></i>
+                          </div>
+                        </div>
+                        <div class='tab_right tab-track'>
 
-                      <input class="btn btn-grey" id='cjzscv5r74lgd1cnmzxjxrht1' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Grey">
+                              <div class="row justify-content-center mr-0">
+                              <% if @activities %>
+                                <div class="traces-list flex-track">
+                                  <% @activities.first(10).each do |activity|%>
+                                   <div class="content"><span class="btn btn-track activity-btn p-2 m-2" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-bicycle"></i> <%= activity["name"] %></span></div>
+                                  <% end %>
+                                  <a href="#" id="loadMore">Load More</a>
+                                </div>
 
-                      <input class="btn btn-black" id='cjznt9nfm0ewd1cnmagwe6hcn' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Black">
+                              <% else %>
+                              <div class="row justify-content-center">
+                                  <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/new&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
+                              </div>
+                              <% end %>
+                          </div>
 
-                      <input class="btn btn-blue" id='cjznskfqy08fq1cl23dig2tjf' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Blue">
-                    </div>
-                    <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text enter-title" id="inputGroup-sizing-default">Title of your map :</span>
+                        </div>
                       </div>
-                        <input class="ride-title form-control" type="text" name="ride-title">
+                    </label>
+                    <input false='' id='tab-2' name='buttons' type='radio'>
+                    <label for='tab-2'>
+                      <div class='app_inner__tab'>
+                        <h2>
+                        <i class="icon fas fa-palette"></i>
+                        Pick color & theme
+                        </h2>
+                        <div class='tab_left'>
+                          <i class='big icon fas fa-palette'></i>
+                          <div class='tab_left__image'>
+                            <i class='icon fas fa-palette'></i>
+                          </div>
+                        </div>
+                        <div class='tab_right'>
+                          <div class="m-3"  id='menu'>
+                          <h3>Chose a style for your map:</h3>
+                            <input class="btn btn-white" id='cjzntfday07bs1cop5ja6cf09' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="White">
+
+                            <input class="btn btn-grey" id='cjzscv5r74lgd1cnmzxjxrht1' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Grey">
+
+                            <input class="btn btn-black" id='cjznt9nfm0ewd1cnmagwe6hcn' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Black">
+
+                            <input class="btn btn-blue" id='cjznskfqy08fq1cl23dig2tjf' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Blue">
+                          </div>
+                          <div class="traces-color m-3">
+                            <h3>Pick a color for your track</h3>
+                            <input type="color" id="ride-color-picker" class= "btn-path rounded-circle btn-color-picker" name="head" value="#e66465">
+                            <span class="btn-path rounded-circle btn-color-blue" id="blue-ride"></span>
+                            <span class="btn-path rounded-circle btn-color-red" id="red-ride"></span>
+                            <span class="btn-path rounded-circle btn-color-yellow" id="yellow-ride"></span>
+                          </div>
+                        </div>
                       </div>
+                    </label>
+                    <input false='' id='tab-3' name='buttons' type='radio'>
+                    <label for='tab-3'>
+                      <div class='app_inner__tab'>
+                        <h2>
+                        <i class='icon far fa-chart-bar'></i>
+                        Add title & info
+                        </h2>
+                        <div class='tab_left'>
+                          <i class='big icon far fa-chart-bar'></i>
+                          <div class='tab_left__image'>
+                            <i class='icon far fa-chart-bar'></i>
+                          </div>
+                        </div>
+                        <div class='tab_right'>
+                          <h3>Steven Fry podcast</h3>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text enter-title" id="inputGroup-sizing-default">Title of your map :</span>
+                            </div>
+                              <input class="ride-title form-control" type="text" name="ride-title">
+                            </div>
+                        </div>
+                        </div>
+                    </label>
+                    <input false='' id='tab-4' name='buttons' type='radio'>
+                    <label for='tab-4'>
+                      <div class='app_inner__tab'>
+                        <h2>
+                        <i class="icon fas fa-print"></i>
+                        Print your Poster
+                        </h2>
+                        <div class='tab_left'>
+                          <i class='big icon fas fa-print'></i>
+                          <div class='tab_left__image'>
+                            <i class='icon fas fa-print'></i>
+                          </div>
+                        </div>
+                        <div class='tab_right'>
+                          <h3>Massive event</h3>
+                          <%= simple_form_for(@map) do |f| %>
+                            <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], :checked => ['A3 - 39€', 'A2 - 59€'].first %>
+                        <% end %>
+                        <% if @activities %>
+                          <div id="order-button" class="btn-posterity">Checkout</div>
+                        <% end %>
+                        </div>
+                      </div>
+                    </label>
                   </div>
-                  <div class="row justify-content-center m-3">
-                    <h5>Chose a format for your poster:</h5>
-                  </div>
-                  <%= simple_form_for(@map) do |f| %>
-                      <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], :checked => ['A3 - 39€', 'A2 - 59€'].first %>
-                  <% end %>
-                  <% if @activities %>
-                    <div id="order-button" class="btn-posterity">Checkout</div>
-                  <% end %>
+                </div>
               </div>
             </div>
           </div>
           <div class="tab-pane fade" id="pills-checkout" role="tabpanel" aria-labelledby="pills-profile-tab">
-              <div class="row">
-                <div class="row justify-content-center m-3">
-                  <h5>Chose a style for your map:</h5>
+              <div id="accordion-style">
+                <div class='right'>
+                  <div class='app'>
+                    <div class='app_inner'>
+                      <input checked='' id='tab-5' name='buttons' type='radio'>
+                      <label for='tab-5'>
+                        <div class='order'>
+                          <h5>Chose a style for your map:</h5>
+                          <div class="row justify-content-center m-3 box-order">
+                            <div id="back-button" class="btn-posterity order-btn"><i class="fas fa-arrow-left"></i> Back to custom</div>
+                            <%= simple_form_for(@map) do |f| %>
+                                <%= f.input :format, :as => :hidden, :input_html => { :value => "" } %>
+                                <%= f.input :title, :as => :hidden, :input_html => { :value => "Test" } %>
+                                  <%= f.simple_fields_for :orders do |orders_form| %>
+                                      <%= orders_form.input :first_name %>
+                                      <%= orders_form.input :last_name %>
+                                      <%= orders_form.input :address %>
+                                  <% end %>
+                            <% end %>
+                            <button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
                 </div>
-                <div class="row justify-content-center m-3">
-                  <div id="back-button" class="btn-posterity">Back to custom</div>
-                  <%= simple_form_for(@map) do |f| %>
-                      <%= f.input :format, :as => :hidden, :input_html => { :value => "" } %>
-                      <%= f.input :title, :as => :hidden, :input_html => { :value => "Test" } %>
-                        <%= f.simple_fields_for :orders do |orders_form| %>
-                            <%= orders_form.input :first_name %>
-                            <%= orders_form.input :last_name %>
-                            <%= orders_form.input :address %>
-                        <% end %>
-                  <% end %>
-                  <button class="btn-posterity" id="submit_map">Get your poster</button>
-                </div>
-            </div>
+              </div>
+
+
+
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <button id="print-map"> PRINT MY MAP</button>
 </div>
 
 
