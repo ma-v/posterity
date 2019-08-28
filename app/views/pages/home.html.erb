@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1484856299450-fb14549bca50?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1720&q=80);">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1554536783-8ee3c48178e0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80);">
   <div class="container">
     <h1 id="h-title"></h1>
     <p>Customize a poster of the itineraries you're the most proud of</p>
@@ -6,30 +6,57 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container-fluid" id="bg-hiw">
 	<div class="section-1 p-5">
-		<h2>How it works</h2>
+		<h1 class="m-5">How it works</h1>
 		<div class="HIW">
 		  <div class="hiw-card">
-		    <img src="">
-		    <h5>Import your last sport record</h5>
+        <%= image_tag "riding.svg" %>
+        <h5>Import your last records</h5>
 		    <p>Connect your strava account and select the performance you want to print</p>
 		  </div>
 		  <div class="hiw-card">
-		    <img src="">
-		    <h5>Customize your poster</h5>
+        <%= image_tag "map.svg" %>
+        <h5>Customize your poster</h5>
 		    <p>Make your personalized map unique</p>
 		  </div>
 		  <div class="hiw-card">
-		    <img src="">
-		    <h5>Order your high quality poster</h5>
+        <%= image_tag "poster.svg" %>
+	      <h5>Order your high quality poster</h5>
 		    <p>...wait a few days, and let yourself shine</p>
 		  </div>
 		</div>
+    <a class="btn-posterity mx-auto my-5" href="/maps/new">CREATE A POSTER</a>
 	</div>
 </div>
-
-<div class="bottom-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1544967369-b3ee5f993a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);">
-  <div class="carousel-card" style="background-image: url(https://www.cartida.com/de/poster/feature/img/poster/features-roads-white/94197f50-124_high.jpeg);">
+<div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="bottom-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1544967369-b3ee5f993a00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);">
+        <div class="carousel-card carousel-style-1">
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="bottom-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1516147697747-02adcafd3fda?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1114&q=80);">
+        <div class="carousel-card carousel-style-2">
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="bottom-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1564049912639-6dce971ec8ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80);">
+        <div class="carousel-card carousel-style-3">
+        </div>
+      </div>
+    </div>
   </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
+

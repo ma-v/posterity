@@ -15,13 +15,14 @@ const initMap = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     map = new mapboxgl.Map({
       container: 'mapid',
-      style: 'mapbox://styles/boboldo/cjzscv5r74lgd1cnmzxjxrht1',
-      center: [5.400000, 43.300000],
-      zoom: 10
+      style: 'mapbox://styles/ma-v/cjzv3hkp30svs1cp5xeexv54g',
+      center: [5.380000, 43.300000],
+      zoom: 11.5
     });
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div>')
   }
+
   var objectToFormData = function(obj, form, namespace) {    
     var fd = form || new FormData();
     var formKey;  
@@ -32,9 +33,9 @@ const initMap = () => {
         } else {
           formKey = property;
         }
+
         if(typeof obj[property] === 'object' && !(obj[property] instanceof File)) {      
           objectToFormData(obj[property], fd, property);
-          
         } else {
           fd.append(formKey, obj[property]);
         }
@@ -47,7 +48,7 @@ const initMap = () => {
   if (submitMap) {
     submitMap.addEventListener('click', (event) => {
         printPdf.build()
-          .format('a4') // valeur à récuperer dans le DOM
+          .format('a3') // valeur à récuperer dans le DOM
           .portrait() // Unnecessary since it's the default but it's included for clarity.
           .print(map, mapboxgl)
           .then(function (pdf) {
@@ -82,21 +83,21 @@ const initMap = () => {
 
 const selectColor = () => {
   const blueRide = document.querySelector("#blue-ride");
-  const redRide = document.querySelector("#red-ride");
-  const yellowRide = document.querySelector("#yellow-ride");
+  const whiteRide = document.querySelector("#white-ride");
+  const fushiaRide = document.querySelector("#fushia-ride");
   const rideColorPicker = document.querySelector("#ride-color-picker");
   const blueTrace = "#0214BB";
-  const redTrace = "red";
-  const yellowTrace = "yellow";
+  const whiteTrace = "white";
+  const fushiaTrace = "#CD0067";
 
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
 
-    if (redRide) {
-    redRide.addEventListener("click", function(){
-      currentTraceColor = redTrace;
+    if (whiteRide) {
+    whiteRide.addEventListener("click", function(){
+      currentTraceColor = whiteTrace;
       if (activityBtn.classList.contains("pressed")) {
-        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', redTrace);
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', whiteTrace);
       }
     });
     }
@@ -110,11 +111,11 @@ const selectColor = () => {
     });
     }
 
-    if (yellowRide) {
-    yellowRide.addEventListener("click", function(){
-      currentTraceColor = yellowTrace;
+    if (fushiaRide) {
+    fushiaRide.addEventListener("click", function(){
+      currentTraceColor = fushiaTrace;
       if (activityBtn.classList.contains("pressed")) {
-        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', yellowTrace);
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', fushiaTrace);
       }
     });
     }
@@ -136,7 +137,7 @@ if (layerList) {
 
   function switchLayer(layer) {
     let layerId = layer.id;
-    map.setStyle('mapbox://styles/boboldo/' + layerId);
+    map.setStyle('mapbox://styles/ma-v/' + layerId);
     map.on('style.load', function() {
       addLayersOnStyleLoad();
     })
@@ -200,14 +201,16 @@ if (layerList) {
 const addTitle = () => {
   let titleFrame = document.querySelector('.map-title');
   let titleField = document.querySelector('.ride-title');
-  titleField.addEventListener('keyup', (event) => {
-    titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
-  });
+  if (titleField) {
+    titleField.addEventListener('keyup', (event) => {
+      titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
+    }); 
+  }
 };
 
  const printMap = () => {
   printPdf.build()
-    .format('a3') // valeur à récuperer dans le DOM
+    .format('a2') // valeur à récuperer dans le DOM
     .portrait() // Unnecessary since it's the default but it's included for clarity.
     .print(map, mapboxgl)
     .then(function (pdf) {
@@ -225,6 +228,8 @@ const addTitle = () => {
     let polyline_i = activityBtn.dataset.polyline;
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
   });
+
+
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
     activityBtn.addEventListener("click", () => {
