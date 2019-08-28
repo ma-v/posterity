@@ -173,18 +173,17 @@ if (layerList) {
               "line-width": 5
             }
           });
-        console.log(map.getLayer(`route_${id}`));
-        let selectedCoordinates = [];
-        document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
-          let id = btn.dataset.id
-          allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
-          allCoordinates[id].forEach(c => selectedCoordinates.push(c))
-        })
+        // let selectedCoordinates = [];
+        // document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
+        //   let id = btn.dataset.id
+        //   allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+        //   allCoordinates[id].forEach(c => selectedCoordinates.push(c));
+        // })
+        // console.log(selectedCoordinates);
+        // let bounds = selectedCoordinates.reduce((bounds, coord) => bounds.extend(coord),
+        //   new mapboxgl.LngLatBounds(selectedCoordinates[0], selectedCoordinates[0]));
 
-        let bounds = selectedCoordinates.reduce((bounds, coord) => bounds.extend(coord),
-          new mapboxgl.LngLatBounds(selectedCoordinates[0], selectedCoordinates[0]));
-
-        if (bounds !== []) { map.fitBounds(bounds, { padding: 20 }); }
+        // if (bounds !== []) { map.fitBounds(bounds, { padding: 40 }); }
       }
     });
   }
@@ -271,7 +270,7 @@ const addTitle = () => {
       let bounds = selectedCoordinates.reduce((bounds, coord) => bounds.extend(coord),
         new mapboxgl.LngLatBounds(selectedCoordinates[0], selectedCoordinates[0]));
 
-      if (bounds !== []) { map.fitBounds(bounds, { padding: 20 }); }
+      if (bounds !== []) { map.fitBounds(bounds, { padding: 30 }); }
     });
   });
 };
