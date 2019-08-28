@@ -24,36 +24,36 @@ const initMap = () => {
   }
   // eventListener sur le bouton print
   var objectToFormData = function(obj, form, namespace) {
-      
+
     var fd = form || new FormData();
     var formKey;
-    
+
     for(var property in obj) {
       if(obj.hasOwnProperty(property)) {
-        
+
         if(namespace) {
           formKey = namespace + '[' + property + ']';
         } else {
           formKey = property;
         }
-       
+
         // if the property is an object, but not a File,
         // use recursivity.
         if(typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
-          
+
           objectToFormData(obj[property], fd, property);
-          
+
         } else {
-          
+
           // if it's a string or a File object
           fd.append(formKey, obj[property]);
         }
-        
+
       }
     }
-    
+
     return fd;
-      
+
   };
 
   const submitMap = document.getElementById('submit_map');
@@ -65,7 +65,7 @@ const initMap = () => {
           .print(map, mapboxgl)
           .then(function (pdf) {
             // pdf.save('map.pdf');
-            
+
             var rawData = pdf.output("blob");
             document.blob = rawData;
             document.pdf = pdf;
@@ -79,9 +79,9 @@ const initMap = () => {
             myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
             /*let mydata = {
               map: {
-                title: "test", 
+                title: "test",
                 image: rawData,
-                orders_attributes: [{first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value}]    
+                orders_attributes: [{first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value}]
               }
             }*/
             //document.mydata = mydata;
@@ -183,6 +183,8 @@ const addTitle = () => {
     let polyline_i = activityBtn.dataset.polyline;
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
   });
+
+
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
     activityBtn.addEventListener("click", () => {
