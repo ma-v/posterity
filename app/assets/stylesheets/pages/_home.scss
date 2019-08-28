@@ -7,11 +7,44 @@ body {
 
 .HIW {
 	display: flex;
-	align-items: top;
 	justify-content: space-around;
 	padding: 15px;
 }
+.hiw-card {
+  padding: 16px;
+  margin: 8px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  // background: rgba(255, 255, 255, .5);
+  & h5, p {
+    margin: 16px auto;
+  }
+}
+
+.hiw-card img {
+  width: 100%;
+  height: 100px;
+  margin: 16px auto;
+}
 
 .section-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 	height: 90vh;
 }
+
+// #bg-hiw {
+//    z-index: 1;
+//    background: center / cover url(trace.svg);
+// }
+
+
+// .carousel-text {
+//   margin: 36px;
+//   top: 10%;
+//   width: 30%;
+//   position: absolute;
+//   color: white;
+// }
