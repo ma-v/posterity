@@ -30,7 +30,7 @@
                               <div class="row justify-content-center mr-0">
                               <% if @activities %>
                                 <div class="traces-list flex-track">
-                                  <% @activities.first(10).each do |activity|%>
+                                  <% @activities.first(20).each do |activity|%>
                                    <div class="content"><span class="btn btn-track activity-btn p-2 m-2" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-bicycle"></i> <%= activity["name"] %></span></div>
                                   <% end %>
                                   <a href="#" id="loadMore">Load More</a>
@@ -62,20 +62,22 @@
                         <div class='tab_right'>
                           <div class="m-3"  id='menu'>
                           <h3>Chose a style for your map:</h3>
-                            <input class="btn btn-white" id='cjzntfday07bs1cop5ja6cf09' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="White">
+                            <input class="btn btn-white" id='cjzv1fkiq0iiy1cka8g7j39qp' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Monochrome-Blue">
 
-                            <input class="btn btn-grey" id='cjzscv5r74lgd1cnmzxjxrht1' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Grey">
+                            <input class="btn btn-grey" id='cjzv15gtn0qo21cnr79a5fggb' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Swiss-Ski">
 
-                            <input class="btn btn-black" id='cjznt9nfm0ewd1cnmagwe6hcn' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Black">
+                            <input class="btn btn-black" id='cjzv2l6go01wi1cqibequuxje' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Blueprint">
 
-                            <input class="btn btn-blue" id='cjznskfqy08fq1cl23dig2tjf' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Blue">
+                            <input class="btn btn-blue" id='cjzv3hkp30svs1cp5xeexv54g' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Green-Streets">
+
+                            <input class="btn btn-blue" id='cjzv480dn016g1cphwep22jef' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Black-White">
                           </div>
                           <div class="traces-color m-3">
                             <h3>Pick a color for your track</h3>
                             <input type="color" id="ride-color-picker" class= "btn-path rounded-circle btn-color-picker" name="head" value="#e66465">
                             <span class="btn-path rounded-circle btn-color-blue" id="blue-ride"></span>
-                            <span class="btn-path rounded-circle btn-color-red" id="red-ride"></span>
-                            <span class="btn-path rounded-circle btn-color-yellow" id="yellow-ride"></span>
+                            <span class="btn-path rounded-circle btn-color-white" id="white-ride"></span>
+                            <span class="btn-path rounded-circle btn-color-fushia" id="fushia-ride"></span>
                           </div>
                         </div>
                       </div>

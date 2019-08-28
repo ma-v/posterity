@@ -14,6 +14,7 @@ switchToCheckout();
 animateTitle();
 
 //INIT MAP
+
 initMap();
 
 $(document).ready(function(){
@@ -25,5 +26,5 @@ $(document).ready(function(){
       $("#loadMore").text("No Content").addClass("noContent");
     }
   });
-
 }) // init la map et toutes ces fonctions
+
