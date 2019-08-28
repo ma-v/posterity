@@ -10,6 +10,17 @@
 	}
 }
 
+.btn-home {
+    font-family: 'Abril Fatface', cursive;
+      color: white;
+      border: 1px solid white;
+      background: transparent;
+      padding: 13px 25px;
+    &:hover {
+      box-shadow: 0 0 10px white;
+      color: white;
+    }
+}
 
 a {
 	text-decoration: none !important;
