@@ -8,10 +8,12 @@ import { animateTitle } from '../actions/animated-title';
 
 //IMPORT JS
 import { initMap } from '../actions/init-map';
+import { loadLoader } from '../actions/loader';
 
 import {switchToCheckout} from '../actions/customize-map-box';
 switchToCheckout();
 animateTitle();
+loadLoader();
 
 //INIT MAP
 
