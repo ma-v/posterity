@@ -47,7 +47,7 @@ const initMap = () => {
   if (submitMap) {
     submitMap.addEventListener('click', (event) => {
         printPdf.build()
-          .format('a4') // valeur à récuperer dans le DOM
+          .format('a3') // valeur à récuperer dans le DOM
           .portrait() // Unnecessary since it's the default but it's included for clarity.
           .print(map, mapboxgl)
           .then(function (pdf) {
@@ -209,7 +209,7 @@ const addTitle = () => {
 
  const printMap = () => {
   printPdf.build()
-    .format('a3') // valeur à récuperer dans le DOM
+    .format('a2') // valeur à récuperer dans le DOM
     .portrait() // Unnecessary since it's the default but it's included for clarity.
     .print(map, mapboxgl)
     .then(function (pdf) {
