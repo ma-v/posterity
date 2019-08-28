@@ -1,9 +1,8 @@
-<div id="new-map-body">
+<!-- <div id="new-map-body">
   <div class="container d-flex justify-content-center">
     <div class="card m-5" style="max-width: 540px;">
       <div class="row no-gutters">
         <div class="col-md-4">
-          <img src='<%= cl_image_tag '#{@map.image.url}', height: 400, width: 300, crop: :fill %>' class="card-img" alt="...">
         </div>
         <div class="col-md-8">
           <div class="card-body ">
@@ -16,7 +15,17 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+<div class="container d-flex justify-content-center">
+    <div class="card border-primary mb-3" style="max-width: 18rem;">
+      <div class="card-header">Order Confirmed</div>
+      <div class="card-body">
+        <h5 class="card-title border-success p-2">Thank you very much</h5>
+        <p class="card-text">Your command number is : #<%= @map.price %>.</p>
+        <p class="card-text">You will receive your poster at : <%= @map.orders.first.address %></p>
+      </div>
+    </div>
+</div>
 
   <div class="alert alert-success" role="alert">
    🥇 Congrats, you will receive your poster soon 🥇
