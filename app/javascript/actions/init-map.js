@@ -15,7 +15,7 @@ const initMap = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     map = new mapboxgl.Map({
       container: 'mapid',
-      style: 'mapbox://styles/boboldo/cjzscv5r74lgd1cnmzxjxrht1',
+      style: 'mapbox://styles/ma-v/cjzv1fkiq0iiy1cka8g7j39qp',
       center: [5.400000, 43.300000],
       zoom: 10
     });
@@ -136,7 +136,7 @@ if (layerList) {
 
   function switchLayer(layer) {
     let layerId = layer.id;
-    map.setStyle('mapbox://styles/boboldo/' + layerId);
+    map.setStyle('mapbox://styles/ma-v/' + layerId);
     map.on('style.load', function() {
       addLayersOnStyleLoad();
     })
@@ -200,9 +200,11 @@ if (layerList) {
 const addTitle = () => {
   let titleFrame = document.querySelector('.map-title');
   let titleField = document.querySelector('.ride-title');
-  titleField.addEventListener('keyup', (event) => {
-    titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
-  });
+  if (titleField) {
+    titleField.addEventListener('keyup', (event) => {
+      titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
+    }); 
+  }
 };
 
  const printMap = () => {
