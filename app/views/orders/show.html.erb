@@ -1,23 +1,23 @@
-<div id="new-map-body">
-  <div class="container d-flex justify-content-center">
-    <div class="card m-5" style="max-width: 540px;">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <img src='<%= cl_image_tag '#{@map.image.url}', height: 400, width: 300, crop: :fill %>' class="card-img" alt="...">
+<div class="order-page d-flex justify-content-center align-items-center rounded">
+
+      <div class="card border-primary mb-3 order-card" style="max-width: 18rem;">
+        <div class="card-header align-items-center">
+            Order Confirmed
+            <i class="fas fa-check-circle"></i>
         </div>
-        <div class="col-md-8">
-          <div class="card-body ">
-            <h5 class="card-title border border-success p-2">Thank you for your order</h5>
-            <p class="card-text shadow-sm p-3 mb-5 bg-white rounded">It's done, you will receive it soon, Here is a Recap of your order :</p>
-            <p class="card-text shadow-sm p-3 mb-5 bg-white rounded">Your command number is : #<%= @map.price %></p>
-            <p class="card-text shadow-sm p-3 mb-5 bg-white rounded">Your address : <%= @map.orders.first.address %></p>
-            <p class="card-text "><small class="text-muted">Last updated 3 mins ago</small></p>
+        <div class="card-body">
+          <h5 class="card-title border-success p-2">Thank you very much</h5>
+          <p class="card-text"> Your order is on the way</p>
+          <div>
+          <%= image_tag "logistics-delivery-truck-in-movement.png" %>
           </div>
+          <p class="card-text">Your command number is : #<%= @map.price %>.</p>
+          <p class="card-text">You will receive your poster at : <%= @map.orders.first.address %></p>
+          <a href="" class="btn-posterity"> Back to Home</a>
         </div>
       </div>
-    </div>
-  </div>
 
+</div>
   <div class="alert alert-success" role="alert">
    🥇 Congrats, you will receive your poster soon 🥇
    <button type="button" class="close" data-dismiss="alert" aria-label="Close">

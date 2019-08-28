@@ -2,8 +2,8 @@ import "bootstrap";
 
 //IMPORT CSS
 import 'mapbox-gl/dist/mapbox-gl.css';
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
-import { animateTitle } from '../actions/animated-title'
+import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
+import { animateTitle } from '../actions/animated-title';
 
 
 //IMPORT JS
@@ -27,4 +27,3 @@ $(document).ready(function(){
     }
   });
 }) // init la map et toutes ces fonctions
-
