@@ -14,7 +14,8 @@
     "mapbox-gl": "^1.2.1",
     "mapbox-print-pdf": "^0.4.3",
     "polyline-encoded": "0.0.8",
-    "popper.js": "^1.15.0"
+    "popper.js": "^1.15.0",
+    "typed.js": "^2.0.10"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.8.0"
