@@ -82,21 +82,21 @@ const initMap = () => {
 
 const selectColor = () => {
   const blueRide = document.querySelector("#blue-ride");
-  const redRide = document.querySelector("#red-ride");
-  const yellowRide = document.querySelector("#yellow-ride");
+  const whiteRide = document.querySelector("#white-ride");
+  const fushiaRide = document.querySelector("#fushia-ride");
   const rideColorPicker = document.querySelector("#ride-color-picker");
   const blueTrace = "#0214BB";
-  const redTrace = "red";
-  const yellowTrace = "yellow";
+  const whiteTrace = "white";
+  const fushiaTrace = "#CD0067";
 
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
 
-    if (redRide) {
-    redRide.addEventListener("click", function(){
-      currentTraceColor = redTrace;
+    if (whiteRide) {
+    whiteRide.addEventListener("click", function(){
+      currentTraceColor = whiteTrace;
       if (activityBtn.classList.contains("pressed")) {
-        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', redTrace);
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', whiteTrace);
       }
     });
     }
@@ -110,11 +110,11 @@ const selectColor = () => {
     });
     }
 
-    if (yellowRide) {
-    yellowRide.addEventListener("click", function(){
-      currentTraceColor = yellowTrace;
+    if (fushiaRide) {
+    fushiaRide.addEventListener("click", function(){
+      currentTraceColor = fushiaTrace;
       if (activityBtn.classList.contains("pressed")) {
-        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', yellowTrace);
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', fushiaTrace);
       }
     });
     }
