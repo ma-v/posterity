@@ -14,4 +14,5 @@ switchToCheckout();
 animateTitle();
 
 //INIT MAP
+
 initMap(); // init la map et toutes ses fonctions
