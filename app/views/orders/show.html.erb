@@ -1,20 +1,20 @@
 <div class="order-page d-flex justify-content-center align-items-center rounded">
 
-      <div class="card border-primary mb-3 order-card" style="max-width: 18rem;">
-        <div class="card-header align-items-center"><%= image_tag("rating.gif") %>
+      <div class="order-container">
+        <div class="order-confirmed">
             Order Confirmed
-            <i class="fas fa-check-circle"></i>
+            <i class="fas fa-check-circle order-check"></i>
+            <h5 class="order-title">Thank you very much</h5>
         </div>
-        <div class="card-body">
-          <h5 class="card-title border-success p-2">Thank you very much</h5>
-          <p class="card-text"> Your order is on the way</p>
-          <div>
-          <%= image_tag("delivery-truck.svg") %>
+        <div class="container order-text">
+          <p class="order-way"> Your order is on the way ...<span class="bike-icon"><%= image_tag('bicycle-white.svg') %></span>...</p>
+          <p>You will receive an email very soon.</p>
+          <p class="">Your command number is : #<%= @map.price %>.</p>
+          <p class="">We hope you will enjoy our Poster</p>
+        </div>
+          <div class="bottom-order">
+            <a href="<% root_path %>" class="btn-posterity btn-order-page"> Back to Home</a>
           </div>
-          <p class="card-text">Your command number is : #<%= @map.price %>.</p>
-          <p class="card-text">You will receive your poster at : <%= @map.orders.first.address %></p>
-          <a href="" class="btn-posterity"> Back to Home</a>
-        </div>
       </div>
 
 </div>
@@ -25,6 +25,4 @@
     </button>
   </div>
 </div>
-
-<%=  cl_image_tag("@map.image", :format => :jpg) %>
 <%= render 'shared/footer' %>

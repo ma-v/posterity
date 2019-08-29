@@ -96,7 +96,6 @@
                           </div>
                         </div>
                         <div class='tab_right'>
-                          <h3>Steven Fry podcast</h3>
                           <div class="input-group mb-3">
                             <div class="input-group-prepend">
                               <span class="input-group-text enter-title" id="inputGroup-sizing-default">Title of your map :</span>
@@ -120,7 +119,6 @@
                           </div>
                         </div>
                         <div class='tab_right'>
-                          <h3>Massive event</h3>
                           <%= simple_form_for(@map) do |f| %>
                             <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], :checked => ['A3 - 39€', 'A2 - 59€'].first %>
                         <% end %>
