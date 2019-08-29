@@ -29,7 +29,7 @@ $(document).ready(function() {
 
   mapLabel.addEventListener('input', event => {
     if (mapLabel.value.length >= 1) {
-      mapTitle.style.display = "flex";
+      mapTitle.style.display = "initial";
     }
     else {
       mapTitle.style.display = "none";

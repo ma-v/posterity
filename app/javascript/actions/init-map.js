@@ -205,7 +205,7 @@ const addTitle = () => {
   let titleField = document.querySelector('.ride-title');
   if (titleField) {
     titleField.addEventListener('keyup', (event) => {
-      titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
+      titleFrame.innerHTML = `<div class="title-map"><p class="legend-title">${titleField.value}</p></div><div class="info-track"></div>`;
     });
   }
 };
