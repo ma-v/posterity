@@ -6,7 +6,50 @@
 
 }
 
-.card-body img {
-  width: 100px;
-  height: 100px;
+.order-confirmed {
+  font-size: 27px;
+  color: white;
+  border: 1px solid;
+  padding: 20px 117px;
+}
+
+.order-check {
+  color: $main-blue;
+}
+
+.bike-icon img {
+  margin-bottom: 20px;
+  height: 36px;
+}
+
+.btn-order-page {
+    color: white;
+    font-size: 17px;
+    border: 1px solid white;
+    padding: 20px 67px;
+    &:hover{
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+.order-way {
+  margin-bottom: 0;
+}
+
+.bottom-order {
+  margin-top: 40px;
+}
+
+.order-title {
+  color: white;
+  font-size: 20px;
+}
+
+.order-text {
+  padding: 20px;
+  color: white;
+  margin-top: 20px;
+  font-size: 20px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.3);
 }
