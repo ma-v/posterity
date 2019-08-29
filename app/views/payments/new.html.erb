@@ -9,16 +9,17 @@
             <span>Amount: <%= humanized_money_with_symbol(@order.amount) %></span>
           </label>
         </article>
+        <%= form_tag map_order_payments_path(@order.map, @order) do %>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-name="My Map"
+          data-email="<%= @order.email %>"
+          data-description="Map #<%= @order.map_sku %>"
+          data-amount="<%= @order.amount_cents %>"
+          data-currency="<%= @order.amount.currency %>"></script>
+        <% end %>
     </div>
-    <%= form_tag map_order_payments_path(@order.map, @order) do %>
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-      data-name="My Map"
-      data-email="<%= @order.email %>"
-      data-description="Map #<%= @order.map_sku %>"
-      data-amount="<%= @order.amount_cents %>"
-      data-currency="<%= @order.amount.currency %>"></script>
-    <% end %>
+    
   </div>
 </div>
 <%= render 'shared/footer' %>
