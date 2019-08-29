@@ -5,6 +5,7 @@ import polyline from '@mapbox/polyline';
 import axios from 'axios';
 import { addFields } from '../actions/fields-input';
 import { checkDistance } from '../actions/fields-input';
+import { checkElevation } from '../actions/fields-input';
 
 let map = null;
 let currentTraceColor = "#0214BB";
@@ -221,6 +222,7 @@ const addTitle = () => {
     });
 };
   document.dist = 0;
+  document.elev = 0;
 
  const selectRide = () => {
 
@@ -239,11 +241,13 @@ const addTitle = () => {
       const id = activityBtn.dataset.id
       document.time = activityBtn.dataset.time
       document.speed = activityBtn.dataset.speed
-      document.elev = activityBtn.dataset.elevation
+
       if (activityBtn.classList.contains("pressed")) {
         document.dist += parseInt(activityBtn.dataset.distance);
+        document.elev += parseInt(activityBtn.dataset.elevation);
         addFields();
         checkDistance();
+        checkElevation();
         map.addLayer({
           "id": `route_${id}`,
           "type": "line",

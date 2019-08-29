@@ -52,7 +52,7 @@ const checkTime = () => {
   let isChecked = timeField.checked;
 
      if (isChecked) {
-      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-time">Time:${document.time/60} Hrs</p>`);
+      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-time">Time:${Math.round((document.time/60)/60)}Hrs</p>`);
      } else{
         let timeInfo = document.querySelector('.legend-infos-time');
         timeInfo.remove();
@@ -63,14 +63,20 @@ const checkTime = () => {
 const checkElevation = () => {
 
   let titleFrame = document.querySelector('.map-title');
+  let elevationInfo = document.querySelector('.legend-infos-elevation');
   let elevationField = document.querySelector('#activity-elevation');
   let isChecked = elevationField.checked;
 
      if (isChecked) {
-      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-elevation">Elevation:${document.elev}</p>`);
+      if(elevationInfo) {
+          elevationInfo.remove();
+        }
+      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-elevation">Elevation:${Math.round(document.elev)}meters</p>`);
      } else{
         let elevationInfo = document.querySelector('.legend-infos-elevation');
-        elevationInfo.remove();
+        if (elevationInfo != null)
+         elevationInfo.remove();
+
 
      }
   };
@@ -78,3 +84,4 @@ const checkElevation = () => {
 
 export {addFields};
 export {checkDistance};
+export {checkElevation};
