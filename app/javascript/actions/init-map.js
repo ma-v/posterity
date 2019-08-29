@@ -239,6 +239,9 @@ const addTitle = () => {
 
       const id = activityBtn.dataset.id
       document.dist = activityBtn.dataset.distance
+      document.time = activityBtn.dataset.time
+      document.speed = activityBtn.dataset.speed
+      document.elev = activityBtn.dataset.elevation
       if (activityBtn.classList.contains("pressed")) {
         addFields();
         map.addLayer({
