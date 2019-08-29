@@ -27,6 +27,11 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.mapboxgl-control-container {
+  display: none;
+}
+
 .legend-title {
     padding-top: 50px;
     color: black;
