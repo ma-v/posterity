@@ -15,7 +15,7 @@ const switchToCheckout = () => {
 	if (orderButton) {
 		orderButton.addEventListener("click", function() {
 			togglePills();
-			mapFormat.value = document.querySelector(".form-check :checked").value;
+			mapFormat.value = document.querySelector(".form-check .value-format:checked").value;
 		});
 
 		backButton.addEventListener("click", togglePills);

@@ -36,12 +36,21 @@ const checkSpeed = () => {
 
   let titleFrame = document.querySelector('.info-track');
   let speedField = document.querySelector('#activity-speed');
+  let speedInfo = document.querySelector('.legend-infos-speed');
   let isChecked = speedField.checked;
 
      if (isChecked) {
+// <<<<<<< HEAD
+//       //
+// =======
+      if(speedInfo) {
+          speedInfo.remove();
+        }
       titleFrame.innerHTML = titleFrame.innerHTML +`<p class="legend-infos-speed"> <i class="fas fa-tachometer-alt"></i> ${Math.round(document.speed*3.6)} km/h</p>`;
+// >>>>>>> master
      } else{
         let speedInfo = document.querySelector('.legend-infos-speed');
+        if (speedInfo != null)
         speedInfo.remove();
 
      }
@@ -50,12 +59,22 @@ const checkTime = () => {
 
   let titleFrame = document.querySelector('.info-track');
   let timeField = document.querySelector('#activity-time');
+  let timeInfo = document.querySelector('.legend-infos-time');
   let isChecked = timeField.checked;
 
      if (isChecked) {
-      titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-time"> <i class="fas fa-stopwatch"></i> ${Math.round(document.time/60)} Hrs</p>`;
+// <<<<<<< HEAD
+//
+// =======
+      if(timeInfo) {
+        timeInfo.remove();
+        }
+      titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-time"> <i class="fas fa-stopwatch"></i> ${Math.round((document.time/60)/60)} Hrs</p>`;
+
+// >>>>>>> master
      } else{
         let timeInfo = document.querySelector('.legend-infos-time');
+        if (timeInfo != null)
         timeInfo.remove();
 
      }
@@ -64,14 +83,24 @@ const checkTime = () => {
 const checkElevation = () => {
 
   let titleFrame = document.querySelector('.info-track');
+  let elevationInfo = document.querySelector('.legend-infos-elevation');
   let elevationField = document.querySelector('#activity-elevation');
   let isChecked = elevationField.checked;
 
      if (isChecked) {
+// <<<<<<< HEAD
+//       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-elevation"><i class="fas fa-mountain"></i> ${document.elev} m</p>`;
+// =======
+      if(elevationInfo) {
+          elevationInfo.remove();
+        }
       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-elevation"><i class="fas fa-mountain"></i> ${document.elev} m</p>`;
+// >>>>>>> master
      } else{
         let elevationInfo = document.querySelector('.legend-infos-elevation');
-        elevationInfo.remove();
+        if (elevationInfo != null)
+         elevationInfo.remove();
+
 
      }
   };
@@ -79,3 +108,6 @@ const checkElevation = () => {
 
 export {addFields};
 export {checkDistance};
+export {checkElevation};
+export {checkTime};
+export {checkSpeed};

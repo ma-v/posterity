@@ -114,7 +114,7 @@
                               </div>
                               <div class="form-check form-check-inline">
                                 <label class="form-check-label label-map" for="inlineCheckbox3">Add Elevation</label>
-                                <input class="form-check-input" type="checkbox" id="activity-elevation" value="option3">
+                                <input class="form-check-input" type="checkbox" id="activity-elevation" value="option4">
                               </div>
                             </div>
                           </div>
@@ -136,7 +136,7 @@
                         </div>
                         <div class='tab_right'>
                           <%= simple_form_for(@map) do |f| %>
-                            <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], :checked => ['A3 - 39€', 'A2 - 59€'].first %>
+                            <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], class: 'value-format', :checked => ['A3 - 39€', 'A2 - 59€'].first %>
                         <% end %>
                         <% if @activities %>
                             <div id="order-button" class="btn-posterity">Checkout</div>
