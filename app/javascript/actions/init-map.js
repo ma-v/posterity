@@ -278,6 +278,8 @@ const addTitle = () => {
         });
       } else {
         document.dist -= parseInt(activityBtn.dataset.distance);
+        document.elev -= parseInt(activityBtn.dataset.elevation);
+        document.time -= parseInt(activityBtn.dataset.time);
         map.setLayoutProperty(`route_${id}`, 'visibility', 'none');
         map.removeLayer(`route_${id}`);
         map.removeSource(`route_${id}`);
