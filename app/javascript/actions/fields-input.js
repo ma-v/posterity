@@ -35,12 +35,17 @@ const checkSpeed = () => {
 
   let titleFrame = document.querySelector('.map-title');
   let speedField = document.querySelector('#activity-speed');
+  let speedInfo = document.querySelector('.legend-infos-speed');
   let isChecked = speedField.checked;
 
      if (isChecked) {
+      if(speedInfo) {
+          speedInfo.remove();
+        }
       titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-speed">average speed:${Math.round(document.speed*3.6)} km/h</p>`);
      } else{
         let speedInfo = document.querySelector('.legend-infos-speed');
+        if (speedInfo != null)
         speedInfo.remove();
 
      }
@@ -92,3 +97,4 @@ export {addFields};
 export {checkDistance};
 export {checkElevation};
 export {checkTime};
+export {checkSpeed};

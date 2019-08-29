@@ -7,6 +7,7 @@ import { addFields } from '../actions/fields-input';
 import { checkDistance } from '../actions/fields-input';
 import { checkElevation } from '../actions/fields-input';
 import { checkTime } from '../actions/fields-input';
+import { checkSpeed } from '../actions/fields-input';
 
 let map = null;
 let currentTraceColor = "#0214BB";
@@ -248,10 +249,12 @@ const addTitle = () => {
         document.dist += parseInt(activityBtn.dataset.distance);
         document.elev += parseInt(activityBtn.dataset.elevation);
         document.time += parseInt(activityBtn.dataset.time);
+        document.speed = (document.dist)/(document.time);
         addFields();
         checkDistance();
         checkElevation();
         checkTime();
+        checkSpeed();
         map.addLayer({
           "id": `route_${id}`,
           "type": "line",
