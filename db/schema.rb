@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_29_101408) do
+ActiveRecord::Schema.define(version: 2019_08_29_103843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_08_29_101408) do
     t.string "map_sku"
     t.integer "amount_cents", default: 0, null: false
     t.string "state"
+    t.string "email"
     t.index ["map_id"], name: "index_orders_on_map_id"
   end
 

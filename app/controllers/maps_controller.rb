@@ -34,7 +34,8 @@ class MapsController < ApplicationController
 	    @map.orders.last.amount_cents = @map.price_cents
 
 		if @map.save
-			render json: @map
+			# redirect_to new_map_order_payment_path(@map, @map.orders.last)
+			render json: @map.orders.last
 		else
 			render :new
 		end
@@ -43,6 +44,6 @@ class MapsController < ApplicationController
 	private
 
 	def map_params
-		params.permit(:title, :image, :format, orders_attributes:[:first_name, :last_name, :address, :map_sku, :state])
+		params.permit(:title, :image, :format, orders_attributes:[:first_name, :last_name, :address, :map_sku, :state, :email])
 	end
 end
