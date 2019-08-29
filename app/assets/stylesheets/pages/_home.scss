@@ -36,6 +36,8 @@ body {
 }
 
 
+// responsive home  <<<<<<<<<<<<<<<<<<
+
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
   .navbar-lewagon {
@@ -90,7 +92,8 @@ body {
     }
   }
   .hiw-card img {
-    display: none;
+    height: 60px;
+    width: auto;
   }
   #carouselExampleControls {
     display: none;
@@ -103,5 +106,52 @@ body {
   .footer-copyright {
     display: none;
   }
+// responsive Maps/new <<<<<<<<<<<<<<<<<<
+  .row {
+    margin: auto;
+  }
+  .display-map {
+    margin: 8px !important;
+  }
 
+  #mapid {
+    width: 300px;
+    height: 400px;
+  }
+  #accordion-style  i {
+    display: none !important;
+  }
+
+  .tab_left__image {
+    display: none;
+  }
+
+  #customize-map {
+    margin: auto !important;
+    max-width: 340px !important;
+  }
+  .right {
+    min-width: 100vw;
+  }
+  .tab_left {
+    display: none;
+  }
+  .tab_right {
+    width: 300px !important;
+    float: left !important;
+  }
+
+  .app_inner__tab {
+    width: 360px;
+  }
+   .app_inner__tab * {
+    position: relative !important;
+  }
+
+  #menu {
+    margin: 0 !important;
+  }
+  .order {
+    width: 300px;
+  }
 }
