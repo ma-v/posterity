@@ -42,7 +42,6 @@
                               </div>
                               <% end %>
                           </div>
-
                         </div>
                       </div>
                     </label>
@@ -96,28 +95,29 @@
                           </div>
                         </div>
                         <div class='tab_right'>
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                            </div>
+                          <div class="input-group mb-3 d-flex justify-content-end">
+                            <div class="input-group-prepend fields-input">
                               <input class="ride-title form-control" placeholder="Title of your Map" type="text" name="ride-title">
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="activity-distance" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Add Distance</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="activity-speed" value="option2">
+                                <label class="form-check-label" for="inlineCheckbox2">Add Average Speed</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="activity-time" value="option3">
+                                <label class="form-check-label" for="inlineCheckbox3">Add Time</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="activity-elevation" value="option3">
+                                <label class="form-check-label" for="inlineCheckbox3">Add Elevation</label>
+                              </div>
                             </div>
+                          </div>
                         </div>
-                           <div class="form-check">
-                              <input class="form-check-input" type="checkbox" id="activity-distance" value="option1">
-                              <label class="form-check-label" for="inlineCheckbox1">Add Distance</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="activity-speed" value="option2">
-                              <label class="form-check-label" for="inlineCheckbox2">Add Average Speed</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="activity-time" value="option3">
-                              <label class="form-check-label" for="inlineCheckbox3">Add Time</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="activity-elevation" value="option3">
-                              <label class="form-check-label" for="inlineCheckbox3">Add Elevation</label>
-                            </div>
+                      </div>
                     </label>
                     <input false='' id='tab-4' name='buttons' type='radio'>
                     <label for='tab-4'>
@@ -137,10 +137,7 @@
                             <%= f.input_field :format, as: :radio_buttons, collection: ['A3 - 39€', 'A2 - 59€'], :checked => ['A3 - 39€', 'A2 - 59€'].first %>
                         <% end %>
                         <% if @activities %>
-
                             <div id="order-button" class="btn-posterity">Checkout</div>
-
-
                         <% end %>
                         </div>
                       </div>
@@ -180,9 +177,6 @@
                   </div>
                 </div>
               </div>
-
-
-
           </div>
         </div>
       </div>
