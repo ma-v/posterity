@@ -1,0 +1,5 @@
+meta_product_name: "Posterity"
+meta_title: "Posterity - Print a poster of the itineraries you're the most proud of"
+meta_description: "Convert any of your sport achievements into a beautiful custom poster. Put your Marathon, your bikepack trip, your mountain trek or any other achievement you're proud of, on you wall. "
+meta_image: "og-image-posterity.png" # should exist in `app/assets/images/`
+twitter_account: "@Posterity20"   # required for Twitter Cards
