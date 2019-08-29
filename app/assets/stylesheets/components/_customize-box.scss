@@ -91,7 +91,7 @@
   font-family: 'Roboto Condensed', sans-serif;
   &_inner{
     position:relative;
-    input[type="radio"]{
+    #tab-1, #tab-2, #tab-3,#tab-4{
       display:none;
     }
     input[type="radio"]:checked + label .app_inner__tab{

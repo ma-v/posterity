@@ -18,13 +18,16 @@ const checkDistance = () => {
   let titleFrame = document.querySelector('.map-title');
   let distanceField = document.querySelector('#activity-distance');
   let isChecked = distanceField.checked;
+  const distanceInput = document.querySelector('.legend-infos-dist')
 
      if (isChecked) {
+        if(distanceInput) {
+          distanceInput.remove();
+        }
       titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-dist">${document.dist/1000} kms</p>`);
-     } else{
-        let distanceInfo = document.querySelector('.legend-infos-dist');
-        distanceInfo.remove();
-
+     } else {
+        if (distanceInput != null)
+          distanceInput.remove();
      }
   };
 

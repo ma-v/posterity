@@ -220,6 +220,7 @@ const addTitle = () => {
       pdf.save('map.pdf');
     });
 };
+  document.dist = 0;
 
  const selectRide = () => {
 
@@ -231,19 +232,18 @@ const addTitle = () => {
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
   });
 
-
-
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
     activityBtn.addEventListener("click", () => {
       event.currentTarget.classList.toggle("pressed");
 
       const id = activityBtn.dataset.id
-      document.dist = activityBtn.dataset.distance
       document.time = activityBtn.dataset.time
       document.speed = activityBtn.dataset.speed
       document.elev = activityBtn.dataset.elevation
       if (activityBtn.classList.contains("pressed")) {
+        document.dist += parseInt(activityBtn.dataset.distance);
         addFields();
+        checkDistance();
         map.addLayer({
           "id": `route_${id}`,
           "type": "line",
@@ -269,6 +269,7 @@ const addTitle = () => {
           }
         });
       } else {
+        document.dist -= parseInt(activityBtn.dataset.distance);
         map.setLayoutProperty(`route_${id}`, 'visibility', 'none');
         map.removeLayer(`route_${id}`);
         map.removeSource(`route_${id}`);
