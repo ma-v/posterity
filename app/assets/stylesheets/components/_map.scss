@@ -16,16 +16,42 @@
     width:1000px;
     font-size:20px;
 }
+
+.label-map {
+  margin-right: 8px;
+}
+
+.dist-map {
+  margin-top: 5px;
+}
+
+.title-map-input {
+  width: 262px;
+}
+
 .map-title {
   display: none;
   position: absolute;
   bottom: 0px;
   background: linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 40%,#fff 0);
-  height: 110px;
+  height: 140px;
   width: 100%;
   z-index: 1000;
   justify-content: space-around;
   align-items: center;
+}
+
+.fields-icon {
+  height: 20px;
+}
+
+.info-track {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 0px 20px;
+  font-family: 'Open Sans';
+  font-weight: 300;
 }
 
 .mapboxgl-control-container {
@@ -46,7 +72,8 @@
 }
 
 .legend-title {
-    padding-top: 50px;
+    padding-top: 67px;
+    text-align: center;
     color: black;
     font-family: "Abril Fatface", "Helvetica", "sans-serif";
     font-size: 24px;

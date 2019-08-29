@@ -15,7 +15,7 @@ const addFields = () => {
 
 const checkDistance = () => {
 
-  let titleFrame = document.querySelector('.map-title');
+  let titleFrame = document.querySelector('.info-track');
   let distanceField = document.querySelector('#activity-distance');
   let isChecked = distanceField.checked;
   const distanceInput = document.querySelector('.legend-infos-dist')
@@ -23,8 +23,9 @@ const checkDistance = () => {
      if (isChecked) {
         if(distanceInput) {
           distanceInput.remove();
+
         }
-      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-dist">${document.dist/1000} kms</p>`);
+      titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-dist"> <i class="fas fa-road"></i> ${Math.round(document.dist/1000)} kms</p>`;
      } else {
         if (distanceInput != null)
           distanceInput.remove();
@@ -33,16 +34,20 @@ const checkDistance = () => {
 
 const checkSpeed = () => {
 
-  let titleFrame = document.querySelector('.map-title');
+  let titleFrame = document.querySelector('.info-track');
   let speedField = document.querySelector('#activity-speed');
   let speedInfo = document.querySelector('.legend-infos-speed');
   let isChecked = speedField.checked;
 
      if (isChecked) {
+// <<<<<<< HEAD
+//       //
+// =======
       if(speedInfo) {
           speedInfo.remove();
         }
-      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-speed">average speed:${Math.round(document.speed*3.6)} km/h</p>`);
+      titleFrame.innerHTML = titleFrame.innerHTML +`<p class="legend-infos-speed"> <i class="fas fa-tachometer-alt"></i> ${Math.round(document.speed*3.6)} km/h</p>`;
+// >>>>>>> master
      } else{
         let speedInfo = document.querySelector('.legend-infos-speed');
         if (speedInfo != null)
@@ -52,17 +57,21 @@ const checkSpeed = () => {
   };
 const checkTime = () => {
 
-  let titleFrame = document.querySelector('.map-title');
+  let titleFrame = document.querySelector('.info-track');
   let timeField = document.querySelector('#activity-time');
   let timeInfo = document.querySelector('.legend-infos-time');
   let isChecked = timeField.checked;
 
      if (isChecked) {
+// <<<<<<< HEAD
+//
+// =======
       if(timeInfo) {
         timeInfo.remove();
         }
-      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-time">Time:${Math.round((document.time/60)/60)}Hours</p>`);
+      titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-time"> <i class="fas fa-stopwatch"></i> ${Math.round((document.time/60)/60)} Hrs</p>`;
 
+// >>>>>>> master
      } else{
         let timeInfo = document.querySelector('.legend-infos-time');
         if (timeInfo != null)
@@ -73,16 +82,20 @@ const checkTime = () => {
 
 const checkElevation = () => {
 
-  let titleFrame = document.querySelector('.map-title');
+  let titleFrame = document.querySelector('.info-track');
   let elevationInfo = document.querySelector('.legend-infos-elevation');
   let elevationField = document.querySelector('#activity-elevation');
   let isChecked = elevationField.checked;
 
      if (isChecked) {
+// <<<<<<< HEAD
+//       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-elevation"><i class="fas fa-mountain"></i> ${document.elev} m</p>`;
+// =======
       if(elevationInfo) {
           elevationInfo.remove();
         }
-      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-elevation">Elevation:${Math.round(document.elev)}meters</p>`);
+      titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-elevation"><i class="fas fa-mountain"></i> ${document.elev} m</p>`;
+// >>>>>>> master
      } else{
         let elevationInfo = document.querySelector('.legend-infos-elevation');
         if (elevationInfo != null)

@@ -15,7 +15,7 @@ const switchToCheckout = () => {
 	if (orderButton) {
 		orderButton.addEventListener("click", function() {
 			togglePills();
-			mapFormat.value = document.querySelector(".form-check :checked").value;
+			mapFormat.value = document.querySelector(".form-check .value-format:checked").value;
 		});
 
 		backButton.addEventListener("click", togglePills);
@@ -29,7 +29,7 @@ $(document).ready(function() {
 
   mapLabel.addEventListener('input', event => {
     if (mapLabel.value.length >= 1) {
-      mapTitle.style.display = "flex";
+      mapTitle.style.display = "initial";
     }
     else {
       mapTitle.style.display = "none";
