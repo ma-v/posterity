@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_093109) do
+ActiveRecord::Schema.define(version: 2019_08_29_101408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2019_08_23_093109) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
-    t.integer "price"
     t.string "format"
+    t.integer "price_cents", default: 0, null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -33,6 +33,10 @@ ActiveRecord::Schema.define(version: 2019_08_23_093109) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "map_id"
+    t.jsonb "payment"
+    t.string "map_sku"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "state"
     t.index ["map_id"], name: "index_orders_on_map_id"
   end
 

@@ -24,17 +24,15 @@ class MapsController < ApplicationController
 
 	def create
 		puts map_params.inspect
-		@map = Map.new(map_params)#.except(:image))
-		#io = StringIO.new(Base64.decode64(map_params[:image]))
-	   	#def io.original_filename
-	   	#	"test.pdf"
-	   	#end
-	   	#@map.image = io
+		@map = Map.new(map_params)
+
 	    if map_params[:format] == "A3 - 39€"
-	      @map.price = 39
+	      @map.price_cents = 3900
 	    elsif map_params[:format] == "A2 - 59€"
-	      @map.price = 59
+	      @map.price_cents = 5900
 	    end
+	    @map.orders.last.amount_cents = @map.price_cents
+
 		if @map.save
 			render json: @map
 		else
@@ -45,6 +43,6 @@ class MapsController < ApplicationController
 	private
 
 	def map_params
-		params.permit(:title, :image, :format, orders_attributes:[:first_name, :last_name, :address])
+		params.permit(:title, :image, :format, orders_attributes:[:first_name, :last_name, :address, :map_sku, :state])
 	end
 end

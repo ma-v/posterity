@@ -58,7 +58,7 @@ const initMap = () => {
             myData.append("image", rawData, "map.pdf");
             myData.append("format", document.getElementById('map_format').value);
 
-            let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value, address: document.getElementById('map_orders_attributes_0_address').value};
+            let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value, address: document.getElementById('map_orders_attributes_0_address').value, state: "pending", map_sku: `map_${Math.floor(Math.random() * 1000000000)}`};
             myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
 
              axios({
