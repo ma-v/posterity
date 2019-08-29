@@ -33,13 +33,10 @@ a {
   line-height: 1.42857;
   border: 1px solid grey;
     &:hover {
-    border: 2px solid $main-blue;
+    border: 1px solid $main-blue;
   	}
   	&.pressed {
 		border: 2px solid $main-blue;
-		&:hover {
-		border: 1px solid grey;
-		}
 	}
 }
 
@@ -54,9 +51,6 @@ a {
   height: 40px;
   width: 40px;
   background-color: $main-blue;
-  &:hover {
-    border: 2px solid grey;
-  }
 }
 
 .btn-color-white {

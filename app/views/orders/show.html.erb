@@ -9,11 +9,11 @@
         <div class="container order-text">
           <p class="order-way"> Your order is on the way ...<span class="bike-icon"><%= image_tag('bicycle-white.svg') %></span>...</p>
           <p>You will receive an email very soon.</p>
-          <p class="">Your command number is : #<%= @map.price %>.</p>
+          <p class="">Your command number is : #<%= @map.orders.last.map_sku %>.</p>
           <p class="">We hope you will enjoy our Poster</p>
         </div>
           <div class="bottom-order">
-            <a href="<% root_path %>" class="btn-posterity btn-order-page"> Back to Home</a>
+            <a href="/" class="btn-posterity btn-order-page"> Back to Home</a>
           </div>
       </div>
 
