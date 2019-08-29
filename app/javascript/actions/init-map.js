@@ -3,6 +3,8 @@ import printPdf from 'mapbox-print-pdf';
 import mapboxDraw from '@mapbox/mapbox-gl-draw';
 import polyline from '@mapbox/polyline';
 import axios from 'axios';
+import { addFields } from '../actions/fields-input';
+import { checkDistance } from '../actions/fields-input';
 
 let map = null;
 let currentTraceColor = "#0214BB";
@@ -23,25 +25,25 @@ const initMap = () => {
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div>')
   }
 
-  var objectToFormData = function(obj, form, namespace) {    
+  var objectToFormData = function(obj, form, namespace) {
     var fd = form || new FormData();
-    var formKey;  
+    var formKey;
     for(var property in obj) {
-      if(obj.hasOwnProperty(property)) {   
+      if(obj.hasOwnProperty(property)) {
         if(namespace) {
           formKey = namespace + '[' + property + ']';
         } else {
           formKey = property;
         }
 
-        if(typeof obj[property] === 'object' && !(obj[property] instanceof File)) {      
+        if(typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
           objectToFormData(obj[property], fd, property);
         } else {
           fd.append(formKey, obj[property]);
         }
       }
-    } 
-    return fd;  
+    }
+    return fd;
   };
 
   const submitMap = document.getElementById('submit_map');
@@ -204,7 +206,7 @@ const addTitle = () => {
   if (titleField) {
     titleField.addEventListener('keyup', (event) => {
       titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
-    }); 
+    });
   }
 };
 
@@ -236,7 +238,12 @@ const addTitle = () => {
       event.currentTarget.classList.toggle("pressed");
 
       const id = activityBtn.dataset.id
+      document.dist = activityBtn.dataset.distance
+      document.time = activityBtn.dataset.time
+      document.speed = activityBtn.dataset.speed
+      document.elev = activityBtn.dataset.elevation
       if (activityBtn.classList.contains("pressed")) {
+        addFields();
         map.addLayer({
           "id": `route_${id}`,
           "type": "line",
@@ -277,7 +284,9 @@ const addTitle = () => {
 
       if (bounds !== []) { map.fitBounds(bounds, { padding: 30 }); }
     });
+
   });
 };
 
  export { initMap };
+ export { selectRide };
