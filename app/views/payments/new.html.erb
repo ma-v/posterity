@@ -1,17 +1,24 @@
-<h1>Purchase of your map #<%= @order.map_sku %></h1>
-<%= form_tag map_order_payments_path(@order.map, @order) do %>
-  <article>
-    <label class="amount">
-      <span>Amount: <%= humanized_money_with_symbol(@order.amount) %></span>
-    </label>
-  </article>
-
-
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-name="My Map"
-    data-email="<%= @order.email %>"
-    data-description="Map #<%= @order.map_sku %>"
-    data-amount="<%= @order.amount_cents %>"
-    data-currency="<%= @order.amount.currency %>"></script>
-<% end %>
+<div class="order-page d-flex justify-content-center align-items-center rounded">
+  <div class="order-container">
+    <div class="order-confirmed">
+        <h2>Last step to purchase your awesome poster</h2>
+    </div>
+    <div class="container order-text">
+      <article>
+          <label class="amount">
+            <span>Amount: <%= humanized_money_with_symbol(@order.amount) %></span>
+          </label>
+        </article>
+    </div>
+    <%= form_tag map_order_payments_path(@order.map, @order) do %>
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+      data-name="My Map"
+      data-email="<%= @order.email %>"
+      data-description="Map #<%= @order.map_sku %>"
+      data-amount="<%= @order.amount_cents %>"
+      data-currency="<%= @order.amount.currency %>"></script>
+    <% end %>
+  </div>
+</div>
+<%= render 'shared/footer' %>
