@@ -35,12 +35,17 @@ const checkSpeed = () => {
 
   let titleFrame = document.querySelector('.map-title');
   let speedField = document.querySelector('#activity-speed');
+  let speedInfo = document.querySelector('.legend-infos-speed');
   let isChecked = speedField.checked;
 
      if (isChecked) {
+      if(speedInfo) {
+          speedInfo.remove();
+        }
       titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-speed">average speed:${Math.round(document.speed*3.6)} km/h</p>`);
      } else{
         let speedInfo = document.querySelector('.legend-infos-speed');
+        if (speedInfo != null)
         speedInfo.remove();
 
      }
@@ -49,12 +54,18 @@ const checkTime = () => {
 
   let titleFrame = document.querySelector('.map-title');
   let timeField = document.querySelector('#activity-time');
+  let timeInfo = document.querySelector('.legend-infos-time');
   let isChecked = timeField.checked;
 
      if (isChecked) {
-      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-time">Time:${document.time/60} Hrs</p>`);
+      if(timeInfo) {
+        timeInfo.remove();
+        }
+      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-time">Time:${Math.round((document.time/60)/60)}Hours</p>`);
+
      } else{
         let timeInfo = document.querySelector('.legend-infos-time');
+        if (timeInfo != null)
         timeInfo.remove();
 
      }
@@ -63,14 +74,20 @@ const checkTime = () => {
 const checkElevation = () => {
 
   let titleFrame = document.querySelector('.map-title');
+  let elevationInfo = document.querySelector('.legend-infos-elevation');
   let elevationField = document.querySelector('#activity-elevation');
   let isChecked = elevationField.checked;
 
      if (isChecked) {
-      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-elevation">Elevation:${document.elev}</p>`);
+      if(elevationInfo) {
+          elevationInfo.remove();
+        }
+      titleFrame.insertAdjacentHTML("beforeend",`<p class="legend-infos-elevation">Elevation:${Math.round(document.elev)}meters</p>`);
      } else{
         let elevationInfo = document.querySelector('.legend-infos-elevation');
-        elevationInfo.remove();
+        if (elevationInfo != null)
+         elevationInfo.remove();
+
 
      }
   };
@@ -78,3 +95,6 @@ const checkElevation = () => {
 
 export {addFields};
 export {checkDistance};
+export {checkElevation};
+export {checkTime};
+export {checkSpeed};
