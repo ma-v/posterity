@@ -69,6 +69,11 @@
   .box-order {
     display: flow-root;
   }
+
+  .fields-input {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .app{
