@@ -35,16 +35,73 @@ body {
 	height: 90vh;
 }
 
-// #bg-hiw {
-//    z-index: 1;
-//    background: center / cover url(trace.svg);
-// }
 
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
-// .carousel-text {
-//   margin: 36px;
-//   top: 10%;
-//   width: 30%;
-//   position: absolute;
-//   color: white;
-// }
+  .navbar-lewagon {
+    justify-content: center;
+    background: white;
+    height: 10vh;
+  }
+
+  .banner {
+    min-height: 250px;
+    padding: 30px;
+  }
+
+  .banner h1 {
+    display: none;
+  }
+
+  .section-1 {
+    padding: 0 !important;
+    margin: 0;
+    height: auto;
+  }
+
+  .section-1 h1{
+    padding-top: 8px;
+    margin: 8px 0 !important;
+    font-size: 26px;
+  }
+
+  .section-1 a {
+    margin: auto !important;
+  }
+
+  .HIW {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .HIW > a {
+    margin: auto !important;
+    padding: auto !important;
+  }
+
+  .hiw-card {
+    margin: 8px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    & h5, p {
+      margin: auto 16px;
+      font-size: 12px;
+    }
+  }
+  .hiw-card img {
+    display: none;
+  }
+  #carouselExampleControls {
+    display: none;
+  }
+
+  .footer {
+    margin-top: 16px;
+    justify-content: center;
+  }
+  .footer-copyright {
+    display: none;
+  }
+
+}
