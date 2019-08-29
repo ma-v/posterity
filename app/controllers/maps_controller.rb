@@ -15,6 +15,10 @@ class MapsController < ApplicationController
 		  	@activity = JSON.parse(RestClient.get("https://www.strava.com/api/v3/activities/#{@activity_id}?include_all_efforts=false", {Authorization: "Bearer #{@access_token}"}))
 		  	@polyline = @activity["map"]["summary_polyline"]
 
+        @distance = @activity["distance"]
+        @time = @activity["moving_time"]
+        @speed = @activity["average_speed"]
+
 		  	@map = Map.new
 		  	@map.orders << Order.new
 	    else
