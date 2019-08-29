@@ -31,7 +31,7 @@
                               <% if @activities %>
                                 <div class="traces-list flex-track">
                                   <% @activities.first(20).each do |activity|%>
-                                   <div class="content"><span class="btn btn-track activity-btn p-2 m-2" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>"><i class="fas fa-bicycle"></i> <%= activity["name"] %></span></div>
+                                   <div class="content"><span class="btn btn-track activity-btn p-2 m-2" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>" data-distance="<%= activity["distance"]%>"><i class="fas fa-bicycle"></i> <%= activity["name"] %></span></div>
                                   <% end %>
                                   <a href="#" id="loadMore">Load More</a>
                                 </div>
@@ -104,19 +104,19 @@
                             </div>
                               <input class="ride-title form-control" type="text" name="ride-title">
                             </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                              <label class="form-check-label" for="inlineCheckbox1">1</label>
+                        </div>
+                           <div class="form-check">
+                              <input class="form-check-input" type="checkbox" id="activity-distance" value="option1">
+                              <label class="form-check-label" for="inlineCheckbox1">Add Distance</label>
                             </div>
                             <div class="form-check form-check-inline">
                               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                              <label class="form-check-label" for="inlineCheckbox2">2</label>
+                              <label class="form-check-label" for="inlineCheckbox2">Add Average Speed</label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled>
-                              <label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+                              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                              <label class="form-check-label" for="inlineCheckbox3">Add Time</label>
                             </div>
-                        </div>
                     </label>
                     <input false='' id='tab-4' name='buttons' type='radio'>
                     <label for='tab-4'>
