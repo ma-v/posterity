@@ -17,16 +17,15 @@
     font-size:20px;
 }
 .map-title {
+  display: none;
   position: absolute;
   bottom: 0px;
   background: linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 40%,#fff 0);
   height: 110px;
   width: 100%;
   z-index: 1000;
-  display: flex;
   justify-content: space-around;
   align-items: center;
-  // opacity: 0.6;
 }
 .legend-title {
     padding-top: 50px;
