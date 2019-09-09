@@ -11,7 +11,7 @@
               <div class='right'>
                 <div class='app'>
                   <div class='app_inner'>
-                    <input checked='' id='tab-1' name='buttons' type='radio'>
+                    <input checked="" id='tab-1' name='buttons' type='radio'>
                     <label for='tab-1'>
                       <div class='app_inner__tab'>
                         <h2>
@@ -44,7 +44,7 @@
                         </div>
                       </div>
                     </label>
-                    <input false='' id='tab-2' name='buttons' type='radio'>
+                    <input id='tab-2' name='buttons' type='radio'>
                     <label for='tab-2'>
                       <div class='app_inner__tab'>
                         <h2>
@@ -70,17 +70,19 @@
 
                             <input class="btn btn-bnw" id='cjzv480dn016g1cphwep22jef' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="Black-White">
                           </div>
-                          <div class="traces-color m-3">
-                            <h3>Pick a color for your track</h3>
-                            <input type="color" id="ride-color-picker" class= "btn-path rounded-circle btn-color-picker" name="head" value="#e66465">
-                            <span class="btn-path rounded-circle btn-color-blue" id="blue-ride"></span>
-                            <span class="btn-path rounded-circle btn-color-white" id="white-ride"></span>
-                            <span class="btn-path rounded-circle btn-color-fushia" id="fushia-ride"></span>
-                          </div>
+                          <% if @activities %>
+                            <div class="traces-color m-3">
+                              <h3>Pick a color for your track</h3>
+                              <input type="color" id="ride-color-picker" class= "btn-path rounded-circle btn-color-picker" name="head" value="#e66465">
+                              <span class="btn-path rounded-circle btn-color-blue" id="blue-ride"></span>
+                              <span class="btn-path rounded-circle btn-color-white" id="white-ride"></span>
+                              <span class="btn-path rounded-circle btn-color-fushia" id="fushia-ride"></span>
+                            </div>
+                          <% end %>
                         </div>
                       </div>
                     </label>
-                    <input false='' id='tab-3' name='buttons' type='radio'>
+                    <input id='tab-3' name='buttons' type='radio'>
                     <label for='tab-3'>
                       <div class='app_inner__tab'>
                         <h2>
@@ -97,6 +99,8 @@
                           <div class="input-group mb-3 d-flex justify-content-end">
                             <div class="input-group-prepend fields-input title-map-input">
                               <input class="ride-title form-control" placeholder="Title of your Map" type="text" name="ride-title">
+                              
+                              <% if @activities %>
                               <div class="form-check-inline">
                                 <label class="form-check-label label-map dist-map" for="inlineCheckbox1">Add Distance</label>
                                 <input class="form-check-input" type="checkbox" id="activity-distance" value="option1">
@@ -115,12 +119,13 @@
                                 <label class="form-check-label label-map" for="inlineCheckbox3">Add Elevation</label>
                                 <input class="form-check-input" type="checkbox" id="activity-elevation" value="option4">
                               </div>
+                              <% end %>
                             </div>
                           </div>
                         </div>
                       </div>
                     </label>
-                    <input false='' id='tab-4' name='buttons' type='radio'>
+                    <input id='tab-4' name='buttons' type='radio'>
                     <label for='tab-4'>
                       <div class='app_inner__tab'>
                         <h2>
