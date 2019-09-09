@@ -42,7 +42,6 @@ const selectRide = () => {
             document.map.fitBounds(traces.getBounds());
 
             // add title and image to form input values
-            titleInput.value = button_i.dataset.title;
             imageInput.value = button_i.dataset.image;
       		})
         }
