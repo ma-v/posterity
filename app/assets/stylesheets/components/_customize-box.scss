@@ -7,10 +7,24 @@
   	background-position: center;
 }
 
-
 .traces-list {
   width: auto;
   height: auto;
+}
+
+.openstreetmaps-credit {
+  color: grey;
+  font-size: 10px;
+  text-align: right;
+  padding-right: 60px;
+}
+
+a {
+  color: grey;
+  :hover {
+    text-decoration: none !important;
+    color: grey;
+  }
 }
 
 @import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300);
