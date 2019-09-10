@@ -24,7 +24,8 @@ const switchToCheckout = () => {
 
 $(document).ready(function() {
     let mapLabel = document.querySelector(".ride-title");
-    let mapTitle = document.querySelector(".title-map");
+    let mapTitle = document.querySelector(".map-title");
+        console.log(mapTitle);
 
   mapLabel.addEventListener('input', event => {
     if (mapLabel.value.length >= 1) {

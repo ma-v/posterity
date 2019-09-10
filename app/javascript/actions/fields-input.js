@@ -23,6 +23,7 @@ const checkDistance = () => {
      if (isChecked) {
         if(distanceInput) {
           distanceInput.remove();
+
         }
       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-dist"> <i class="fas fa-road"></i> ${Math.round(document.dist/1000)} kms</p>`;
      } else {
@@ -39,11 +40,16 @@ const checkSpeed = () => {
   let isChecked = speedField.checked;
 
      if (isChecked) {
+// <<<<<<< HEAD
+//       //
+// =======
       if(speedInfo) {
           speedInfo.remove();
         }
       titleFrame.innerHTML = titleFrame.innerHTML +`<p class="legend-infos-speed"> <i class="fas fa-tachometer-alt"></i> ${Math.round(document.speed*3.6)} km/h</p>`;
-     } else {
+// >>>>>>> master
+     } else{
+        let speedInfo = document.querySelector('.legend-infos-speed');
         if (speedInfo != null)
         speedInfo.remove();
 
@@ -57,11 +63,17 @@ const checkTime = () => {
   let isChecked = timeField.checked;
 
      if (isChecked) {
+// <<<<<<< HEAD
+//
+// =======
       if(timeInfo) {
         timeInfo.remove();
         }
       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-time"> <i class="fas fa-stopwatch"></i> ${Math.round((document.time/60)/60)} Hrs</p>`;
-     } else {
+
+// >>>>>>> master
+     } else{
+        let timeInfo = document.querySelector('.legend-infos-time');
         if (timeInfo != null)
         timeInfo.remove();
 
@@ -76,11 +88,16 @@ const checkElevation = () => {
   let isChecked = elevationField.checked;
 
      if (isChecked) {
+// <<<<<<< HEAD
+//       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-elevation"><i class="fas fa-mountain"></i> ${document.elev} m</p>`;
+// =======
       if(elevationInfo) {
           elevationInfo.remove();
         }
       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-elevation"><i class="fas fa-mountain"></i> ${document.elev} m</p>`;
-     } else {
+// >>>>>>> master
+     } else{
+        let elevationInfo = document.querySelector('.legend-infos-elevation');
         if (elevationInfo != null)
          elevationInfo.remove();
 
