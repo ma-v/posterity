@@ -30,15 +30,17 @@
 }
 
 .map-title {
-  display: none;
   position: absolute;
   bottom: 0px;
-  background: linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 40%,#fff 0);
-  height: 140px;
+  background: linear-gradient(0deg, rgba(255,255,255,1) 20%, rgba(255,255,255,0.9) 36%, rgba(255,255,255,0.8) 49%, rgba(255,255,255,0.7) 61%, rgba(255,255,255,0.5) 72%, rgba(255,255,255,0.4) 79%, rgba(255,255,255,0.3) 85%, rgba(255,255,255,0) 90%);
+  height: auto;
   width: 100%;
   z-index: 1000;
   justify-content: space-around;
   align-items: center;
+  p {
+    padding-top: 20px;
+  }
 }
 
 .fields-icon {
@@ -58,32 +60,28 @@
   display: none;
 }
 
-.map-field {
-  position: absolute;
-  bottom: 0px;
-  background: linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 40%,#fff 0);
-  height: 110px;
-  width: 100%;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  // opacity: 0.6;
-}
+// .map-field {
+//   position: absolute;
+//   bottom: 0px;
+//   background: linear-gradient(180deg,hsla(0,0%,100%,0) 0,#fff 40%,#fff 0);
+//   height: 110px;
+//   width: 100%;
+//   z-index: 1000;
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   // opacity: 0.6;
+// }
 
 .legend-title {
-    padding-top: 67px;
+    padding-top: 40px;
+    padding-bottom: -10px;
     text-align: center;
     color: black;
     font-family: "Abril Fatface", "Helvetica", "sans-serif";
     font-size: 24px;
   }
-.legend-infos {
-    // padding-top: 50px;
-    color: black;
-    font-family: "Abril Fatface", "Helvetica", "sans-serif";
-    font-size: 8px;
-  }
+
 .enter-title {
   font-family: "Abril Fatface";
 }
