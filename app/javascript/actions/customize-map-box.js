@@ -20,11 +20,12 @@ const switchToCheckout = () => {
 
 		backButton.addEventListener("click", togglePills);
 		}
-	}
+}
 
 $(document).ready(function() {
     let mapLabel = document.querySelector(".ride-title");
-    let mapTitle = document.querySelector(".title-map");
+    let mapTitle = document.querySelector(".map-title");
+
     if (mapLabel) {
 	  mapLabel.addEventListener('input', event => {
 	    if (mapLabel.value.length >= 1) {
