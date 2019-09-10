@@ -25,15 +25,16 @@ const switchToCheckout = () => {
 $(document).ready(function() {
     let mapLabel = document.querySelector(".ride-title");
     let mapTitle = document.querySelector(".title-map");
-
-  mapLabel.addEventListener('input', event => {
-    if (mapLabel.value.length >= 1) {
-      mapTitle.style.display = "initial";
+    if (mapLabel) {
+	  mapLabel.addEventListener('input', event => {
+	    if (mapLabel.value.length >= 1) {
+	      mapTitle.style.display = "initial";
+	    }
+	    else {
+	      mapTitle.style.display = "none";
+	    }
+	  });	
     }
-    else {
-      mapTitle.style.display = "none";
-    }
-  });
 });
 
   // if .ride-title is empty, display:none(.map-title)

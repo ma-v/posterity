@@ -18,6 +18,8 @@ class PaymentsController < ApplicationController
 	      )
 
 	      @order.update(payment: charge.to_json, state: 'paid')
+	   	  mail = OrderMailer.with(order: @order).confirmation
+	   	  mail.deliver_now
 	      redirect_to "/maps/#{@order.map_id}/orders/confirmation"
 
 	    rescue Stripe::CardError => e
