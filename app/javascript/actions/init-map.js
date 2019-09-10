@@ -25,7 +25,7 @@ const initMap = () => {
       zoom: 11.5
     });
     let frame = document.querySelector('#mapid');
-    frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div>')
+    frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div class="title-map"></div><div class="info-track"></div><div>')
   }
 
   var objectToFormData = function(obj, form, namespace) {
@@ -204,11 +204,11 @@ if (layerList) {
 }
 
 const addTitle = () => {
-  let titleFrame = document.querySelector('.map-title');
+  let titleFrame = document.querySelector('.title-map');
   let titleField = document.querySelector('.ride-title');
   if (titleField) {
     titleField.addEventListener('keyup', (event) => {
-      titleFrame.innerHTML = `<div class="title-map"><p class="legend-title">${titleField.value}</p></div><div class="info-track"></div>`;
+    titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
     });
   }
 };
@@ -222,7 +222,7 @@ const addTitle = () => {
       // Cloudinary::Uploader.upload(pdf);
       pdf.save('map.pdf');
     });
-};
+ };
   document.dist = 0;
   document.elev = 0;
   document.time = 0;
