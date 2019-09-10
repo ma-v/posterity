@@ -26,6 +26,10 @@ gem 'carrierwave', '~> 1.2'
 gem 'stripe'
 gem 'money-rails'
 
+#Emailing
+gem 'letter_opener', group: :development
+gem 'postmark-rails'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
