@@ -28,7 +28,6 @@ $(document).ready(function() {
     if (mapLabel) {
 	  mapLabel.addEventListener('input', event => {
 	    if (mapLabel.value.length >= 1) {
-	      debugger
 	      mapTitle.style.display = "initial";
 	    }
 	    else {
