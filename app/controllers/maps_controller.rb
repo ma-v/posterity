@@ -27,9 +27,9 @@ class MapsController < ApplicationController
 		puts map_params.inspect
 		@map = Map.new(map_params)
 
-	    if map_params[:format] == "A3 - 39€"
+	    if map_params[:format] == "30x40cm - 39€"
 	      @map.price_cents = 3900
-	    elsif map_params[:format] == "A2 - 59€"
+	    elsif map_params[:format] == "50x70cm - 59€"
 	      @map.price_cents = 5900
 	    end
 	    @map.orders.last.amount_cents = @map.price_cents
