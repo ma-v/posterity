@@ -50,10 +50,19 @@ const initMap = () => {
   };
 
   const submitMap = document.getElementById('submit_map');
+  const mapFormat = document.getElementById('map_format');
+  
   if (submitMap) {
     submitMap.addEventListener('click', (event) => {
+      let pdfFormat = ""
+      if (mapFormat.value === '30x40cm - 39€'){
+        pdfFormat = "a3";
+      }
+      if (mapFormat.value === '50x70cm - 59€') {
+        pdfFormat = "b2";
+      }
         printPdf.build()
-          .format('a3') // valeur à récuperer dans le DOM
+          .format(pdfFormat)
           .portrait() // Unnecessary since it's the default but it's included for clarity.
           .print(map, mapboxgl)
           .then(function (pdf) {
@@ -61,7 +70,7 @@ const initMap = () => {
             let myData = new FormData();
             myData.append("title", "test");
             myData.append("image", rawData, "map.pdf");
-            myData.append("format", document.getElementById('map_format').value);
+            myData.append("format", mapFormat.value);
 
             let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value, address: document.getElementById('map_orders_attributes_0_address').value, email: document.getElementById('map_orders_attributes_0_email').value, state: "pending", map_sku: `map_${Math.floor(Math.random() * 1000000000)}`};
             myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
