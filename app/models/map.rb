@@ -1,5 +1,4 @@
 class Map < ApplicationRecord
-  validates :title, presence: true
   has_many :orders
   monetize :price_cents
 

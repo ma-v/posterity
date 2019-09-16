@@ -166,7 +166,11 @@
                             <div id="back-button" class="btn-posterity order-btn"><i class="fas fa-arrow-left"></i> Back to custom</div>
                             <%= simple_form_for(@map) do |f| %>
                                 <%= f.input :format, :as => :hidden, :input_html => { :value => "" } %>
-                                <%= f.input :title, :as => :hidden, :input_html => { :value => "Test" } %>
+                                <%= f.input :title, :as => :hidden, :input_html => { :value => "" } %>
+                                <%= f.input :distance, :as => :hidden, :input_html => { :value => "" } %>
+                                <%= f.input :speed, :as => :hidden, :input_html => { :value => "" } %>
+                                <%= f.input :elevation, :as => :hidden, :input_html => { :value => "" } %>
+                                <%= f.input :time, :as => :hidden, :input_html => { :value => "" } %>
                                   <%= f.simple_fields_for :orders do |orders_form| %>
                                       <%= orders_form.input :first_name %>
                                       <%= orders_form.input :last_name %>

@@ -50,7 +50,12 @@ const initMap = () => {
   };
 
   const submitMap = document.getElementById('submit_map');
+  const mapTitle = document.getElementById('map_title');
   const mapFormat = document.getElementById('map_format');
+  const mapDistance = document.getElementById('map_distance');
+  const mapElevation = document.getElementById('map_elevation');
+  const mapSpeed = document.getElementById('map_speed');
+  const mapTime = document.getElementById('map_time');
   
   if (submitMap) {
     submitMap.addEventListener('click', (event) => {
@@ -68,9 +73,13 @@ const initMap = () => {
           .then(function (pdf) {
             var rawData = pdf.output("blob");
             let myData = new FormData();
-            myData.append("title", "test");
+            myData.append("title", mapTitle.value);
             myData.append("image", rawData, "map.pdf");
             myData.append("format", mapFormat.value);
+            myData.append("distance", mapDistance.value);
+            myData.append("elevation", mapElevation.value);
+            myData.append("speed", mapSpeed.value);
+            myData.append("time", mapTime.value);
 
             let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value, address: document.getElementById('map_orders_attributes_0_address').value, email: document.getElementById('map_orders_attributes_0_email').value, state: "pending", map_sku: `map_${Math.floor(Math.random() * 1000000000)}`};
             myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
@@ -251,8 +260,6 @@ const addTitle = () => {
       event.currentTarget.classList.toggle("pressed");
 
       const id = activityBtn.dataset.id
-
-      document.speed = activityBtn.dataset.speed
 
       if (activityBtn.classList.contains("pressed")) {
         document.dist += parseInt(activityBtn.dataset.distance);
