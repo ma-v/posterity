@@ -18,7 +18,7 @@ const checkDistance = () => {
   let titleFrame = document.querySelector('.info-track');
   let distanceField = document.querySelector('#activity-distance');
   let isChecked = distanceField.checked;
-  const distanceInput = document.querySelector('.legend-infos-dist')
+  const distanceInput = document.querySelector('.legend-infos-dist');
 
      if (isChecked) {
         if(distanceInput) {
