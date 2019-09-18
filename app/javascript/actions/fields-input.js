@@ -62,7 +62,7 @@ const checkTime = () => {
       if(timeInfo) {
         timeInfo.remove();
         }
-      titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-time"> <i class="fas fa-stopwatch"></i> ${Math.round((document.time/60)/60)} Hrs</p>`;
+      titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-time"> <i class="fas fa-stopwatch"></i> ${new Date(document.time * 1000).toISOString().substr(11, 8)}</p>`;
      } else{
         let timeInfo = document.querySelector('.legend-infos-time');
         if (timeInfo != null)

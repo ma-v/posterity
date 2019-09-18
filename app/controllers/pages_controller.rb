@@ -7,5 +7,8 @@ class PagesController < ApplicationController
   end
 
   def admin_dashboard
+  	@orders = Order.all
+  	@orders.sort_by {|order| order.created_at}
+  	@orders.reverse
   end
 end

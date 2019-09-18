@@ -1,1 +1,73 @@
-<h1>test</h1>
+<h1>Last Orders</h1>
+<div class="mr-3 ml-3">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Command #</th>
+      <th scope="col">Status</th>
+      <th scope="col">Price</th>
+      <th scope="col">Map-Url</th>
+      <th scope="col">Title</th>
+      <th scope="col">Elev</th>
+      <th scope="col">Dist</th>
+      <th scope="col">Time</th>
+      <th scope="col">Speed</th>
+      <th scope="col">Address</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+	<% @orders.reverse.each do |order| %>    
+	    <tr>
+	      <td><%= order.created_at %></td>
+	      <td><%= order.map_sku %></td>
+	      <td>
+	      	<% if order.state === "paid" %>
+	      		<span class="badge badge-success">Paid</span>
+			<% else %>
+				<span class="badge badge-warning">Pending</span>
+			<% end %>
+	      </td>
+	      <td><%= order.map.price_cents / 100 %>€</td>
+	      <td><a href="<%= order.map.image %>" target="blank">Pdf</a></td>
+	      <td><%= order.map.title%></td>
+	      <td>
+	      	<% if order.map.elevation%>
+	      		<%= order.map.elevation %> m
+			<% else %>
+				x
+			<% end %>
+	      </td>
+	      <td>
+	      	<% if order.map.distance%>
+	      		<%= order.map.distance / 1000 %> km
+			<% else %>
+				x
+			<% end %>
+	      </td>
+	      <td>
+	      	<% if order.map.time %>
+	      		<%= [order.map.time / 3600, order.map.time / 60 % 60, order.map.time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':') %>
+			<% else %>
+				x
+			<% end %>
+	      </td>
+	      <td>
+	      	<% if order.map.speed %>
+	      		<%= order.map.speed / 100 * 3.6 %>km/h
+			<% else %>
+				x
+			<% end %>
+	      </td>
+	      <td><%= order.first_name%>, <%= order.first_name%></td>
+	      <td><%= order.address%></td>
+	      <td><%= order.email%></td>
+	      
+	    </tr>
+	<% end %>
+  </tbody>
+</table>
+</div>
