@@ -1,1 +1,49 @@
-<h1>test</h1>
+<h1>Last Orders</h1>
+<div class="mr-3 ml-3">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Command #</th>
+      <th scope="col">Status</th>
+      <th scope="col">Price</th>
+      <th scope="col">Map-Url</th>
+      <th scope="col">Title</th>
+      <th scope="col">Elev</th>
+      <th scope="col">Dist</th>
+      <th scope="col">Time</th>
+      <th scope="col">Speed</th>
+      <th scope="col">Address</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+	<% @orders.each do |order| %>    
+	    <tr>
+	      <td><%= order.created_at %></td>
+	      <td><%= order.map_sku %></td>
+	      <td>
+	      	<% if order.state === "paid" %>
+	      		<span class="badge badge-success">Paid</span>
+			<% else %>
+				<span class="badge badge-warning">Pending</span>
+			<% end %>
+	      </td>
+	      <td><%= order.map.price_cents / 100 %>€</td>
+	      <td><a href="<%= order.map.image %>" target="blank">Pdf</a></td>
+	      <td><%= order.map.title%></td>
+	      <td><%= order.map.elevation%></td>
+	      <td><%= order.map.distance%></td>
+	      <td><%= order.map.time%></td>
+	      <td><%= order.map.speed%></td>
+	      <td><%= order.first_name%>, <%= order.first_name%></td>
+	      <td><%= order.address%></td>
+	      <td><%= order.email%></td>
+	      
+	    </tr>
+	<% end %>
+  </tbody>
+</table>
+</div>

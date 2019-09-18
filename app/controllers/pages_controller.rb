@@ -7,5 +7,7 @@ class PagesController < ApplicationController
   end
 
   def admin_dashboard
+  	@orders = Order.all
+  	# @orders.sort_by {|order_a, order_b| order_a.created_at <=> order_b.created_at}
   end
 end
