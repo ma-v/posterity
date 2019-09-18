@@ -20,7 +20,7 @@
     </tr>
   </thead>
   <tbody>
-	<% @orders.each do |order| %>    
+	<% @orders.reverse.each do |order| %>    
 	    <tr>
 	      <td><%= order.created_at %></td>
 	      <td><%= order.map_sku %></td>
@@ -34,10 +34,34 @@
 	      <td><%= order.map.price_cents / 100 %>€</td>
 	      <td><a href="<%= order.map.image %>" target="blank">Pdf</a></td>
 	      <td><%= order.map.title%></td>
-	      <td><%= order.map.elevation%></td>
-	      <td><%= order.map.distance%></td>
-	      <td><%= order.map.time%></td>
-	      <td><%= order.map.speed%></td>
+	      <td>
+	      	<% if order.map.elevation%>
+	      		<%= order.map.elevation %> m
+			<% else %>
+				x
+			<% end %>
+	      </td>
+	      <td>
+	      	<% if order.map.distance%>
+	      		<%= order.map.distance / 1000 %> km
+			<% else %>
+				x
+			<% end %>
+	      </td>
+	      <td>
+	      	<% if order.map.time %>
+	      		<%= [order.map.time / 3600, order.map.time / 60 % 60, order.map.time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':') %>
+			<% else %>
+				x
+			<% end %>
+	      </td>
+	      <td>
+	      	<% if order.map.speed %>
+	      		<%= order.map.speed / 100 * 3.6 %>km/h
+			<% else %>
+				x
+			<% end %>
+	      </td>
 	      <td><%= order.first_name%>, <%= order.first_name%></td>
 	      <td><%= order.address%></td>
 	      <td><%= order.email%></td>

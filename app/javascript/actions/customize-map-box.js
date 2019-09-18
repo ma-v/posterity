@@ -35,7 +35,7 @@ const switchToCheckout = () => {
 			}
 
 			if (document.querySelector("#activity-speed").checked) {
-				mapSpeed.value = document.speed;
+				mapSpeed.value = document.speed * 100;
 			} else {
 				mapSpeed.value = "";
 			}
