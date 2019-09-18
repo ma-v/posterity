@@ -30,6 +30,9 @@ gem 'money-rails'
 gem 'letter_opener', group: :development
 gem 'postmark-rails'
 
+#Admin
+gem 'devise'
+
 group :development do
   gem 'web-console', '>= 3.3.0'
 end

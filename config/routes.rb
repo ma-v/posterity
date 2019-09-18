@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   root to: 'pages#home'
   resources :maps, only: [:new, :create] do
   	get '/orders/confirmation', to: "orders#show"
