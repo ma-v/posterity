@@ -22,11 +22,13 @@ const initMap = () => {
       container: 'mapid',
       style: 'mapbox://styles/ma-v/cjzv3hkp30svs1cp5xeexv54g',
       center: [5.380000, 43.300000],
-      zoom: 11.5
+      zoom: 11.5,
     });
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div class="title-map"></div><div class="info-track"></div><div>')
   }
+
+
 
   var objectToFormData = function(obj, form, namespace) {
     var fd = form || new FormData();
@@ -66,12 +68,15 @@ const initMap = () => {
       if (mapFormat.value === '50x70cm - 59€') {
         pdfFormat = "b2";
       }
+
         printPdf.build()
           .format(pdfFormat)
           .portrait() // Unnecessary since it's the default but it's included for clarity.
+          .dpi(300)
           .print(map, mapboxgl)
           .then(function (pdf) {
             var rawData = pdf.output("blob");
+            console.log(rawData);
             let myData = new FormData();
             myData.append("title", mapTitle.value);
             myData.append("image", rawData, "map.pdf");
@@ -231,16 +236,6 @@ const addTitle = () => {
   }
 };
 
- const printMap = () => {
-  printPdf.build()
-    .format('a2') // valeur à récuperer dans le DOM
-    .portrait() // Unnecessary since it's the default but it's included for clarity.
-    .print(map, mapboxgl)
-    .then(function (pdf) {
-      // Cloudinary::Uploader.upload(pdf);
-      pdf.save('map.pdf');
-    });
- };
   document.dist = 0;
   document.elev = 0;
   document.time = 0;
