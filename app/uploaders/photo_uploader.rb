@@ -1,3 +1,7 @@
 class PhotoUploader < CarrierWave::Uploader::Base
-  storage :fog              
+  include CarrierWave::MiniMagick #
+  
+  def extension_whitelist
+    %w(pdf PDF)
+  end            
 end

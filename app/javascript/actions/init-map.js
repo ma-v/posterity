@@ -22,7 +22,7 @@ const initMap = () => {
       container: 'mapid',
       style: 'mapbox://styles/ma-v/cjzv3hkp30svs1cp5xeexv54g',
       center: [5.380000, 43.300000],
-      zoom: 11.5,
+      zoom: 11.5
     });
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div class="title-map"></div><div class="info-track"></div><div>')
@@ -76,7 +76,6 @@ const initMap = () => {
           .print(map, mapboxgl)
           .then(function (pdf) {
             var rawData = pdf.output("blob");
-            console.log(rawData);
             let myData = new FormData();
             myData.append("title", mapTitle.value);
             myData.append("image", rawData, "map.pdf");
