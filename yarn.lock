@@ -2384,6 +2384,11 @@ cyclist@~0.2.2:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
 
+d3-queue@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/d3-queue/-/d3-queue-2.0.3.tgz#07fbda3acae5358a9c5299aaf880adf0953ed2c2"
+  integrity sha1-B/vaOsrlNYqcUpmq+ICt8JU+0sI=
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -2587,7 +2592,7 @@ dom-serializer@0:
     domelementtype "^2.0.1"
     entities "^2.0.0"
 
-dom-to-image@^2.5.2:
+dom-to-image@^2.5.2, dom-to-image@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/dom-to-image/-/dom-to-image-2.6.0.tgz#8a503608088c87b1c22f9034ae032e1898955867"
   integrity sha1-ilA2CAiMh7HCL5A0rgMuGJiVWGc=
@@ -4268,6 +4273,13 @@ leaflet-easyprint@^2.1.9:
     dom-to-image "^2.5.2"
     file-saver "^1.3.3"
 
+leaflet-image@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/leaflet-image/-/leaflet-image-0.4.0.tgz#e84f22ff6288f09b9b0e2f51a4850a9f07968cc1"
+  integrity sha1-6E8i/2KI8JubDi9RpIUKnweWjME=
+  dependencies:
+    d3-queue "2.0.3"
+
 leaflet@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.5.1.tgz#9afb9d963d66c870066b1342e7a06f92840f46bf"
@@ -4458,6 +4470,11 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+mapbox-gl-leaflet@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/mapbox-gl-leaflet/-/mapbox-gl-leaflet-0.0.10.tgz#8147cea99c31d8348195a803d0d284037dceffc1"
+  integrity sha512-JFeav7uQyH0qN9Y4P2VwxuVn4KbFt180HScK/6jQEzj0TK2EEDBVA9gsiT3VYILGwP00PE3i9LiXiSoYd4e95w==
 
 mapbox-gl@^1.2.1:
   version "1.2.1"

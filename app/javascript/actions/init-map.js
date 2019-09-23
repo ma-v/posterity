@@ -8,25 +8,50 @@ import { checkDistance } from '../actions/fields-input';
 import { checkElevation } from '../actions/fields-input';
 import { checkTime } from '../actions/fields-input';
 import { checkSpeed } from '../actions/fields-input';
+// Tests Leaflet 
+import * as L from "leaflet";
+import {} from "mapbox-gl-leaflet";
+import domtoimage from 'dom-to-image';
 
-let map = null;
 let currentTraceColor = "#0214BB";
 
  // créer la map avec Mapbox
 const initMap = () => {
-  const mapElement = document.getElementById('mapid');
+  document.map = L.map('mapid').setView([43.305, -1.5], 8);
+  if (document.map) {
+      var gl = L.mapboxGL({
+            accessToken: 'pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ',
+            style: 'mapbox://styles/mapbox/bright-v8',
+            preferCanvas: true
+        // L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.mvt?access_token={accessToken}', {
+        // maxZoom: 18,
+        // tileSize: 512,
+        // zoomOffset: -1,
+        // id: 'mapbox.mapbox-streets-v7',
+        // accessToken: 'pk.eyJ1IjoibWF0aGlhczIxODkiLCJhIjoiY2p6YjlsMTM1MDhjMTNncGg0M3M2Ymx3bCJ9.5DmaCa-Xj2popxvUOIeglQ'
+        }).addTo(document.map);
+      
+      const node = document.map;
+      domtoimage.toSvg(node)
+          .then(function (dataUrl) {
+              console.log(dataUrl);
+          })
+          .catch(function (error) {
+              console.error('oops, something went wrong!', error);
+          });
+    }
 
-  if (mapElement) {
-    mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
-    map = new mapboxgl.Map({
-      container: 'mapid',
-      style: 'mapbox://styles/ma-v/cjzv3hkp30svs1cp5xeexv54g',
-      center: [5.380000, 43.300000],
-      zoom: 11.5
-    });
-    let frame = document.querySelector('#mapid');
-    frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div class="title-map"></div><div class="info-track"></div><div>')
-  }
+  // if (mapElement) {
+  //   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
+  //   map = new mapboxgl.Map({
+  //     container: 'mapid',
+  //     style: 'mapbox://styles/ma-v/cjzv3hkp30svs1cp5xeexv54g',
+  //     center: [5.380000, 43.300000],
+  //     zoom: 11.5
+  //   });
+  //   let frame = document.querySelector('#mapid');
+  //   frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div class="title-map"></div><div class="info-track"></div><div>')
+  // }
 
   var objectToFormData = function(obj, form, namespace) {
     var fd = form || new FormData();
@@ -101,7 +126,7 @@ const initMap = () => {
   selectRide();
   addTitle();
   selectColor();
-  return map;
+  return document.map;
 };
 
 const selectColor = () => {
