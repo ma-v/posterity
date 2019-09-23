@@ -19,8 +19,9 @@ gem 'rest-client'
 gem 'strava-ruby-client'
 
 #photo uploader
-gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
+gem "fog-aws"
+gem 'mini_magick'
 
 #Payment
 gem 'stripe'

@@ -34,7 +34,7 @@ class MapsController < ApplicationController
 	    end
 	    @map.orders.last.amount_cents = @map.price_cents
 
-		if @map.save
+		if @map.save!
 			# redirect_to new_map_order_payment_path(@map, @map.orders.last)
 			render json: @map.orders.last
 		else
