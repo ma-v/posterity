@@ -84,8 +84,11 @@ const initMap = () => {
             var rawData = pdf.output("blob");
             let myData = new FormData();
             myData.append("title", mapTitle.value);
-            myData.append("map_url", mapUrl.value);
-            // myData.append("image", rawData, "map.pdf");
+            if (mapUrl.value.length > 7800) {
+              myData.append("image", rawData, "map.pdf");  
+            } else {
+              myData.append("map_url", mapUrl.value);  
+            }
             myData.append("format", mapFormat.value);
             myData.append("distance", mapDistance.value);
             myData.append("elevation", mapElevation.value);
@@ -106,7 +109,6 @@ const initMap = () => {
             // .catch(function (error) {...}
           });
        }, false);
-
   }
   selectRide();
   addTitle();
