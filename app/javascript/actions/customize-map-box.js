@@ -1,4 +1,6 @@
 import { map } from '../actions/init-map';
+import { generateUrl } from '../actions/init-map';
+
 
 const switchToCheckout = () => {
 	const orderButton = document.querySelector("#order-button");
@@ -11,17 +13,13 @@ const switchToCheckout = () => {
   	const mapElevation = document.getElementById('map_elevation');
   	const mapSpeed = document.getElementById('map_speed');
   	const mapTime = document.getElementById('map_time');
+  	const mapUrl = document.getElementById('map_map_url');
 
 	const togglePills = () => {
-		const mapCanvas = document.querySelector('.mapboxgl-canvas');
 		customBox.classList.toggle("show");
 		customBox.classList.toggle("active");
 		checkout.classList.toggle("show");
 		checkout.classList.toggle("active");
-		mapDiv.classList.toggle("big");
-		mapCanvas.style.width = "100%";
-		mapCanvas.style.height = "100%";
-		map.resize();
 	}
 
 	if (orderButton) {
@@ -29,6 +27,7 @@ const switchToCheckout = () => {
 			togglePills();
 			mapTitleField.value = document.querySelector(".ride-title").value;
 			mapFormat.value = document.querySelector(".form-check .value-format:checked").value;
+			mapUrl.value = generateUrl();
 			if (document.querySelector("#activity-distance").checked) {
 				mapDistance.value = document.dist;
 			} else {
