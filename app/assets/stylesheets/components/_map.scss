@@ -1,11 +1,16 @@
 #mapid {
-  width: 426px;
-  height: 600px;
+  width: 914px;//426px;
+  height: 1280px;//600px;
   border: 15px solid black;
   border-radius: 2px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   text-align: left !important;
   position: relative;
+}
+
+#mapid.small {
+  width: 426px;
+  height: 600px;
 }
 
 #mapid a {

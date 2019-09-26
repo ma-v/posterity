@@ -29,6 +29,10 @@ const initMap = () => {
       center: [5.380000, 43.300000],
       zoom: 11.5
     });
+    mapElement.classList.toggle("small");
+    const mapCanvas = document.querySelector('.mapboxgl-canvas');
+    mapCanvas.style.width = "100%";
+    mapCanvas.style.height = "100%";
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div class="title-map"></div><div class="info-track"></div><div>')
   }

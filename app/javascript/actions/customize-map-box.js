@@ -11,7 +11,6 @@ const switchToCheckout = () => {
   	const mapElevation = document.getElementById('map_elevation');
   	const mapSpeed = document.getElementById('map_speed');
   	const mapTime = document.getElementById('map_time');
-  	const mapDiv = document.getElementById('mapid');
 
 	const togglePills = () => {
 		const mapCanvas = document.querySelector('.mapboxgl-canvas');
