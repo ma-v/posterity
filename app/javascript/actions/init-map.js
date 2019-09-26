@@ -331,3 +331,4 @@ document.time = 0;
 
  export { initMap };
  export { selectRide };
+ export { map };

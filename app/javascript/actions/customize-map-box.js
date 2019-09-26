@@ -1,3 +1,5 @@
+import { map } from '../actions/init-map';
+
 const switchToCheckout = () => {
 	const orderButton = document.querySelector("#order-button");
 	const backButton = document.querySelector("#back-button");
@@ -9,12 +11,18 @@ const switchToCheckout = () => {
   	const mapElevation = document.getElementById('map_elevation');
   	const mapSpeed = document.getElementById('map_speed');
   	const mapTime = document.getElementById('map_time');
+  	const mapDiv = document.getElementById('mapid');
 
 	const togglePills = () => {
+		const mapCanvas = document.querySelector('.mapboxgl-canvas');
 		customBox.classList.toggle("show");
 		customBox.classList.toggle("active");
 		checkout.classList.toggle("show");
 		checkout.classList.toggle("active");
+		mapDiv.classList.toggle("big");
+		mapCanvas.style.width = "100%";
+		mapCanvas.style.height = "100%";
+		map.resize();
 	}
 
 	if (orderButton) {
