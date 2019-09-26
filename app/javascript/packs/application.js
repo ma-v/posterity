@@ -12,13 +12,13 @@ import { loadLoader } from '../actions/loader';
 
 
 import {switchToCheckout} from '../actions/customize-map-box';
+initMap();
 switchToCheckout();
 animateTitle();
 loadLoader();
 
 //INIT MAP
 
-initMap();
 
 $(document).ready(function(){
   $(".content").slice(0, 4).show();

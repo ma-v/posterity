@@ -11,6 +11,11 @@ import { checkSpeed } from '../actions/fields-input';
 
 let map = null;
 let currentTraceColor = "#0214BB";
+let currentStyleId = "cjzv3hkp30svs1cp5xeexv54g";
+let allCoordinates = [];
+let selectedCoordinates = [];
+let allPolylines = [];
+let selectedPolylines = [];
 
  // créer la map avec Mapbox
 const initMap = () => {
@@ -24,6 +29,10 @@ const initMap = () => {
       center: [5.380000, 43.300000],
       zoom: 11.5
     });
+    mapElement.classList.toggle("small");
+    const mapCanvas = document.querySelector('.mapboxgl-canvas');
+    mapCanvas.style.width = "100%";
+    mapCanvas.style.height = "100%";
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div class="title-map"></div><div class="info-track"></div><div>')
   }
@@ -104,155 +113,12 @@ const initMap = () => {
   return map;
 };
 
-const selectColor = () => {
-  const blueRide = document.querySelector("#blue-ride");
-  const whiteRide = document.querySelector("#white-ride");
-  const fushiaRide = document.querySelector("#fushia-ride");
-  const rideColorPicker = document.querySelector("#ride-color-picker");
-  const blueTrace = "#0214BB";
-  const whiteTrace = "white";
-  const fushiaTrace = "#CD0067";
-
-
-  document.querySelectorAll('.activity-btn').forEach(activityBtn => {
-
-    if (whiteRide) {
-    whiteRide.addEventListener("click", function(){
-      currentTraceColor = whiteTrace;
-      if (activityBtn.classList.contains("pressed")) {
-        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', whiteTrace);
-      }
-    });
-    }
-
-    if (blueRide) {
-    blueRide.addEventListener("click", function(){
-      currentTraceColor = blueTrace;
-      if (activityBtn.classList.contains("pressed")) {
-        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', blueTrace);
-      }
-    });
-    }
-
-    if (fushiaRide) {
-    fushiaRide.addEventListener("click", function(){
-      currentTraceColor = fushiaTrace;
-      if (activityBtn.classList.contains("pressed")) {
-        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', fushiaTrace);
-      }
-    });
-    }
-
-    if (rideColorPicker) {
-    rideColorPicker.addEventListener("change", function(){
-      currentTraceColor = event.currentTarget.value;
-      if (activityBtn.classList.contains("pressed")) {
-        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', event.currentTarget.value);
-      }
-    });
-    }
-  });
-}
-
-let layerList = document.getElementById('menu');
-if (layerList) {
-  let inputs = layerList.getElementsByTagName('input');
-
-  function switchLayer(layer) {
-    let layerId = layer.id;
-    map.setStyle('mapbox://styles/ma-v/' + layerId);
-    map.on('style.load', function() {
-      addLayersOnStyleLoad();
-    })
-  }
-
-  const addLayersOnStyleLoad = () => {
-    const allCoordinates = [];
-    document.querySelectorAll('.activity-btn').forEach(activityBtn => {
-      if (activityBtn.classList.contains("pressed")) {
-        const id = activityBtn.dataset.id
-        let polyline_i = activityBtn.dataset.polyline;
-        allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
-        map.addLayer({
-            "id": `route_${id}`,
-            "type": "line",
-            "source": {
-              "type": "geojson",
-              "data": {
-                "type": "Feature",
-                "properties": {},
-                "geometry": {
-                  "type": "LineString",
-                  "coordinates": allCoordinates[id]
-                  }
-              }
-            },
-            "layout": {
-              "line-join": "round",
-              "line-cap": "round",
-              "visibility": "visible"
-            },
-            "paint": {
-              "line-color": currentTraceColor,
-              "line-width": 5
-            }
-          });
-        // let selectedCoordinates = [];
-        // document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
-        //   let id = btn.dataset.id
-        //   allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
-        //   allCoordinates[id].forEach(c => selectedCoordinates.push(c));
-        // })
-        // console.log(selectedCoordinates);
-        // let bounds = selectedCoordinates.reduce((bounds, coord) => bounds.extend(coord),
-        //   new mapboxgl.LngLatBounds(selectedCoordinates[0], selectedCoordinates[0]));
-
-        // if (bounds !== []) { map.fitBounds(bounds, { padding: 40 }); }
-      }
-    });
-  }
-
-  for (let i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener("click", (event) => {
-      switchLayer(event.currentTarget);
-    });
-  }
-
-
-}
-
-const addTitle = () => {
-  let titleFrame = document.querySelector('.title-map');
-  let titleField = document.querySelector('.ride-title');
-  if (titleField) {
-    titleField.addEventListener('keyup', (event) => {
-    titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
-    });
-  }
-};
-
- const printMap = () => {
-  printPdf.build()
-    .format('a2') // valeur à récuperer dans le DOM
-    .portrait() // Unnecessary since it's the default but it's included for clarity.
-    .print(map, mapboxgl)
-    .then(function (pdf) {
-      // Cloudinary::Uploader.upload(pdf);
-      pdf.save('map.pdf');
-    });
- };
-  document.dist = 0;
-  document.elev = 0;
-  document.time = 0;
-
- const selectRide = () => {
-
-  const allCoordinates = [];
-
+const selectRide = () => {
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
     const id = activityBtn.dataset.id
     let polyline_i = activityBtn.dataset.polyline;
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+    allPolylines[id] = polyline_i;
   });
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
@@ -304,20 +170,169 @@ const addTitle = () => {
         map.removeLayer(`route_${id}`);
         map.removeSource(`route_${id}`);
       }
-      let selectedCoordinates = [];
+      selectedCoordinates = [];
+      selectedPolylines = [];
       document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
-        let id = btn.dataset.id
-        allCoordinates[id].forEach(c => selectedCoordinates.push(c))
+        let id = btn.dataset.id;
+        allCoordinates[id].forEach(c => selectedCoordinates.push(c));
+        selectedPolylines.push(allPolylines[id]);
       })
 
       let bounds = selectedCoordinates.reduce((bounds, coord) => bounds.extend(coord),
         new mapboxgl.LngLatBounds(selectedCoordinates[0], selectedCoordinates[0]));
-
       if (bounds !== []) { map.fitBounds(bounds, { padding: 30 }); }
     });
-
   });
 };
 
+const addTitle = () => {
+  let titleFrame = document.querySelector('.title-map');
+  let titleField = document.querySelector('.ride-title');
+  if (titleField) {
+    titleField.addEventListener('keyup', (event) => {
+    titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
+    });
+  }
+};
+
+const selectColor = () => {
+  const blueRide = document.querySelector("#blue-ride");
+  const whiteRide = document.querySelector("#white-ride");
+  const fushiaRide = document.querySelector("#fushia-ride");
+  const rideColorPicker = document.querySelector("#ride-color-picker");
+  const blueTrace = "#0214bb";
+  const whiteTrace = "#ffffff";
+  const fushiaTrace = "#cd0067";
+
+
+  document.querySelectorAll('.activity-btn').forEach(activityBtn => {
+
+    if (whiteRide) {
+    whiteRide.addEventListener("click", function(){
+      currentTraceColor = whiteTrace;
+      if (activityBtn.classList.contains("pressed")) {
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', whiteTrace);
+      }
+    });
+    }
+
+    if (blueRide) {
+    blueRide.addEventListener("click", function(){
+      currentTraceColor = blueTrace;
+      if (activityBtn.classList.contains("pressed")) {
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', blueTrace);
+      }
+    });
+    }
+
+    if (fushiaRide) {
+    fushiaRide.addEventListener("click", function(){
+      currentTraceColor = fushiaTrace;
+      if (activityBtn.classList.contains("pressed")) {
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', fushiaTrace);
+      }
+    });
+    }
+
+    if (rideColorPicker) {
+    rideColorPicker.addEventListener("change", function(){
+      currentTraceColor = event.currentTarget.value;
+      if (activityBtn.classList.contains("pressed")) {
+        map.setPaintProperty(`route_${activityBtn.dataset.id}`, 'line-color', event.currentTarget.value);
+      }
+    });
+    }
+  });
+}
+
+const testUrl = document.querySelector("#test-url");
+if (testUrl) {
+  testUrl.addEventListener('click', event => {
+    generateUrl();
+  })
+}
+
+const generateUrl = () => { 
+  let currentZoom = map.getZoom();
+  let currentCenter = map.getCenter();
+  if (selectedPolylines && selectedPolylines.length > 0) { 
+    // let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[0])}),path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[1])})/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`  
+    const urlPolylines = selectedPolylines.map(polyline => {
+      return `path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(polyline)})`
+    }).join(",");
+    let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${urlPolylines}/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`;
+    console.log(url);
+    return url;
+  } else {
+    let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`;
+    console.log(url);
+    return url;
+  }
+  
+}
+
+let layerList = document.getElementById('menu');
+if (layerList) {
+  let inputs = layerList.getElementsByTagName('input');
+
+  function switchLayer(layer) {
+    let layerId = layer.id;
+    map.setStyle('mapbox://styles/ma-v/' + layerId);
+    currentStyleId = layerId;
+    map.on('style.load', function() {
+      addLayersOnStyleLoad();
+    })
+  }
+
+  const addLayersOnStyleLoad = () => {
+    document.querySelectorAll('.activity-btn').forEach(activityBtn => {
+      if (activityBtn.classList.contains("pressed")) {
+        const id = activityBtn.dataset.id
+        let polyline_i = activityBtn.dataset.polyline;
+        allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+        // allGeoJson[id] = polyline.toGeoJSON(`${polyline_i}`);
+        map.addLayer({
+            "id": `route_${id}`,
+            "type": "line",
+            "source": {
+              "type": "geojson",
+              "data": {
+                "type": "Feature",
+                "properties": {},
+                "geometry": {
+                  "type": "LineString",
+                  "coordinates": allCoordinates[id]
+                  }
+              }
+            },
+            "layout": {
+              "line-join": "round",
+              "line-cap": "round",
+              "visibility": "visible"
+            },
+            "paint": {
+              "line-color": currentTraceColor,
+              "line-width": 5
+            }
+          });
+      }
+    });
+  }
+
+  for (let i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener("click", (event) => {
+      switchLayer(event.currentTarget);
+    });
+  }
+
+
+}
+
+document.dist = 0;
+document.elev = 0;
+document.time = 0;
+
+
  export { initMap };
  export { selectRide };
+ export { map };
