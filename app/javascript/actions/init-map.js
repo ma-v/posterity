@@ -13,7 +13,11 @@ let map = null;
 let currentTraceColor = "#0214BB";
 let currentStyleId = "cjzv3hkp30svs1cp5xeexv54g";
 let allCoordinates = [];
+// let allGeoJson = [];
 let selectedCoordinates = [];
+// let selectedGeoJson = [];
+let allPolylines = [];
+let selectedPolylines = [];
 
  // créer la map avec Mapbox
 const initMap = () => {
@@ -112,6 +116,9 @@ const selectRide = () => {
     const id = activityBtn.dataset.id
     let polyline_i = activityBtn.dataset.polyline;
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+    allPolylines[id] = polyline_i;
+
+    // allGeoJson[id] = polyline.toGeoJSON(`${polyline_i}`);
   });
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
@@ -163,9 +170,13 @@ const selectRide = () => {
         map.removeLayer(`route_${id}`);
         map.removeSource(`route_${id}`);
       }
+      selectedCoordinates = [];
+      selectedPolylines = [];
       document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
-        let id = btn.dataset.id
-        allCoordinates[id].forEach(c => selectedCoordinates.push(c))
+        let id = btn.dataset.id;
+        allCoordinates[id].forEach(c => selectedCoordinates.push(c));
+        // selectedGeoJson.push(allGeoJson[id]);
+        selectedPolylines.push(allPolylines[id]);
       })
 
       let bounds = selectedCoordinates.reduce((bounds, coord) => bounds.extend(coord),
@@ -190,9 +201,9 @@ const selectColor = () => {
   const whiteRide = document.querySelector("#white-ride");
   const fushiaRide = document.querySelector("#fushia-ride");
   const rideColorPicker = document.querySelector("#ride-color-picker");
-  const blueTrace = "#0214BB";
-  const whiteTrace = "white";
-  const fushiaTrace = "#CD0067";
+  const blueTrace = "#0214bb";
+  const whiteTrace = "#ffffff";
+  const fushiaTrace = "#cd0067";
 
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
@@ -247,7 +258,9 @@ const generateUrl = () => {
   let currentCenter = map.getCenter();
   let overlay = [];
   overlay.push(`(${polyline.encode(selectedCoordinates)})`);
-  let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/path${overlay}/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`
+  console.log(selectedPolylines);
+  console.log(selectedCoordinates);
+  let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[0])}),path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[1])})/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`
   console.log(url);
 }
 
@@ -270,6 +283,7 @@ if (layerList) {
         const id = activityBtn.dataset.id
         let polyline_i = activityBtn.dataset.polyline;
         allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+        // allGeoJson[id] = polyline.toGeoJSON(`${polyline_i}`);
         map.addLayer({
             "id": `route_${id}`,
             "type": "line",
