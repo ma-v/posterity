@@ -251,8 +251,20 @@ if (testUrl) {
 const generateUrl = () => { 
   let currentZoom = map.getZoom();
   let currentCenter = map.getCenter();
-  let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[0])}),path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[1])})/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`
-  console.log(url);
+  if (selectedPolylines && selectedPolylines.length > 0) { 
+    // let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[0])}),path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[1])})/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`  
+    const urlPolylines = selectedPolylines.map(polyline => {
+      return `path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(polyline)})`
+    }).join(",");
+    let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${urlPolylines}/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`;
+    console.log(url);
+    return url;
+  } else {
+    let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`;
+    console.log(url);
+    return url;
+  }
+  
 }
 
 let layerList = document.getElementById('menu');
