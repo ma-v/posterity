@@ -32,7 +32,7 @@
 			<% end %>
 	      </td>
 	      <td><%= order.map.price_cents / 100 %>€</td>
-	      <td><a href="<%= order.map.image %>" target="blank">Pdf</a></td>
+	      <td><a href="<%= order.map.map_url %>" target="blank">MB_Url</a>  <a href="<%= order.map.image %>" target="blank">Pdf</a></td>
 	      <td><%= order.map.title%></td>
 	      <td>
 	      	<% if order.map.elevation%>

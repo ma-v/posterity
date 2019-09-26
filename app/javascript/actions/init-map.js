@@ -65,6 +65,7 @@ const initMap = () => {
   const mapElevation = document.getElementById('map_elevation');
   const mapSpeed = document.getElementById('map_speed');
   const mapTime = document.getElementById('map_time');
+  const mapUrl = document.getElementById('map_map_url');
   
   if (submitMap) {
     submitMap.addEventListener('click', (event) => {
@@ -83,7 +84,11 @@ const initMap = () => {
             var rawData = pdf.output("blob");
             let myData = new FormData();
             myData.append("title", mapTitle.value);
-            myData.append("image", rawData, "map.pdf");
+            if (mapUrl.value.length > 7800) {
+              myData.append("image", rawData, "map.pdf");  
+            } else {
+              myData.append("map_url", mapUrl.value);  
+            }
             myData.append("format", mapFormat.value);
             myData.append("distance", mapDistance.value);
             myData.append("elevation", mapElevation.value);
@@ -103,9 +108,7 @@ const initMap = () => {
             }).then(function (response) { window.location.href = `/maps/${response.data.map_id}/orders/${response.data.id}/payments/new` });
             // .catch(function (error) {...}
           });
-
        }, false);
-
   }
   selectRide();
   addTitle();
@@ -261,14 +264,11 @@ const generateUrl = () => {
       return `path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(polyline)})`
     }).join(",");
     let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${urlPolylines}/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`;
-    console.log(url);
     return url;
   } else {
     let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`;
-    console.log(url);
     return url;
-  }
-  
+  } 
 }
 
 let layerList = document.getElementById('menu');
@@ -336,3 +336,4 @@ document.time = 0;
  export { initMap };
  export { selectRide };
  export { map };
+ export { generateUrl };
