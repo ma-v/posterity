@@ -13,9 +13,7 @@ let map = null;
 let currentTraceColor = "#0214BB";
 let currentStyleId = "cjzv3hkp30svs1cp5xeexv54g";
 let allCoordinates = [];
-// let allGeoJson = [];
 let selectedCoordinates = [];
-// let selectedGeoJson = [];
 let allPolylines = [];
 let selectedPolylines = [];
 
@@ -117,8 +115,6 @@ const selectRide = () => {
     let polyline_i = activityBtn.dataset.polyline;
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
     allPolylines[id] = polyline_i;
-
-    // allGeoJson[id] = polyline.toGeoJSON(`${polyline_i}`);
   });
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
@@ -175,7 +171,6 @@ const selectRide = () => {
       document.querySelectorAll('.activity-btn.pressed').forEach(btn => {
         let id = btn.dataset.id;
         allCoordinates[id].forEach(c => selectedCoordinates.push(c));
-        // selectedGeoJson.push(allGeoJson[id]);
         selectedPolylines.push(allPolylines[id]);
       })
 
@@ -256,10 +251,6 @@ if (testUrl) {
 const generateUrl = () => { 
   let currentZoom = map.getZoom();
   let currentCenter = map.getCenter();
-  let overlay = [];
-  overlay.push(`(${polyline.encode(selectedCoordinates)})`);
-  console.log(selectedPolylines);
-  console.log(selectedCoordinates);
   let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[0])}),path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[1])})/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`
   console.log(url);
 }
