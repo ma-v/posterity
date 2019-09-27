@@ -260,10 +260,10 @@ const generateUrl = () => {
     const urlPolylines = selectedPolylines.map(polyline => {
       return `path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(polyline)})`
     }).join(",");
-    let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${urlPolylines}/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`;
+    let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${urlPolylines}/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA&logo=false`;
     return url;
   } else {
-    let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`;
+    let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA&logo=false`;
     return url;
   } 
 }
