@@ -26,7 +26,7 @@ const initMap = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     map = new mapboxgl.Map({
       container: 'mapid',
-      style: 'mapbox://styles/ma-v/cjzv3hkp30svs1cp5xeexv54g',
+      style: `mapbox://styles/ma-v/${currentStyleId}`,
       center: currentCenter,
       zoom: currentZoom
     });
@@ -250,13 +250,6 @@ const selectColor = () => {
     });
     }
   });
-}
-
-const testUrl = document.querySelector("#test-url");
-if (testUrl) {
-  testUrl.addEventListener('click', event => {
-    generateUrl();
-  })
 }
 
 const generateUrl = () => { 

@@ -33,7 +33,6 @@
                                    <div class="content"><span class="btn btn-track activity-btn p-2 m-2" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>" data-distance="<%= activity["distance"]%>" data-time="<%= activity["moving_time"]%>" data-speed="<%= activity["average_speed"] %>" data-elevation="<%= activity["total_elevation_gain"] %>"><i class="fas fa-bicycle"></i> <%= activity["name"] %></span></div>
                                   <% end %>
                                   <a href="#" id="loadMore" class="btn-posterity">Load More</a>
-                                  <button class=btn-posterity id="test-url">test</button>
                                 </div>
 
                               <% else %>
