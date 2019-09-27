@@ -10,29 +10,33 @@ import { checkTime } from '../actions/fields-input';
 import { checkSpeed } from '../actions/fields-input';
 
 let map = null;
+let currentCenter = [5.380000, 43.300000];
+let currentZoom = 11.5;
 let currentTraceColor = "#0214BB";
 let currentStyleId = "cjzv3hkp30svs1cp5xeexv54g";
 let allCoordinates = [];
 let selectedCoordinates = [];
 let allPolylines = [];
 let selectedPolylines = [];
+const mapElement = document.getElementById('mapid');
 
  // créer la map avec Mapbox
 const initMap = () => {
-  const mapElement = document.getElementById('mapid');
-
   if (mapElement) {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     map = new mapboxgl.Map({
       container: 'mapid',
-      style: 'mapbox://styles/ma-v/cjzv3hkp30svs1cp5xeexv54g',
-      center: [5.380000, 43.300000],
-      zoom: 11.5
+      style: `mapbox://styles/ma-v/${currentStyleId}`,
+      center: currentCenter,
+      zoom: currentZoom
     });
-    mapElement.classList.toggle("small");
+    mapElement.classList.add("small");
     const mapCanvas = document.querySelector('.mapboxgl-canvas');
     mapCanvas.style.width = "100%";
     mapCanvas.style.height = "100%";
+    map.on('style.load', function() {
+      addLayersOnStyleLoad();
+    })
     let frame = document.querySelector('#mapid');
     frame.insertAdjacentHTML('beforeend', '<div class="map-title"><div class="title-map"></div><div class="info-track"></div><div>')
   }
@@ -248,13 +252,6 @@ const selectColor = () => {
   });
 }
 
-const testUrl = document.querySelector("#test-url");
-if (testUrl) {
-  testUrl.addEventListener('click', event => {
-    generateUrl();
-  })
-}
-
 const generateUrl = () => { 
   let currentZoom = map.getZoom();
   let currentCenter = map.getCenter();
@@ -271,6 +268,41 @@ const generateUrl = () => {
   } 
 }
 
+const addLayersOnStyleLoad = () => {
+  document.querySelectorAll('.activity-btn').forEach(activityBtn => {
+    if (activityBtn.classList.contains("pressed")) {
+      const id = activityBtn.dataset.id
+      let polyline_i = activityBtn.dataset.polyline;
+      allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+      // allGeoJson[id] = polyline.toGeoJSON(`${polyline_i}`);
+      map.addLayer({
+          "id": `route_${id}`,
+          "type": "line",
+          "source": {
+            "type": "geojson",
+            "data": {
+              "type": "Feature",
+              "properties": {},
+              "geometry": {
+                "type": "LineString",
+                "coordinates": allCoordinates[id]
+                }
+            }
+          },
+          "layout": {
+            "line-join": "round",
+            "line-cap": "round",
+            "visibility": "visible"
+          },
+          "paint": {
+            "line-color": currentTraceColor,
+            "line-width": 5
+          }
+        });
+    }
+  });
+}
+
 let layerList = document.getElementById('menu');
 if (layerList) {
   let inputs = layerList.getElementsByTagName('input');
@@ -284,48 +316,19 @@ if (layerList) {
     })
   }
 
-  const addLayersOnStyleLoad = () => {
-    document.querySelectorAll('.activity-btn').forEach(activityBtn => {
-      if (activityBtn.classList.contains("pressed")) {
-        const id = activityBtn.dataset.id
-        let polyline_i = activityBtn.dataset.polyline;
-        allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
-        // allGeoJson[id] = polyline.toGeoJSON(`${polyline_i}`);
-        map.addLayer({
-            "id": `route_${id}`,
-            "type": "line",
-            "source": {
-              "type": "geojson",
-              "data": {
-                "type": "Feature",
-                "properties": {},
-                "geometry": {
-                  "type": "LineString",
-                  "coordinates": allCoordinates[id]
-                  }
-              }
-            },
-            "layout": {
-              "line-join": "round",
-              "line-cap": "round",
-              "visibility": "visible"
-            },
-            "paint": {
-              "line-color": currentTraceColor,
-              "line-width": 5
-            }
-          });
-      }
-    });
-  }
-
   for (let i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener("click", (event) => {
       switchLayer(event.currentTarget);
     });
   }
 
-
+  window.addEventListener("resize", event => {
+    mapElement.classList.remove("small");
+    currentCenter = map.getCenter();
+    currentZoom = map.getZoom();
+    map.remove();
+    initMap();
+  });
 }
 
 document.dist = 0;
