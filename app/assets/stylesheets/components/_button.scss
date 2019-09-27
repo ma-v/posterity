@@ -88,6 +88,17 @@ a {
     }
 }
 
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .btn-track:hover {
+    background: white;
+    color: $main-blue;
+  }
+  .btn-track.pressed:hover {
+    background: $main-blue;
+    color: white;
+  }
+}
+
 .btn-bnw {
   margin: 4px;
   height: 50px;
