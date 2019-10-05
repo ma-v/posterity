@@ -10,6 +10,8 @@ class OrdersController < ApplicationController
       @order.shipped = true
       @order.update(order_params)
       @order.save!
+      mail = OrderMailer.with(order: @order).shipment
+      mail.deliver_now
       redirect_to admin_dashboard_path
     elsif @order.shipped === true
       @order.shipped = false
