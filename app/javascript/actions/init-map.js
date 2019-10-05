@@ -165,7 +165,9 @@ const selectRide = () => {
           },
           "paint": {
             "line-color": currentTraceColor,
-            "line-width": 5
+            "line-width": 7,
+            "line-opacity": 1,
+            "line-blur": 4
           }
         });
       } else {
@@ -296,7 +298,9 @@ const addLayersOnStyleLoad = () => {
           },
           "paint": {
             "line-color": currentTraceColor,
-            "line-width": 5
+            "line-width": 7,
+            "line-opacity": 1,
+            "line-blur": 2
           }
         });
     }
