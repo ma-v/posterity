@@ -323,11 +323,13 @@ if (layerList) {
   }
 
   window.addEventListener("resize", event => {
-    mapElement.classList.remove("small");
-    currentCenter = map.getCenter();
-    currentZoom = map.getZoom();
-    map.remove();
-    initMap();
+    if (window.innerWidth > 800) {
+      mapElement.classList.remove("small");
+      currentCenter = map.getCenter();
+      currentZoom = map.getZoom();
+      map.remove();
+      initMap();
+    }  
   });
 }
 
