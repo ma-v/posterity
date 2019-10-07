@@ -1,8 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :set_map, only: [:show]
   before_action :set_order, only: [:update, :cancel_shipment]
 
-  def show
+  def confirmation
   end
 
   def update
