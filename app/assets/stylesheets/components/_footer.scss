@@ -14,6 +14,19 @@
   display: flex;
   align-items: center;
 }
+
+.footer-terms {
+  padding-right: 30px;
+  a {
+  color: $main-blue;
+  opacity: 0.45;
+  text-decoration: none;
+  padding: 0px 10px;
+} :hover {
+    opacity: 1;
+  }
+}
+
 .footer-links a {
   color: $main-blue;
   opacity: 0.45;
