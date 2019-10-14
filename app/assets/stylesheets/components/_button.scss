@@ -68,12 +68,13 @@ a {
 .btn-track {
   color: #0214BB;
   border-color: #0214BB;
-  height: 42px;
-  width: 150px;
+  height: 30px;
+  width: 60px;
   overflow: hidden;
   white-space: nowrap;
   display: inline-block;
   text-overflow: ellipsis;
+	font-size: 7px;
     &:hover {
       background: $main-blue;
       color: white;
@@ -87,6 +88,8 @@ a {
       }
     }
 }
+
+
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
   .btn-track:hover {
