@@ -70,7 +70,7 @@ const initMap = () => {
   const mapSpeed = document.getElementById('map_speed');
   const mapTime = document.getElementById('map_time');
   const mapUrl = document.getElementById('map_map_url');
-  
+
   if (submitMap) {
     submitMap.addEventListener('click', (event) => {
       let pdfFormat = ""
@@ -89,9 +89,9 @@ const initMap = () => {
             let myData = new FormData();
             myData.append("title", mapTitle.value);
             if (mapUrl.value.length > 7800) {
-              myData.append("image", rawData, "map.pdf");  
+              myData.append("image", rawData, "map.pdf");
             } else {
-              myData.append("map_url", mapUrl.value);  
+              myData.append("map_url", mapUrl.value);
             }
             myData.append("format", mapFormat.value);
             myData.append("distance", mapDistance.value);
@@ -252,11 +252,11 @@ const selectColor = () => {
   });
 }
 
-const generateUrl = () => { 
+const generateUrl = () => {
   let currentZoom = map.getZoom();
   let currentCenter = map.getCenter();
-  if (selectedPolylines && selectedPolylines.length > 0) { 
-    // let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[0])}),path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[1])})/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`  
+  if (selectedPolylines && selectedPolylines.length > 0) {
+    // let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[0])}),path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(selectedPolylines[1])})/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA`
     const urlPolylines = selectedPolylines.map(polyline => {
       return `path-5+${currentTraceColor.substring(1)}(${encodeURIComponent(polyline)})`
     }).join(",");
@@ -265,7 +265,7 @@ const generateUrl = () => {
   } else {
     let url = `https://api.mapbox.com/styles/v1/ma-v/${currentStyleId}/static/${currentCenter.lng},${currentCenter.lat},${currentZoom}/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjanlqeXNwMHgwODhiM2RxNHhvYjA1YWw3In0.agRm7mEXDZNZfn9w45PBOA&logo=false`;
     return url;
-  } 
+  }
 }
 
 const addLayersOnStyleLoad = () => {
@@ -329,7 +329,7 @@ if (layerList) {
       currentZoom = map.getZoom();
       map.remove();
       initMap();
-    }  
+    }
   });
 }
 
