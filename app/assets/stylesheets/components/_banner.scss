@@ -27,8 +27,14 @@
 .bottom-banner {
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 800px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  .carousel-card {
+    height: 600px;
+    width: 400px;
+    border: 7px solid white;
+    box-shadow: 0 0 12px white;
+  }
 }
