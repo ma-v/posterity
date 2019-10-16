@@ -22,7 +22,7 @@
   }
 }
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+@media (min-width: 100px) and (max-width: 575px) {
   .navbar-lewagon .navbar-brand img {
     width: 100px;
   }
