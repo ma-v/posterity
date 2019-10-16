@@ -24,7 +24,7 @@ body {
 
 .hiw-card img {
   width: 100%;
-  height: 100px;
+  height: 15vh;
   margin: 16px auto;
 }
 
@@ -35,10 +35,14 @@ body {
 	height: 90vh;
 }
 
+// responsive home smallest devices  <<<<<<<<<<<<<<<<<<
 
-// responsive home  <<<<<<<<<<<<<<<<<<
+@media (min-width: 100px) and (max-width: 575px) {
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  #mapid.small {
+    width: 300px;
+    height: 400px;
+  }
 
   .navbar-lewagon {
     justify-content: center;
@@ -73,8 +77,9 @@ body {
   }
 
   .HIW {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
   }
 
   .HIW > a {
@@ -87,76 +92,174 @@ body {
     height: auto;
     display: flex;
     flex-direction: row;
-    & h5, p {
+    & h5{
       margin: auto 16px;
       font-size: 12px;
+    }
+    & p {
+      margin: auto 16px;
+      font-size: 8px;
     }
   }
   .hiw-card img {
     height: 60px;
     width: auto;
   }
+
   #carouselExampleControls {
     display: none;
   }
 
   .footer {
+    border-top: 0.5px solid $main-blue;
     margin-top: 16px;
     justify-content: center;
+    a {
+      font-size: 15px;
+    }
   }
   .footer-copyright {
     display: none;
   }
-// responsive Maps/new <<<<<<<<<<<<<<<<<<
-  .row {
-    margin: auto;
-  }
-  .display-map {
-    margin: 8px !important;
-  }
+}
 
-  // #mapid {
-  //   width: 300px;
-  //   height: 400px;
-  // }
-
-  #accordion-style  i {
-    display: none !important;
+// responsive small devices
+@media (min-width: 576px) and (max-width: 768px) {
+  .navbar-lewagon {
+    justify-content: center;
+    background: white;
+    height: 10vh;
   }
 
-  .tab_left__image {
-    display: none;
+  .banner {
+    min-height: 400px;
+    padding: 80px;
+    background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), image-url('background-2.jpg');
   }
 
-  #customize-map {
+  .section-1 {
+    margin: 0;
+    height: auto;
+    padding: 1rem !important;
+  }
+
+  .section-1 h1{
+    padding-top: 8px;
+    margin: 8px 0 !important;
+    font-size: 26px;
+  }
+
+  .section-1 a {
     margin: auto !important;
-    max-width: 340px !important;
-  }
-  .right {
-    min-width: 100vw;
-  }
-  .tab_left {
-    display: none;
-  }
-  .tab_right {
-    width: 300px !important;
-    float: left !important;
   }
 
-  .app_inner__tab {
-    width: 360px;
+  .HIW {
+    display: flex;
+    justify-content: center;
   }
-   .app_inner__tab * {
-    position: relative !important;
+
+  .HIW > a {
+    margin: auto !important;
+    padding: auto !important;
   }
-  .content {
+
+  .hiw-card {
+    margin: 8px;
+    height: auto;
+    display: flex;
+    & h5{
+      margin: auto 16px;
+      font-size: 12px;
+    }
+    & p {
+      margin: auto 16px;
+      font-size: 8px;
+    }
+  }
+  .hiw-card img {
+    height: 60px;
     width: auto;
   }
 
-  #menu {
-    margin: 0 !important;
+  .bottom-banner {
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    .carousel-card {
+      height: 300px;
+      width: 200px;
+      border: 5px solid white;
+      box-shadow: 0 0 10px white;
+    }
   }
-  .order {
-    width: 300px;
+}
+
+// responsive medium devices
+@media (min-width: 768px) and (max-width: 992px) {
+  .navbar-lewagon {
+    justify-content: center;
+    background: white;
+    height: 10vh;
+  }
+
+  .banner {
+    min-height: 500px;
+    padding: 160px;
+  }
+
+  .section-1 {
+    margin: 0;
+    height: auto;
+    padding: 2rem !important;
+  }
+
+  .section-1 h1{
+    margin: 8px 0 !important;
+  }
+
+  .section-1 a {
+    margin: auto !important;
+  }
+
+  .HIW {
+    display: flex;
+    justify-content: center;
+  }
+
+  .HIW > a {
+    margin: auto !important;
+    padding: auto !important;
+  }
+
+  .hiw-card {
+    margin: 8px;
+    height: auto;
+    display: flex;
+    & h5{
+      margin: auto 20px;
+      font-size: 16px;
+    }
+    & p {
+      margin: auto 20px;
+      font-size: 16px;
+    }
+  }
+
+  .bottom-banner {
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    .carousel-card {
+      height: 400px;
+      width: 266px;
+      border: 7px solid white;
+      box-shadow: 0 0 12px white;
+    }
   }
 }
