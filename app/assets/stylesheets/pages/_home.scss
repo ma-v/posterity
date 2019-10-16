@@ -36,7 +36,13 @@ body {
 }
 
 // responsive home smallest devices  <<<<<<<<<<<<<<<<<<
+
 @media (min-width: 100px) and (max-width: 575px) {
+
+  #mapid.small {
+    width: 300px;
+    height: 400px;
+  }
 
   .navbar-lewagon {
     justify-content: center;
@@ -257,5 +263,3 @@ body {
     }
   }
 }
-
-@media (min-width: 768px)

@@ -1,3 +1,63 @@
+// responsive small device landscape
+@media (min-height: 100px) and (max-height: 420px) and (min-width: 500px) and (max-width: 900px){
+  .navbar-lewagon .navbar-brand img {
+    width: 100px;
+  }
+
+  #mapid.small {
+    width: 225px !important;
+    height: 300px !important;
+  }
+
+  .row {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+  }
+
+  #accordion-style  i {
+    display: none !important;
+  }
+
+  .tab_left__image {
+    display: none;
+  }
+
+  #customize-map {
+    margin: auto !important;
+    max-width: 400px !important;
+  }
+
+  .right {
+    min-width: 100vw;
+  }
+  .tab_left {
+    display: none;
+  }
+  .tab_right {
+    width: 300px !important;
+    float: left !important;
+  }
+
+  .app_inner__tab {
+    width: 350px;
+  }
+   .app_inner__tab * {
+    position: relative !important;
+  }
+  .content {
+    width: auto;
+  }
+
+  #menu {
+    margin: 0 !important;
+  }
+  .order {
+    width: 300px;
+  }
+}
+
 // responsive smallest devices
 @media (min-width: 100px) and (max-width: 575px) {
   .row {
