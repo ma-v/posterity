@@ -74,10 +74,13 @@ const initMap = () => {
   if (submitMap) {
     submitMap.addEventListener('click', (event) => {
       let pdfFormat = ""
-      if (mapFormat.value === '30x40cm - 39€'){
+      if (mapFormat.value === '21x30cm - 25€'){
+        pdfFormat = "a4";
+      }
+      if (mapFormat.value === '30x45cm - 39€'){
         pdfFormat = "a3";
       }
-      if (mapFormat.value === '50x70cm - 59€') {
+      if (mapFormat.value === '50x70cm - 55€') {
         pdfFormat = "b2";
       }
         printPdf.build()
