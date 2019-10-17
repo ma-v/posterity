@@ -22,13 +22,14 @@ class MapsController < ApplicationController
 	def create
 		puts map_params.inspect
 		@map = Map.new(map_params)
-
-	    if map_params[:format] == "30x40cm - 39€"
-	      @map.price_cents = 3900
-	    elsif map_params[:format] == "50x70cm - 59€"
-	      @map.price_cents = 5900
-	    end
-	    @map.orders.last.amount_cents = @map.price_cents
+		if map_params[:format] == "21x30cm - 25€"
+      @map.price_cents = 2500
+		elsif map_params[:format] == "30x45cm - 39€"
+      @map.price_cents = 3900
+    elsif map_params[:format] == "50x70cm - 55€"
+      @map.price_cents = 5500
+    end
+    @map.orders.last.amount_cents = @map.price_cents
 
 		if @map.save
 			# redirect_to new_map_order_payment_path(@map, @map.orders.last)
