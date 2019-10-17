@@ -112,7 +112,10 @@ const initMap = () => {
               headers: {
                 'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
               }
-            }).then(function (response) { window.location.href = `/maps/${response.data.map_id}/orders/${response.data.id}/payments/new` });
+            }).then(function (response) {
+              debugger;
+              //window.location.href = `/maps/${response.data.map_id}/orders/${response.data.id}/payments/new`
+            });
             // .catch(function (error) {...}
           });
        }, false);

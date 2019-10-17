@@ -20,7 +20,9 @@ class MapsController < ApplicationController
 	end
 
 	def create
+		puts "----------------------------------"
 		puts map_params.inspect
+		binding.pry
 		@map = Map.new(map_params)
 		if map_params[:format] == "21x30cm - 25€"
       @map.price_cents = 2500
