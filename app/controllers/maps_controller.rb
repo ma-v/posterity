@@ -10,11 +10,10 @@ class MapsController < ApplicationController
 
 		  	@activities = JSON.parse(RestClient.get("https://www.strava.com/api/v3/athlete/activities?per_page=100", {Authorization: "Bearer #{@access_token}"}))
 
-				@user = User.new(strava_id: "#{@athlete_id}")
-				@user.save!
+				@user = User.find_or_initialize_by(strava_id: "#{@athlete_id}")
+				@user.save
 		  	@map = Map.new
 		  	@map.orders << Order.new
-				@map.orders.last.user = @user
 	    else
 	      @map =Map.new
 	    end
@@ -43,6 +42,10 @@ class MapsController < ApplicationController
 	private
 
 	def map_params
-		params.permit(:title, :image, :map_url, :format, :distance, :time, :elevation, :speed, orders_attributes:[:first_name, :last_name, :address, :map_sku, :state, :email, :user_id])
+		params.permit(:title, :image, :map_url, :format, :distance, :time, :elevation, :speed, orders_attributes:[:first_name, :last_name, :address, :map_sku, :state, :email])
 	end
+
+	def user_params
+    params.permit(:strava_id)
+  end
 end
