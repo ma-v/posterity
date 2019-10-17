@@ -180,6 +180,7 @@
                                       <%= orders_form.input :last_name %>
                                       <%= orders_form.input :address %>
                                       <%= orders_form.input :email %>
+                                      <%= orders_form.input :strava_id, :as => :hidden, :input_html => { :value => @athlete_id } %>
                                   <% end %>
                             <% end %>
                             <div class="checkout d-flex justify-content-around">

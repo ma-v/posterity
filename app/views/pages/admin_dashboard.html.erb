@@ -16,11 +16,12 @@
       <th scope="col">Address</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
+      <th scope="col">Strava Profile</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
-	<% @orders.sort_by {|order| order.id}.reverse.each do |order| %>    
+	<% @orders.sort_by {|order| order.id}.reverse.each do |order| %>
 	    <tr>
 	      <td><%= order.created_at %></td>
 	      <td><%= order.id %></td>
@@ -36,7 +37,7 @@
 	      <td><%= order.map.title%></td>
 	      <td>
 	      	<% if order.map.elevation%>
-	      		<%= order.map.elevation %> 
+	      		<%= order.map.elevation %>
 			<% else %>
 				x
 			<% end %>
@@ -65,13 +66,14 @@
 	      <td><%= order.address%></td>
 	      <td><%= order.first_name%>, <%= order.last_name%></td>
 	      <td><%= order.email%></td>
+	      <td><a href="https://www.strava.com/athletes/<%= order.user.strava_id%>" target="blank"><i class="fab fa-strava"></i></a></td>
 	      <td>
 			<% if order.shipped %>
 				<span class="badge badge-success">Shipped</span>
 				<%= link_to(order_path(order), class: "btn btn-light btn-sm", method: :put, data: { confirm: "Are you sure?" }) do %>
 					<i class="fas fa-undo-alt"></i>
 				<% end %>
-	       <% else %> 
+	       <% else %>
 	       		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
 	       		  	<i class="fas fa-paper-plane"></i>
 	       		</button>
@@ -88,7 +90,7 @@
 	       		      	<%= simple_form_for(order) do |f| %>
 	       		      		<%= f.input :tracking_number %>
 	       		      		<%= f.button :submit, class: "btn btn-primary", data: { confirm: "Are you sure?" } %>
-	       		      	<% end %> 
+	       		      	<% end %>
 	       		      </div>
 	       		      <div class="modal-footer">
 	       		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
