@@ -101,6 +101,7 @@ const initMap = () => {
             myData.append("elevation", mapElevation.value);
             myData.append("speed", mapSpeed.value);
             myData.append("time", mapTime.value);
+            myData.append("strava_id", document.getElementById('map_orders_attributes_0_strava_id').value);
 
             let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value, address: document.getElementById('map_orders_attributes_0_address').value, email: document.getElementById('map_orders_attributes_0_email').value, state: "pending", map_sku: `map_${Math.floor(Math.random() * 1000000000)}`};
             myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
@@ -113,8 +114,7 @@ const initMap = () => {
                 'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
               }
             }).then(function (response) {
-              debugger;
-              //window.location.href = `/maps/${response.data.map_id}/orders/${response.data.id}/payments/new`
+              window.location.href = `/maps/${response.data.map_id}/orders/${response.data.id}/payments/new`
             });
             // .catch(function (error) {...}
           });

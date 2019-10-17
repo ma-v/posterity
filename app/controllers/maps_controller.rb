@@ -20,9 +20,6 @@ class MapsController < ApplicationController
 	end
 
 	def create
-		puts "----------------------------------"
-		puts map_params.inspect
-		binding.pry
 		@map = Map.new(map_params)
 		if map_params[:format] == "21x30cm - 25€"
       @map.price_cents = 2500
@@ -32,6 +29,7 @@ class MapsController < ApplicationController
       @map.price_cents = 5500
     end
     @map.orders.last.amount_cents = @map.price_cents
+		@map.orders.last.user = User.find_by(strava_id: map_params[:strava_id])
 
 		if @map.save
 			# redirect_to new_map_order_payment_path(@map, @map.orders.last)
@@ -44,10 +42,6 @@ class MapsController < ApplicationController
 	private
 
 	def map_params
-		params.permit(:title, :image, :map_url, :format, :distance, :time, :elevation, :speed, orders_attributes:[:first_name, :last_name, :address, :map_sku, :state, :email])
+		params.permit(:title, :image, :map_url, :format, :distance, :time, :elevation, :speed, :strava_id, orders_attributes:[:first_name, :last_name, :address, :map_sku, :state, :email])
 	end
-
-	def user_params
-    params.permit(:strava_id)
-  end
 end
