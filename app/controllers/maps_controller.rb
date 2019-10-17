@@ -10,10 +10,6 @@ class MapsController < ApplicationController
 		  	@biggest_ride = @stats["biggest_ride_distance"]
 
 		  	@activities = JSON.parse(RestClient.get("https://www.strava.com/api/v3/athlete/activities?per_page=100", {Authorization: "Bearer #{@access_token}"}))
-		  	@activity_id = @activities.first["id"]
-
-		  	@activity = JSON.parse(RestClient.get("https://www.strava.com/api/v3/activities/#{@activity_id}?include_all_efforts=false", {Authorization: "Bearer #{@access_token}"}))
-		  	@polyline = @activity["map"]["summary_polyline"]
 
 
 		  	@map = Map.new

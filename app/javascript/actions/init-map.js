@@ -271,10 +271,9 @@ const generateUrl = () => {
 const addLayersOnStyleLoad = () => {
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
     if (activityBtn.classList.contains("pressed")) {
-      const id = activityBtn.dataset.id
+      let id = activityBtn.dataset.id;
       let polyline_i = activityBtn.dataset.polyline;
       allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
-      // allGeoJson[id] = polyline.toGeoJSON(`${polyline_i}`);
       map.addLayer({
           "id": `route_${id}`,
           "type": "line",
@@ -303,12 +302,23 @@ const addLayersOnStyleLoad = () => {
   });
 }
 
+const removeLayersBeforeStyleLoad = () => {
+  document.querySelectorAll('.activity-btn').forEach(activityBtn => {
+    if (activityBtn.classList.contains("pressed")) {
+      let id = activityBtn.dataset.id;
+      map.removeLayer(`route_${id}`);
+      map.removeSource(`route_${id}`);
+    }
+  });
+}
+
 let layerList = document.getElementById('menu');
 if (layerList) {
   let inputs = layerList.getElementsByTagName('input');
 
   function switchLayer(layer) {
     let layerId = layer.id;
+    removeLayersBeforeStyleLoad();
     map.setStyle('mapbox://styles/ma-v/' + layerId);
     currentStyleId = layerId;
     map.on('style.load', function() {
