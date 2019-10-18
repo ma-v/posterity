@@ -8,6 +8,7 @@ import { checkDistance } from '../actions/fields-input';
 import { checkElevation } from '../actions/fields-input';
 import { checkTime } from '../actions/fields-input';
 import { checkSpeed } from '../actions/fields-input';
+import * as turf from '@turf/turf';
 
 let map = null;
 let currentCenter = [5.380000, 43.300000];
@@ -131,20 +132,24 @@ const selectRide = () => {
     const id = activityBtn.dataset.id
     let polyline_i = activityBtn.dataset.polyline;
     allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+    // allCoordinates[id] = allCoordinates[id].filter(coordinates => allCoordinates[id].indexOf(coordinates) % 2 == 0)
     allPolylines[id] = polyline_i;
   });
 
   document.querySelectorAll('.activity-btn').forEach(activityBtn => {
     activityBtn.addEventListener("click", () => {
       event.currentTarget.classList.toggle("pressed");
-
-      const id = activityBtn.dataset.id
+      const id = activityBtn.dataset.id;
 
       if (activityBtn.classList.contains("pressed")) {
         document.dist += parseInt(activityBtn.dataset.distance);
         document.elev += parseInt(activityBtn.dataset.elevation);
         document.time += parseInt(activityBtn.dataset.time);
         document.speed = (document.dist)/(document.time);
+        const curvedLine = turf.bezierSpline(turf.lineString(allCoordinates[id]), {
+          "resolution": 1000000,
+          "sharpness": 0
+        });
         addFields();
         checkDistance();
         checkElevation();
@@ -155,14 +160,7 @@ const selectRide = () => {
           "type": "line",
           "source": {
             "type": "geojson",
-            "data": {
-              "type": "Feature",
-              "properties": {},
-              "geometry": {
-                "type": "LineString",
-                "coordinates": allCoordinates[id]
-                }
-            }
+            "data": curvedLine
           },
           "layout": {
             "line-join": "round",
@@ -259,6 +257,7 @@ const selectColor = () => {
 }
 
 const generateUrl = () => {
+  debugger
   let currentZoom = map.getZoom();
   let currentCenter = map.getCenter();
   if (selectedPolylines && selectedPolylines.length > 0) {
@@ -280,19 +279,16 @@ const addLayersOnStyleLoad = () => {
       let id = activityBtn.dataset.id;
       let polyline_i = activityBtn.dataset.polyline;
       allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+      const curvedLine = turf.bezierSpline(turf.lineString(allCoordinates[id]), {
+          "resolution": 1000000,
+          "sharpness": 0
+        });
       map.addLayer({
           "id": `route_${id}`,
           "type": "line",
           "source": {
             "type": "geojson",
-            "data": {
-              "type": "Feature",
-              "properties": {},
-              "geometry": {
-                "type": "LineString",
-                "coordinates": allCoordinates[id]
-                }
-            }
+            "data": curvedLine
           },
           "layout": {
             "line-join": "round",
