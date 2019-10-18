@@ -42,6 +42,6 @@ class MapsController < ApplicationController
 	private
 
 	def map_params
-		params.permit(:title, :image, :map_url, :format, :distance, :time, :elevation, :speed, :strava_id, orders_attributes:[:first_name, :last_name, :address, :map_sku, :state, :email])
+		params.permit(:title, :image, :map_url, :format, :distance, :time, :elevation, :speed, :strava_id, orders_attributes:[:first_name, :last_name, :email, :address, :post_code, :city, :country, :map_sku, :state])
 	end
 end

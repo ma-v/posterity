@@ -104,7 +104,17 @@ const initMap = () => {
             myData.append("time", mapTime.value);
             myData.append("strava_id", document.getElementById('map_orders_attributes_0_strava_id').value);
 
-            let ordersAttributes = {first_name: document.getElementById('map_orders_attributes_0_first_name').value, last_name: document.getElementById('map_orders_attributes_0_last_name').value, address: document.getElementById('map_orders_attributes_0_address').value, email: document.getElementById('map_orders_attributes_0_email').value, state: "pending", map_sku: `map_${Math.floor(Math.random() * 1000000000)}`};
+            let ordersAttributes = {
+              first_name: document.getElementById('map_orders_attributes_0_first_name').value,
+              last_name: document.getElementById('map_orders_attributes_0_last_name').value,
+              email: document.getElementById('map_orders_attributes_0_email').value,
+              address: document.getElementById('map_orders_attributes_0_address').value,
+              post_code: document.getElementById('map_orders_attributes_0_post_code').value,
+              city: document.getElementById('map_orders_attributes_0_city').value,
+              country: document.getElementById('map_orders_attributes_0_country').value,
+              state: "pending",
+              map_sku: `map_${Math.floor(Math.random() * 1000000000)}`
+            };
             myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
 
              axios({

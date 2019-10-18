@@ -63,7 +63,12 @@
 				x
 			<% end %>
 	      </td>
-	      <td><%= order.address%></td>
+	      <td>
+          <%= order.address%>
+          <%= order.post_code%>
+          <%= order.city%>
+          <%= order.country%>
+				</td>
 	      <td><%= order.first_name%>, <%= order.last_name%></td>
 	      <td><%= order.email%></td>
 	      <td><a href="https://www.strava.com/athletes/<%= order.user.strava_id%>" target="blank"><i class="fab fa-strava"></i></a></td>

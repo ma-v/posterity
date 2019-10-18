@@ -178,8 +178,11 @@
                                   <%= f.simple_fields_for :orders do |orders_form| %>
                                       <%= orders_form.input :first_name %>
                                       <%= orders_form.input :last_name %>
-                                      <%= orders_form.input :address %>
                                       <%= orders_form.input :email %>
+                                      <%= orders_form.input :address %>
+                                      <%= orders_form.input :post_code %>
+                                      <%= orders_form.input :city %>
+                                      <%= orders_form.input :country, as: :country, priority: ['FR'] %>
                                       <%= orders_form.input :strava_id, :as => :hidden, :input_html => { :value => @athlete_id } %>
                                   <% end %>
                             <% end %>
