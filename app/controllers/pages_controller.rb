@@ -8,5 +8,6 @@ class PagesController < ApplicationController
 
   def admin_dashboard
   	@orders = Order.all
+    @users = User.all
   end
 end

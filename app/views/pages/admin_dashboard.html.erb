@@ -1,112 +1,153 @@
-<h1>Last Orders</h1>
-<div class="mr-3 ml-3">
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Command #</th>
-      <th scope="col">Status</th>
-      <th scope="col">Price</th>
-      <th scope="col">Map-Url</th>
-      <th scope="col">Title</th>
-      <th scope="col">Elev</th>
-      <th scope="col">Dist</th>
-      <th scope="col">Time</th>
-      <th scope="col">Speed</th>
-      <th scope="col">Address</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Strava Profile</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-	<% @orders.sort_by {|order| order.id}.reverse.each do |order| %>
-	    <tr>
-	      <td><%= order.created_at %></td>
-	      <td><%= order.id %></td>
-	      <td>
-	      	<% if order.state === "paid" %>
-	      		<span class="badge badge-success">Paid</span>
-			<% else %>
-				<span class="badge badge-warning">Pending</span>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="true">Orders</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="users-tab" data-toggle="tab" href="#users" role="tab" aria-controls="users" aria-selected="false">Users</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+  	<h1>Last Orders</h1>
+		<div class="mr-3 ml-3">
+		<table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Date</th>
+		      <th scope="col">Command #</th>
+		      <th scope="col">Status</th>
+		      <th scope="col">Price</th>
+		      <th scope="col">Map-Url</th>
+		      <th scope="col">Title</th>
+		      <th scope="col">Elev</th>
+		      <th scope="col">Dist</th>
+		      <th scope="col">Time</th>
+		      <th scope="col">Speed</th>
+		      <th scope="col">Address</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Strava Profile</th>
+		      <th scope="col">Actions</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+			<% @orders.sort_by {|order| order.id}.reverse.each do |order| %>
+			    <tr>
+			      <td><%= order.created_at %></td>
+			      <td><%= order.id %></td>
+			      <td>
+			      	<% if order.state === "paid" %>
+			      		<span class="badge badge-success">Paid</span>
+					<% else %>
+						<span class="badge badge-warning">Pending</span>
+					<% end %>
+			      </td>
+			      <td><%= order.map.price_cents / 100 %>€</td>
+			      <td><a href="<%= order.map.map_url %>" target="blank">MB_Url</a>  <a href="<%= order.map.image %>" target="blank">Pdf</a></td>
+			      <td><%= order.map.title%></td>
+			      <td>
+			      	<% if order.map.elevation%>
+			      		<%= order.map.elevation %>
+					<% else %>
+						x
+					<% end %>
+			      </td>
+			      <td>
+			      	<% if order.map.distance%>
+			      		<%= order.map.distance / 1000 %> km
+					<% else %>
+						x
+					<% end %>
+			      </td>
+			      <td>
+			      	<% if order.map.time %>
+			      		<%= [order.map.time / 3600, order.map.time / 60 % 60, order.map.time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':') %>
+					<% else %>
+						x
+					<% end %>
+			      </td>
+			      <td>
+			      	<% if order.map.speed %>
+			      		<%= order.map.speed / 100 * 3.6 %>km/h
+					<% else %>
+						x
+					<% end %>
+			      </td>
+			      <td>
+		          <%= order.address%>
+		          <%= order.post_code%>
+		          <%= order.city%>
+		          <%= order.country%>
+						</td>
+			      <td><%= order.first_name%>, <%= order.last_name%></td>
+			      <td><%= order.email%></td>
+			      <td><a href="https://www.strava.com/athletes/<%= order.user.strava_id%>" target="blank"><i class="fab fa-strava"></i></a></td>
+			      <td>
+					<% if order.shipped %>
+						<span class="badge badge-success">Shipped</span>
+						<%= link_to(order_path(order), class: "btn btn-light btn-sm", method: :put, data: { confirm: "Are you sure?" }) do %>
+							<i class="fas fa-undo-alt"></i>
+						<% end %>
+			       <% else %>
+			       		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			       		  	<i class="fas fa-paper-plane"></i>
+			       		</button>
+			       		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			       		  <div class="modal-dialog" role="document">
+			       		    <div class="modal-content">
+			       		      <div class="modal-header">
+			       		        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			       		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			       		          <span aria-hidden="true">&times;</span>
+			       		        </button>
+			       		      </div>
+			       		      <div class="modal-body">
+			       		      	<%= simple_form_for(order) do |f| %>
+			       		      		<%= f.input :tracking_number %>
+			       		      		<%= f.button :submit, class: "btn btn-primary", data: { confirm: "Are you sure?" } %>
+			       		      	<% end %>
+			       		      </div>
+			       		      <div class="modal-footer">
+			       		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			       		      </div>
+			       		    </div>
+			       		  </div>
+			       		</div>
+			       <% end %>
+			      </td>
+			    </tr>
 			<% end %>
-	      </td>
-	      <td><%= order.map.price_cents / 100 %>€</td>
-	      <td><a href="<%= order.map.map_url %>" target="blank">MB_Url</a>  <a href="<%= order.map.image %>" target="blank">Pdf</a></td>
-	      <td><%= order.map.title%></td>
-	      <td>
-	      	<% if order.map.elevation%>
-	      		<%= order.map.elevation %>
-			<% else %>
-				x
+		  </tbody>
+		</table>
+		</div>
+  </div>
+  <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+  	<h1>All users</h1>
+		<div class="mr-3 ml-3">
+		<table class="table">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Creation date</th>
+		      <th scope="col">Strava Link</th>
+		      <th scope="col">First Name / Name</th>
+		    </tr>
+		  </thead>
+			<tbody>
+			<% @users.sort_by {|user| user.id}.reverse.each do |user| %>
+			    <tr>
+			      <td><%= user.created_at %></td>
+			      <td><a href="https://www.strava.com/athletes/<%= user.strava_id%>" target="blank"><i class="fab fa-strava"></i></a></td>
+			      <td>
+							<% if user.orders.length > 0 %>
+								<%= user.orders.first.first_name %><%= user.orders.first.last_name %>
+							<% else %>
+								<p>X</p>
+							<% end %>
+						</td>
+			    </tr>
 			<% end %>
-	      </td>
-	      <td>
-	      	<% if order.map.distance%>
-	      		<%= order.map.distance / 1000 %> km
-			<% else %>
-				x
-			<% end %>
-	      </td>
-	      <td>
-	      	<% if order.map.time %>
-	      		<%= [order.map.time / 3600, order.map.time / 60 % 60, order.map.time % 60].map{|t| t.to_s.rjust(2,'0')}.join(':') %>
-			<% else %>
-				x
-			<% end %>
-	      </td>
-	      <td>
-	      	<% if order.map.speed %>
-	      		<%= order.map.speed / 100 * 3.6 %>km/h
-			<% else %>
-				x
-			<% end %>
-	      </td>
-	      <td>
-          <%= order.address%>
-          <%= order.post_code%>
-          <%= order.city%>
-          <%= order.country%>
-				</td>
-	      <td><%= order.first_name%>, <%= order.last_name%></td>
-	      <td><%= order.email%></td>
-	      <td><a href="https://www.strava.com/athletes/<%= order.user.strava_id%>" target="blank"><i class="fab fa-strava"></i></a></td>
-	      <td>
-			<% if order.shipped %>
-				<span class="badge badge-success">Shipped</span>
-				<%= link_to(order_path(order), class: "btn btn-light btn-sm", method: :put, data: { confirm: "Are you sure?" }) do %>
-					<i class="fas fa-undo-alt"></i>
-				<% end %>
-	       <% else %>
-	       		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-	       		  	<i class="fas fa-paper-plane"></i>
-	       		</button>
-	       		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	       		  <div class="modal-dialog" role="document">
-	       		    <div class="modal-content">
-	       		      <div class="modal-header">
-	       		        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-	       		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	       		          <span aria-hidden="true">&times;</span>
-	       		        </button>
-	       		      </div>
-	       		      <div class="modal-body">
-	       		      	<%= simple_form_for(order) do |f| %>
-	       		      		<%= f.input :tracking_number %>
-	       		      		<%= f.button :submit, class: "btn btn-primary", data: { confirm: "Are you sure?" } %>
-	       		      	<% end %>
-	       		      </div>
-	       		      <div class="modal-footer">
-	       		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	       		      </div>
-	       		    </div>
-	       		  </div>
-	       		</div>
-	       <% end %>
-	      </td>
-	    </tr>
-	<% end %>
-  </tbody>
-</table>
+		  </tbody>
+		</table>
+		</div>
+  </div>
 </div>
