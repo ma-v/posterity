@@ -26,6 +26,7 @@
 		      <th scope="col">Address</th>
 		      <th scope="col">Name</th>
 		      <th scope="col">Email</th>
+		      <th scope="col">Phone</th>
 		      <th scope="col">Strava Profile</th>
 		      <th scope="col">Actions</th>
 		    </tr>
@@ -81,6 +82,7 @@
 						</td>
 			      <td><%= order.first_name%>, <%= order.last_name%></td>
 			      <td><%= order.email%></td>
+			      <td><%= order.phone%></td>
 			      <td><a href="https://www.strava.com/athletes/<%= order.user.strava_id%>" target="blank"><i class="fab fa-strava"></i></a></td>
 			      <td>
 					<% if order.shipped %>

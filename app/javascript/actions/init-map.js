@@ -108,6 +108,7 @@ const initMap = () => {
               first_name: document.getElementById('map_orders_attributes_0_first_name').value,
               last_name: document.getElementById('map_orders_attributes_0_last_name').value,
               email: document.getElementById('map_orders_attributes_0_email').value,
+              phone: document.getElementById('map_orders_attributes_0_phone').value,
               address: document.getElementById('map_orders_attributes_0_address').value,
               post_code: document.getElementById('map_orders_attributes_0_post_code').value,
               city: document.getElementById('map_orders_attributes_0_city').value,
