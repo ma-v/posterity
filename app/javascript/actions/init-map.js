@@ -11,8 +11,8 @@ import { checkSpeed } from '../actions/fields-input';
 import * as turf from '@turf/turf';
 
 let map = null;
-let currentCenter = [5.380000, 43.300000];
-let currentZoom = 11.5;
+let currentCenter = [2.3322219, 48.856614];
+let currentZoom = 11.3;
 let currentTraceColor = "#0214BB";
 let currentStyleId = "cjzv3hkp30svs1cp5xeexv54g";
 let allCoordinates = [];
