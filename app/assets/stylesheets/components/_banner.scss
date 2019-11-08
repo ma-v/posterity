@@ -24,16 +24,44 @@
   padding-bottom: 8px;
 }
 
+.inspiration img {
+  border: solid 4px black;
+  height: auto;
+  width: 65%;
+  margin-bottom: 20px;
+  &:hover {
+    box-shadow: 0 10px 10px LightGray;
+  }
+}
+
+.inspiration-small img {
+  border: solid 4px black;
+  height: auto;
+  width: 45%;
+  margin-bottom: 20px;
+  &:hover {
+    box-shadow: 0 10px 10px LightGray;
+  }
+}
+
+.carousel-control-next-icon {
+    background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-prev-icon {
+    background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 8 8'%3E%3Cpath d='M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
 .bottom-banner {
   background-size: cover;
   background-position: center;
-  height: 800px;
+  height: 700px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   .carousel-card {
-    height: 600px;
-    width: 400px;
+    height: 90%;
+    width: 60%;
     border: 7px solid white;
     box-shadow: 0 0 12px white;
   }
