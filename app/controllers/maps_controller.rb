@@ -19,6 +19,12 @@ class MapsController < ApplicationController
 	    end
 	end
 
+	def classics_challenge
+		@map = Map.new
+		@order = Order.new
+		@map.orders << @order
+	end
+
 	def create
 		@map = Map.new(map_params)
 		if map_params[:format] == "21x30cm - 25€"

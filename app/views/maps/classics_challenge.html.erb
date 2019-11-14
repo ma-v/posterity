@@ -1,0 +1,21 @@
+<%= simple_form_for(@map) do |f| %>
+    <%= f.input :format, :as => :hidden, :input_html => { :value => "" } %>
+    <%= f.input :map_url, :as => :hidden, :input_html => { :value => "https://api.mapbox.com/styles/v1/ma-v/cjzv3hkp30svs1cp5xeexv54g/static/2.3322219,48.856614,11.3/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjazJ2cGRvNWUwNng0M21ucWQzcGFqY2g2In0.WBlEoavgZb1PPFxXqtKKqQ&logo=false" } %>
+    <%= f.input :title, :as => :hidden, :input_html => { :value => "" } %>
+    <%= f.input :distance, :as => :hidden, :input_html => { :value => "" } %>
+    <%= f.input :speed, :as => :hidden, :input_html => { :value => "" } %>
+    <%= f.input :elevation, :as => :hidden, :input_html => { :value => "" } %>
+    <%= f.input :time, :as => :hidden, :input_html => { :value => "" } %>
+      <%= f.simple_fields_for :orders do |orders_form| %>
+          <%= orders_form.input :first_name %>
+          <%= orders_form.input :last_name %>
+          <%= orders_form.input :email %>
+          <%= orders_form.input :phone %>
+          <%= orders_form.input :address %>
+          <%= orders_form.input :post_code %>
+          <%= orders_form.input :city %>
+          <%= orders_form.input :country, as: :country, priority: ['FR'] %>
+          <%= orders_form.input :strava_id, :as => :hidden, :input_html => { :value => @athlete_id } %>
+      <% end %>
+<% end %>
+<button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
