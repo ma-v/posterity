@@ -1,6 +1,4 @@
-import { map } from '../actions/init-map';
 import { generateUrl } from '../actions/init-map';
-
 
 const switchToCheckout = () => {
 	const orderButton = document.querySelector("#order-button");
@@ -10,10 +8,10 @@ const switchToCheckout = () => {
 	const mapTitleField = document.querySelector("#map_title");
 	const mapFormat = document.querySelector("#map_format");
 	const mapDistance = document.getElementById('map_distance');
-  	const mapElevation = document.getElementById('map_elevation');
-  	const mapSpeed = document.getElementById('map_speed');
-  	const mapTime = document.getElementById('map_time');
-  	const mapUrl = document.getElementById('map_map_url');
+	const mapElevation = document.getElementById('map_elevation');
+	const mapSpeed = document.getElementById('map_speed');
+	const mapTime = document.getElementById('map_time');
+	const mapUrl = document.getElementById('map_map_url');
 
 	const togglePills = () => {
 		customBox.classList.toggle("show");
@@ -52,26 +50,10 @@ const switchToCheckout = () => {
 				mapTime.value = "";
 			}
 		});
-
+	}
+	if (backButton) {
 		backButton.addEventListener("click", togglePills);
-		}
-}
-
-$(document).ready(function() {
-    let mapLabel = document.querySelector(".ride-title");
-    let mapTitle = document.querySelector(".title-map");
-    if (mapLabel) {
-	  mapLabel.addEventListener('input', event => {
-	    if (mapLabel.value.length >= 1) {
-	      mapTitle.style.display = "initial";
-	    }
-	    else {
-	      mapTitle.style.display = "none";
-	    }
-	  });	
-    }
-});
-
-  // if .ride-title is empty, display:none(.map-title)
+	}
+};
 
 export {switchToCheckout};

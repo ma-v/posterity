@@ -9,7 +9,4 @@ const loadLoader = () => {
   };
 };
 
-
 export { loadLoader };
-
-

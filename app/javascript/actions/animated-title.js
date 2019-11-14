@@ -8,7 +8,7 @@ const animateTitle = () => {
 		  smartBackspace: true,
 		  typeSpeed: 75,
 		  showCursor: false
-		});	
+		});
  	}
 };
 

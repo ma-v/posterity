@@ -3,28 +3,19 @@ import "bootstrap";
 //IMPORT CSS
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
-import { animateTitle } from '../actions/animated-title';
-
 
 //IMPORT JS
-import { initMap } from '../actions/init-map';
-import { loadLoader } from '../actions/loader';
-
-
-import {switchToCheckout} from '../actions/customize-map-box';
-initMap();
-switchToCheckout();
+import { animateTitle } from '../actions/animated-title';
 animateTitle();
+
+import { initMap } from '../actions/init-map';
+initMap();
+
+import { displayActivities } from '../actions/display-activities';
+displayActivities();
+
+import {switchToCheckout} from '../actions/switch-to-checkout';
+switchToCheckout();
+
+import { loadLoader } from '../actions/loader';
 loadLoader();
-
-
-$(document).ready(function(){
-  $(".content").slice(0, 16).show();
-  $("#loadMore").on("click", function(e){
-    e.preventDefault();
-    $(".content:hidden").slice(0, 16).slideDown();
-    if($(".content:hidden").length == 0) {
-      $("#loadMore").text("").addClass("noContent");
-    }
-  });
-});
