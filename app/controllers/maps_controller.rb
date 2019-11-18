@@ -20,9 +20,7 @@ class MapsController < ApplicationController
 	end
 
 	def classics_challenge
-		@map = Map.new
-		@order = Order.new
-		@map.orders << @order
+		@map = Map.new()
 	end
 
 	def create
