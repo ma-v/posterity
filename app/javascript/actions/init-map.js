@@ -353,7 +353,7 @@ if (submitMap) {
       let myData = new FormData();
         myData.append("title", mapTitle.value);
         myData.append("map_url", mapUrl.value);
-        myData.append("format", mapFormat.value);
+        myData.append("format", "30x45cm - 39€");
         myData.append("distance", mapDistance.value);
         myData.append("elevation", mapElevation.value);
         myData.append("speed", mapSpeed.value);

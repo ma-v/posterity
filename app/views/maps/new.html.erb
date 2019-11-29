@@ -150,7 +150,7 @@
                         <div class='tab_right'>
                           <%= simple_form_for(@map) do |f| %>
                             <%= f.input_field :format, as: :radio_buttons, collection: ['21x30cm - 25€', '30x45cm - 39€', '50x70cm - 55€'], class: 'value-format', :checked => ['21x30cm - 25€', '30x45cm - 39€', '50x70cm - 55€'].first %>
-                        <% end %>
+                          <% end %>
                         <% if @activities %>
                             <div id="order-button" class="btn-posterity">Checkout</div>
                         <% end %>

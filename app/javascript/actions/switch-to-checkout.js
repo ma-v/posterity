@@ -24,7 +24,9 @@ const switchToCheckout = () => {
 		orderButton.addEventListener("click", function() {
 			togglePills();
 			mapTitleField.value = document.querySelector(".ride-title").value;
-			mapFormat.value = document.querySelector(".form-check .value-format:checked").value;
+			if (document.querySelector(".form-check .value-format:checked")) {
+				mapFormat.value = document.querySelector(".form-check .value-format:checked").value ;
+			}
 			mapUrl.value = generateUrl();
 			if (document.querySelector("#activity-distance").checked) {
 				mapDistance.value = document.dist;

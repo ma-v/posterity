@@ -1,8 +1,11 @@
+<div class="navbar navbar-expand-sm navbar-lewagon">
+  <%= image_tag "logo-cc.png", class: "logo-cc"%>
+</div>
 <div id="new-map-body">
   <div class="container-fluid py-5">
     <div class="row">
       <div class="display-map col-5 my-auto ml-auto">
-        <div id="classics_challenge_map" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        <div id="classics_challenge_map""></div>
       </div>
       <div id="customize-map" class="col-5 my-auto mr-auto">
         <div class="tab-content" id="pills-tabContent">
@@ -25,12 +28,16 @@
                           </div>
                         </div>
                         <div class='tab_right'>
-                          <div class="m-3"  id='menu'>
+                          <div class="m-3">
                           <h3>Choisissez un style pour votre poster</h3>
                             <input class="btn btn-cc-yellow" id='ck2kdyw7z0e5t1ck0ffszwwh3' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="CC-yellow">
+                            <input class="btn btn-cc-white" id='other' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="CC-white">
                             <div class="input-group-prepend fields-input title-map-input mt-3">
                               <input class="ride-title form-control" placeholder="Ajoutez un titre à votre poster" type="text" name="ride-title">
                             </div>
+                            <%= simple_form_for(@map) do |f| %>
+                              <%= f.input_field :format, :as => :hidden, collection: ['21x30cm - 25€', '30x45cm - 39€', '50x70cm - 55€'], class: 'value-format', :checked => ['30x45cm - 39€'].first %>
+                            <% end %>
                           </div>
                         </div>
                       </div>
@@ -39,8 +46,7 @@
                     <label for='tab-4'>
                       <div class='app_inner__tab'>
                         <h2>
-
-                          <div id="order-button" class="btn-posterity">39,99€</div>
+                          <div id="order-button" class="btn-posterity">Checkout</div>
                         </h2>
                       </div>
                     </label>

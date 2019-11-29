@@ -11,6 +11,9 @@ animateTitle();
 import { initMap } from '../actions/init-map';
 initMap();
 
+import { changeCcStyle } from '../actions/classics-challenge';
+changeCcStyle();
+
 import { displayActivities } from '../actions/display-activities';
 displayActivities();
 
