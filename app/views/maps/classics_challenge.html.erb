@@ -1,21 +1,101 @@
-<%= simple_form_for(@map) do |f| %>
-    <%= f.input :format, :as => :hidden, :input_html => { :value => "" } %>
-    <%= f.input :map_url, :as => :hidden, :input_html => { :value => "https://api.mapbox.com/styles/v1/ma-v/cjzv3hkp30svs1cp5xeexv54g/static/2.3322219,48.856614,11.3/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjazJ2cGRvNWUwNng0M21ucWQzcGFqY2g2In0.WBlEoavgZb1PPFxXqtKKqQ&logo=false" } %>
-    <%= f.input :title, :as => :hidden, :input_html => { :value => "" } %>
-    <%= f.input :distance, :as => :hidden, :input_html => { :value => "" } %>
-    <%= f.input :speed, :as => :hidden, :input_html => { :value => "" } %>
-    <%= f.input :elevation, :as => :hidden, :input_html => { :value => "" } %>
-    <%= f.input :time, :as => :hidden, :input_html => { :value => "" } %>
-      <%= f.simple_fields_for :orders do |orders_form| %>
-          <%= orders_form.input :first_name %>
-          <%= orders_form.input :last_name %>
-          <%= orders_form.input :email %>
-          <%= orders_form.input :phone %>
-          <%= orders_form.input :address %>
-          <%= orders_form.input :post_code %>
-          <%= orders_form.input :city %>
-          <%= orders_form.input :country, as: :country, priority: ['FR'] %>
-          <%= orders_form.input :strava_id, :as => :hidden, :input_html => { :value => @athlete_id } %>
-      <% end %>
-<% end %>
-<button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
+<div id="new-map-body">
+  <div class="container-fluid py-5">
+    <div class="row">
+      <div class="display-map col-5 my-auto ml-auto">
+        <div id="classics_challenge_map" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </div>
+      <div id="customize-map" class="col-5 my-auto mr-auto">
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane fade show active" id="pills-customize-map" role="tabpanel" aria-labelledby="pills-home-tab">
+            <div id="accordion-style">
+              <div class='right'>
+                <div class='app'>
+                  <div class='app_inner'>
+                    <input id='tab-2' name='buttons' type='radio' checked>
+                    <label for='tab-2'>
+                      <div class='app_inner__tab'>
+                        <h2>
+                        <i class="icon fas fa-palette"></i>
+                        Design
+                        </h2>
+                        <div class='tab_left'>
+                          <i class='big icon fas fa-palette'></i>
+                          <div class='tab_left__image'>
+                            <i class='icon fas fa-palette'></i>
+                          </div>
+                        </div>
+                        <div class='tab_right'>
+                          <div class="m-3"  id='menu'>
+                          <h3>Choisissez un style pour votre poster</h3>
+                            <input class="btn btn-cc-yellow" id='ck2kdyw7z0e5t1ck0ffszwwh3' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="CC-yellow">
+                            <div class="input-group-prepend fields-input title-map-input mt-3">
+                              <input class="ride-title form-control" placeholder="Ajoutez un titre à votre poster" type="text" name="ride-title">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </label>
+                    <input id='tab-4' name='buttons' type='radio'>
+                    <label for='tab-4'>
+                      <div class='app_inner__tab'>
+                        <h2>
+
+                          <div id="order-button" class="btn-posterity">39,99€</div>
+                        </h2>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-checkout" role="tabpanel" aria-labelledby="pills-profile-tab">
+              <div id="accordion-style">
+                <div class='right'>
+                  <div class='app'>
+                    <div class='app_inner'>
+                      <input id='tab-5' name='buttons' type='radio'>
+                      <label for='tab-5'>
+                        <div class='order'>
+                          <h5>Please fill your information to create your order:</h5>
+                          <div class="row justify-content-center m-3 box-order">
+                            <div id="back-button" class="btn-posterity order-btn"><i class="fas fa-arrow-left"></i> Back to custom</div>
+                            <%= simple_form_for(@map) do |f| %>
+                              <%= f.input :format, :as => :hidden, :input_html => { :value => "30x45cm - 39€" } %>
+                              <%= f.input :map_url, :as => :hidden, :input_html => { :value => "https://api.mapbox.com/styles/v1/ma-v/cjzv3hkp30svs1cp5xeexv54g/static/2.3322219,48.856614,11.3/914x1280@2x?access_token=pk.eyJ1IjoibWEtdiIsImEiOiJjazJ2cGRvNWUwNng0M21ucWQzcGFqY2g2In0.WBlEoavgZb1PPFxXqtKKqQ&logo=false" } %>
+                              <%= f.input :title, :as => :hidden, :input_html => { :value => "" } %>
+                              <%= f.input :distance, :as => :hidden, :input_html => { :value => "" } %>
+                              <%= f.input :speed, :as => :hidden, :input_html => { :value => "" } %>
+                              <%= f.input :elevation, :as => :hidden, :input_html => { :value => "" } %>
+                              <%= f.input :time, :as => :hidden, :input_html => { :value => "" } %>
+                              <%= f.simple_fields_for :orders do |orders_form| %>
+                                <%= orders_form.input :first_name %>
+                                <%= orders_form.input :last_name %>
+                                <%= orders_form.input :email %>
+                                <%= orders_form.input :phone %>
+                                <%= orders_form.input :address %>
+                                <%= orders_form.input :post_code %>
+                                <%= orders_form.input :city %>
+                                <%= orders_form.input :country, as: :country, priority: ['FR'] %>
+                                <%= orders_form.input :strava_id, :as => :hidden, :input_html => { :value => "Unknown" } %>
+                              <% end %>
+                            <% end %>
+                            <div class="checkout d-flex justify-content-around">
+                              <button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
+                            </div>
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="openstreetmaps-credit">
+      Map data by <a href="http://www.openstreetmap.org/" target="blank">OpenStreetMaps contributors</a>
+    </div>
+  </div>
+</div>

@@ -302,52 +302,89 @@ if (submitMap) {
     if (mapFormat.value === '50x70cm - 55€') {
       pdfFormat = "b2";
     }
-    printPdf.build()
-    .format(pdfFormat)
-    .portrait() // Unnecessary since it's the default but it's included for clarity.
-    .print(map, mapboxgl)
-    .then(function (pdf) {
-      var rawData = pdf.output("blob");
-      let myData = new FormData();
-      myData.append("title", mapTitle.value);
-      if (mapUrl.value.length > 7800) {
-        myData.append("image", rawData, "map.pdf");
-      } else {
-        myData.append("map_url", mapUrl.value);
-      }
-      myData.append("format", mapFormat.value);
-      myData.append("distance", mapDistance.value);
-      myData.append("elevation", mapElevation.value);
-      myData.append("speed", mapSpeed.value);
-      myData.append("time", mapTime.value);
-      myData.append("strava_id", document.getElementById('map_orders_attributes_0_strava_id').value);
-
-      let ordersAttributes = {
-        first_name: document.getElementById('map_orders_attributes_0_first_name').value,
-        last_name: document.getElementById('map_orders_attributes_0_last_name').value,
-        email: document.getElementById('map_orders_attributes_0_email').value,
-        phone: document.getElementById('map_orders_attributes_0_phone').value,
-        address: document.getElementById('map_orders_attributes_0_address').value,
-        post_code: document.getElementById('map_orders_attributes_0_post_code').value,
-        city: document.getElementById('map_orders_attributes_0_city').value,
-        country: document.getElementById('map_orders_attributes_0_country').value,
-        state: "pending",
-        map_sku: `map_${Math.floor(Math.random() * 1000000000)}`
-      };
-      myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
-
-      axios({
-        method: 'POST',
-        url: '/maps',
-        data: myData,
-        headers: {
-          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+    if (mapElement) {
+      printPdf.build()
+      .format(pdfFormat)
+      .portrait() // Unnecessary since it's the default but it's included for clarity.
+      .print(map, mapboxgl)
+      .then(function (pdf) {
+        var rawData = pdf.output("blob");
+        let myData = new FormData();
+        myData.append("title", mapTitle.value);
+        if (mapUrl.value.length > 7800) {
+          myData.append("image", rawData, "map.pdf");
+        } else {
+          myData.append("map_url", mapUrl.value);
         }
-      }).then(function (response) {
-        window.location.href = `/maps/${response.data.map_id}/orders/${response.data.id}/payments/new`
+        myData.append("format", mapFormat.value);
+        myData.append("distance", mapDistance.value);
+        myData.append("elevation", mapElevation.value);
+        myData.append("speed", mapSpeed.value);
+        myData.append("time", mapTime.value);
+        myData.append("strava_id", document.getElementById('map_orders_attributes_0_strava_id').value);
+
+        let ordersAttributes = {
+          first_name: document.getElementById('map_orders_attributes_0_first_name').value,
+          last_name: document.getElementById('map_orders_attributes_0_last_name').value,
+          email: document.getElementById('map_orders_attributes_0_email').value,
+          phone: document.getElementById('map_orders_attributes_0_phone').value,
+          address: document.getElementById('map_orders_attributes_0_address').value,
+          post_code: document.getElementById('map_orders_attributes_0_post_code').value,
+          city: document.getElementById('map_orders_attributes_0_city').value,
+          country: document.getElementById('map_orders_attributes_0_country').value,
+          state: "pending",
+          map_sku: `map_${Math.floor(Math.random() * 1000000000)}`
+        };
+        myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
+
+        axios({
+          method: 'POST',
+          url: '/maps',
+          data: myData,
+          headers: {
+            'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+          }
+        }).then(function (response) {
+          window.location.href = `/maps/${response.data.map_id}/orders/${response.data.id}/payments/new`
+        });
+        // .catch(function (error) {...}
       });
-      // .catch(function (error) {...}
-    });
+    } else {
+      let myData = new FormData();
+        myData.append("title", mapTitle.value);
+        myData.append("map_url", mapUrl.value);
+        myData.append("format", mapFormat.value);
+        myData.append("distance", mapDistance.value);
+        myData.append("elevation", mapElevation.value);
+        myData.append("speed", mapSpeed.value);
+        myData.append("time", mapTime.value);
+        myData.append("strava_id", document.getElementById('map_orders_attributes_0_strava_id').value);
+
+        let ordersAttributes = {
+          first_name: document.getElementById('map_orders_attributes_0_first_name').value,
+          last_name: document.getElementById('map_orders_attributes_0_last_name').value,
+          email: document.getElementById('map_orders_attributes_0_email').value,
+          phone: document.getElementById('map_orders_attributes_0_phone').value,
+          address: document.getElementById('map_orders_attributes_0_address').value,
+          post_code: document.getElementById('map_orders_attributes_0_post_code').value,
+          city: document.getElementById('map_orders_attributes_0_city').value,
+          country: document.getElementById('map_orders_attributes_0_country').value,
+          state: "pending",
+          map_sku: `map_${Math.floor(Math.random() * 1000000000)}`
+        };
+        myData = objectToFormData(ordersAttributes, myData, "orders_attributes[]");
+
+        axios({
+          method: 'POST',
+          url: '/maps',
+          data: myData,
+          headers: {
+            'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+          }
+        }).then(function (response) {
+          window.location.href = `/maps/${response.data.map_id}/orders/${response.data.id}/payments/new`
+        });
+    }
   }, false);
 }
 

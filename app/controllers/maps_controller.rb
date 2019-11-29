@@ -20,7 +20,10 @@ class MapsController < ApplicationController
 	end
 
 	def classics_challenge
-		@map = Map.new()
+		@user = User.find_or_initialize_by(strava_id: "Unknown")
+		@user.save
+		@map = Map.new
+		@map.orders << Order.new
 	end
 
 	def create
