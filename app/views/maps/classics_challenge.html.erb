@@ -1,6 +1,3 @@
-<div class="navbar navbar-expand-sm navbar-lewagon">
-  <%= image_tag "logo-cc.png", class: "logo-cc"%>
-</div>
 <div id="new-map-body">
   <div class="container-fluid py-5">
     <div class="row">
@@ -14,6 +11,12 @@
               <div class='right'>
                 <div class='app'>
                   <div class='app_inner'>
+                    <input id='tab-1' name='buttons' type='radio' disabled="true">
+                    <label for='tab-1'>
+                      <div class='app_inner__tab'>
+                        <h2><i id="cc-icon"><%= image_tag "logo-cc.png", class: "logo-cc"%></i>2019 Finisher Poster</h2>
+                      </div>
+                    </label>
                     <input id='tab-2' name='buttons' type='radio' checked>
                     <label for='tab-2'>
                       <div class='app_inner__tab'>
@@ -42,7 +45,7 @@
                         </div>
                       </div>
                     </label>
-                    <input id='tab-4' name='buttons' type='radio'>
+                    <input id='tab-4' name='buttons' type='radio' disabled="true">
                     <label for='tab-4'>
                       <div class='app_inner__tab'>
                         <h2>

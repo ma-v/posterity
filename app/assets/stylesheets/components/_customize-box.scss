@@ -219,10 +219,19 @@ a {
         font-size: 18px;
         i{
           position: relative;
-          right: 271px;
+          right: 170px;
           opacity:0.3;
           transition:all .3s;
         }
+        #cc-icon{
+          opacity: 1;
+        }
+        //.cc-icon .logo-cc{
+        //   width: 30px;
+        // }
+				img{
+					width: 60px;
+				}
       }
 
       .tab-track {
