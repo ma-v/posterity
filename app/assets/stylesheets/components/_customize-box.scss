@@ -154,12 +154,11 @@ a {
       display:block;
       width:100%;
       &:nth-of-type(1) .app_inner__tab{
-        background:whitesmoke;
+        background:white;
         height:auto;
         padding-bottom: 50px;
         &:hover{
           transition:all .2s;
-          background:darken(white,4%);
         }
         height:200px;
         .tab_left__image{
@@ -172,7 +171,6 @@ a {
         padding-bottom: 50px;
         &:hover{
           transition:all .2s;
-          background:darken(white,4%);
         }
         .tab_left__image{
           background:#0214BB
@@ -184,7 +182,6 @@ a {
         padding-bottom: 50px;
         &:hover{
           transition:all .2s;
-          background:darken(white,4%);
         }
         .tab_left__image{
           background:#0214BB
@@ -196,7 +193,6 @@ a {
         padding-bottom: 50px;
         &:hover{
           transition:all .2s;
-          background:darken(white,4%);
         }
         .tab_left__image{
           background:#0214BB
