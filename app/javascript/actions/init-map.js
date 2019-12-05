@@ -123,11 +123,13 @@ const selectRide = () => {
 
 const addTitle = () => {
   let titleFrame = document.querySelector('.title-map');
-  let titleField = document.querySelector('.ride-title');
-  if (titleField) {
-    titleField.addEventListener('keyup', (event) => {
-      titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
-    });
+  if (titleFrame) {
+    let titleField = document.querySelector('.ride-title');
+    if (titleField) {
+      titleField.addEventListener('keyup', (event) => {
+        titleFrame.innerHTML = `<p class="legend-title">${titleField.value}</p>`;
+      });
+    }
   }
 };
 

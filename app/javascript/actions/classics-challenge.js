@@ -20,4 +20,23 @@ const changeCcStyle = () => {
   }
 }
 
+const addNameCc = () => {
+  let frame = document.querySelector('#classics_challenge_map');
+  if (frame){
+    frame.insertAdjacentHTML('beforeend', '<div class="classics-challenge-name"><div class="name-map"></div><div>');
+  }
+
+  const addName = () => {
+    let nameFrame = document.querySelector('.name-map');
+    let nameField = document.querySelector('.ride-title');
+    if (nameField) {
+      nameField.addEventListener('keyup', (event) => {
+        nameFrame.innerHTML = `<p class="legend-name">${nameField.value}</p>`;
+      });
+    }
+  };
+  addName();
+};
+
 export { changeCcStyle };
+export { addNameCc };

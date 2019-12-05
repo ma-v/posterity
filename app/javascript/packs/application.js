@@ -14,6 +14,9 @@ initMap();
 import { changeCcStyle } from '../actions/classics-challenge';
 changeCcStyle();
 
+import { addNameCc } from '../actions/classics-challenge';
+addNameCc();
+
 import { displayActivities } from '../actions/display-activities';
 displayActivities();
 
