@@ -8,7 +8,7 @@ class MapsController < ApplicationController
 		  	# @stats = JSON.parse(RestClient.get("https://www.strava.com/api/v3/athletes/#{@athlete_id}/stats?page=&per_page=", {Authorization: "Bearer #{@access_token}"}))
 		  	# @biggest_ride = @stats["biggest_ride_distance"]
 
-		  	@activities = JSON.parse(RestClient.get("https://www.strava.com/api/v3/athlete/activities?per_page=100", {Authorization: "Bearer #{@access_token}"}))
+		  	@activities = JSON.parse(RestClient.get("https://www.strava.com/api/v3/athlete/activities?per_page=200", {Authorization: "Bearer #{@access_token}"}))
 
 				@user = User.find_or_initialize_by(strava_id: "#{@athlete_id}")
 				@user.save

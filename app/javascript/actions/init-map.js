@@ -82,7 +82,7 @@ const initMap = () => {
         pdfFormat = "a3";
       }
       if (mapFormat.value === '50x70cm - 55€') {
-        pdfFormat = "b2";
+        pdfFormat = "b3";
       }
         printPdf.build()
           .format(pdfFormat)
