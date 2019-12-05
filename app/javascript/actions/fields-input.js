@@ -1,100 +1,88 @@
 import {selectRide} from './init-map';
 import {initMap} from './init-map';
 
-const addFields = () => {
-  let titleFrame = document.querySelector('.map-title');
+const fieldsInputs = () => {
+  let titleFrame = document.querySelector('.info-track');
   let distanceField = document.querySelector('#activity-distance');
   let speedField = document.querySelector('#activity-speed');
   let timeField = document.querySelector('#activity-time');
   let elevationField = document.querySelector('#activity-elevation');
-  distanceField.addEventListener('change', checkDistance);
-  speedField.addEventListener('change', checkSpeed);
-  timeField.addEventListener('change', checkTime);
-  elevationField.addEventListener('change', checkElevation);
-};
 
-const checkDistance = () => {
+  const addFields = () => {
+    distanceField.addEventListener('change', checkDistance);
+    speedField.addEventListener('change', checkSpeed);
+    timeField.addEventListener('change', checkTime);
+    elevationField.addEventListener('change', checkElevation);
+  };
 
-  let titleFrame = document.querySelector('.info-track');
-  let distanceField = document.querySelector('#activity-distance');
-  let isChecked = distanceField.checked;
-  const distanceInput = document.querySelector('.legend-infos-dist');
-
-     if (isChecked) {
-        if(distanceInput) {
-          distanceInput.remove();
-
-        }
+  const checkDistance = () => {
+    let isChecked = distanceField.checked;
+    const distanceInfo = document.querySelector('.legend-infos-dist');
+    if (isChecked) {
+      if(distanceInfo) {
+        distanceInfo.remove();
+      }
       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-dist"> <i class="fas fa-road"></i> ${Math.round(document.dist/1000)} kms</p>`;
-     } else {
-        if (distanceInput != null)
-          distanceInput.remove();
-     }
+    } else {
+      if (distanceInfo)
+      distanceInfo.remove();
+    }
   };
 
-const checkSpeed = () => {
+  const checkSpeed = () => {
+    let isChecked = speedField.checked;
+    const speedInfo = document.querySelector('.legend-infos-speed');
 
-  let titleFrame = document.querySelector('.info-track');
-  let speedField = document.querySelector('#activity-speed');
-  let speedInfo = document.querySelector('.legend-infos-speed');
-  let isChecked = speedField.checked;
-
-     if (isChecked) {
+    if (isChecked) {
       if(speedInfo) {
-          speedInfo.remove();
-        }
-      titleFrame.innerHTML = titleFrame.innerHTML +`<p class="legend-infos-speed"> <i class="fas fa-tachometer-alt"></i> ${Math.round(document.speed*3.6)} km/h</p>`;
-     } else{
-        let speedInfo = document.querySelector('.legend-infos-speed');
-        if (speedInfo != null)
         speedInfo.remove();
+      }
+      titleFrame.innerHTML = titleFrame.innerHTML +`<p class="legend-infos-speed"> <i class="fas fa-tachometer-alt"></i> ${Math.round(document.speed*3.6)} km/h</p>`;
+    } else{
+      let speedInfo = document.querySelector('.legend-infos-speed');
+      if (speedInfo)
+      speedInfo.remove();
 
-     }
+    }
   };
-const checkTime = () => {
+  const checkTime = () => {
+    let isChecked = timeField.checked;
+    let timeInfo = document.querySelector('.legend-infos-time');
 
-  let titleFrame = document.querySelector('.info-track');
-  let timeField = document.querySelector('#activity-time');
-  let timeInfo = document.querySelector('.legend-infos-time');
-  let isChecked = timeField.checked;
-
-     if (isChecked) {
+    if (isChecked) {
       if(timeInfo) {
         timeInfo.remove();
-        }
+      }
       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-time"> <i class="fas fa-stopwatch"></i> ${new Date(document.time * 1000).toISOString().substr(11, 8)}</p>`;
-     } else{
-        let timeInfo = document.querySelector('.legend-infos-time');
-        if (timeInfo != null)
-        timeInfo.remove();
+    } else{
+      let timeInfo = document.querySelector('.legend-infos-time');
+      if (timeInfo)
+      timeInfo.remove();
 
-     }
+    }
   };
 
-const checkElevation = () => {
+  const checkElevation = () => {
+    let elevationInfo = document.querySelector('.legend-infos-elevation');
+    let isChecked = elevationField.checked;
 
-  let titleFrame = document.querySelector('.info-track');
-  let elevationInfo = document.querySelector('.legend-infos-elevation');
-  let elevationField = document.querySelector('#activity-elevation');
-  let isChecked = elevationField.checked;
-
-     if (isChecked) {
+    if (isChecked) {
       if(elevationInfo) {
-          elevationInfo.remove();
-        }
+        elevationInfo.remove();
+      }
       titleFrame.innerHTML = titleFrame.innerHTML + `<p class="legend-infos-elevation"><i class="fas fa-mountain"></i> ${document.elev} m</p>`;
-     } else{
-        let elevationInfo = document.querySelector('.legend-infos-elevation');
-        if (elevationInfo != null)
-         elevationInfo.remove();
-
-
-     }
+    } else{
+      let elevationInfo = document.querySelector('.legend-infos-elevation');
+      if (elevationInfo)
+      elevationInfo.remove();
+    }
   };
 
+  addFields();
+  checkDistance();
+  checkSpeed();
+  checkTime();
+  checkElevation();
+};
 
-export {addFields};
-export {checkDistance};
-export {checkElevation};
-export {checkTime};
-export {checkSpeed};
+export { fieldsInputs };

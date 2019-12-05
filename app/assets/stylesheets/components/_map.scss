@@ -13,6 +13,18 @@
   height: 600px;
 }
 
+#classics_challenge_map {
+  background: url("https://res.cloudinary.com/ma-v/image/upload/v1575553773/CC-AFFICHE-RECAP-V3_1_uo4q4o.jpg");
+  background-size: cover;
+  width: 426px;//426px;
+  height: 600px;//600px;
+  border: 15px solid black;
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: left !important;
+  position: relative;
+}
+
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
   #mapid.small {
     width: 300px;
@@ -53,6 +65,36 @@
   align-items: center;
 }
 
+.legend-title {
+    padding-bottom: -10px;
+    text-align: center;
+    color: black;
+    font-family: "Abril Fatface", "Helvetica", "sans-serif";
+    font-weight: 300;
+    font-size: 24px;
+    padding-top: 20px;
+  }
+
+.classics-challenge-name {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  z-index: 1000;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.legend-name {
+    padding-bottom: -10px;
+    text-align: left;
+    color: #1D1F1F;
+    font-family: "Roboto", "Helvetica", "sans-serif";
+    font-weight: 600;
+    font-size: 10px;
+    padding-bottom: 27px;
+    padding-left: 29px;
+  }
+
 .fields-icon {
   height: 20px;
 }
@@ -83,18 +125,6 @@
 //   // opacity: 0.6;
 // }
 
-.legend-title {
-    padding-bottom: -10px;
-    text-align: center;
-    color: black;
-    font-family: "Abril Fatface", "Helvetica", "sans-serif";
-    font-weight: 300;
-    font-size: 24px;
-    padding-top: 20px;
-  }
-
 .enter-title {
   font-family: "Abril Fatface";
 }
-
-

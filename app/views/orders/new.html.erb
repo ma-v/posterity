@@ -1,15 +1,13 @@
 <div class="container">
   <div class="row">
-  <h1>Your Poster Order</h1>
-
-<%= simple_form_for([@map, @order]) do |f| %>
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :address %>
-    <%= f.label :format, "Price :" %> <%= @map.price %> €
-    <br>
-    <%= f.button :submit, class: "btn-primary" %>
-<% end %>
-</div>
-
+    <h1>Your Poster Order</h1>
+    <%= simple_form_for([@map, @order]) do |f| %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :address %>
+        <%= f.label :format, "Price :" %> <%= @map.price %> €
+        <br>
+        <%= f.button :submit, class: "btn-primary" %>
+    <% end %>
+  </div>
 </div>

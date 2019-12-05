@@ -19,6 +19,13 @@ class MapsController < ApplicationController
 	    end
 	end
 
+	def classics_challenge
+		@user = User.find_or_initialize_by(strava_id: "Unknown")
+		@user.save
+		@map = Map.new
+		@map.orders << Order.new
+	end
+
 	def create
 		@map = Map.new(map_params)
 		if map_params[:format] == "21x30cm - 25€"

@@ -150,7 +150,7 @@
                         <div class='tab_right'>
                           <%= simple_form_for(@map) do |f| %>
                             <%= f.input_field :format, as: :radio_buttons, collection: ['21x30cm - 25€', '30x45cm - 39€', '50x70cm - 55€'], class: 'value-format', :checked => ['21x30cm - 25€', '30x45cm - 39€', '50x70cm - 55€'].first %>
-                        <% end %>
+                          <% end %>
                         <% if @activities %>
                             <div id="order-button" class="btn-posterity">Checkout</div>
                         <% end %>
@@ -173,26 +173,7 @@
                           <h5>Please fill your information to create your order:</h5>
                           <div class="row justify-content-center m-3 box-order">
                             <div id="back-button" class="btn-posterity order-btn"><i class="fas fa-arrow-left"></i> Back to custom</div>
-                            <%= simple_form_for(@map) do |f| %>
-                                <%= f.input :format, :as => :hidden, :input_html => { :value => "" } %>
-                                <%= f.input :map_url, :as => :hidden, :input_html => { :value => "" } %>
-                                <%= f.input :title, :as => :hidden, :input_html => { :value => "" } %>
-                                <%= f.input :distance, :as => :hidden, :input_html => { :value => "" } %>
-                                <%= f.input :speed, :as => :hidden, :input_html => { :value => "" } %>
-                                <%= f.input :elevation, :as => :hidden, :input_html => { :value => "" } %>
-                                <%= f.input :time, :as => :hidden, :input_html => { :value => "" } %>
-                                  <%= f.simple_fields_for :orders do |orders_form| %>
-                                      <%= orders_form.input :first_name %>
-                                      <%= orders_form.input :last_name %>
-                                      <%= orders_form.input :email %>
-                                      <%= orders_form.input :phone %>
-                                      <%= orders_form.input :address %>
-                                      <%= orders_form.input :post_code %>
-                                      <%= orders_form.input :city %>
-                                      <%= orders_form.input :country, as: :country, priority: ['FR'] %>
-                                      <%= orders_form.input :strava_id, :as => :hidden, :input_html => { :value => @athlete_id } %>
-                                  <% end %>
-                            <% end %>
+                            <%= render 'form', map: @map %>
                             <div class="checkout d-flex justify-content-around">
                               <button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
                             </div>
