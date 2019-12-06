@@ -14,15 +14,27 @@
 }
 
 #classics_challenge_map {
-  background: url("https://res.cloudinary.com/ma-v/image/upload/v1575553773/CC-AFFICHE-RECAP-V3_1_uo4q4o.jpg");
-  background-size: cover;
-  width: 426px;//426px;
-  height: 600px;//600px;
+  width: 914px;//426px;
+  height: 1280px;//600px;
   border: 15px solid black;
   border-radius: 2px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   text-align: left !important;
   position: relative;
+  // background: url("https://res.cloudinary.com/ma-v/image/upload/v1575553773/CC-AFFICHE-RECAP-V3_1_uo4q4o.jpg");
+  // background-size: cover;
+  // width: 426px;//426px;
+  // height: 600px;//600px;
+  // border: 15px solid black;
+  // border-radius: 2px;
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  // text-align: left !important;
+  // position: relative;
+}
+
+#classics_challenge_map.small {
+  width: 426px;
+  height: 600px;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {

@@ -1,6 +1,29 @@
+import mapboxgl from 'mapbox-gl';
+
+let map = null;
 const ccMap = document.querySelector("#classics_challenge_map");
 const yellowStyle = document.querySelector(".btn-cc-yellow");
 const whiteStyle = document.querySelector(".btn-cc-white");
+
+const initCcMap = () => {
+  if (ccMap) {
+    mapboxgl.accessToken = ccMap.dataset.mapboxApiKey;
+    map = new mapboxgl.Map({
+      container: 'classics_challenge_map',
+      style: `mapbox://styles/ma-v/ck2kdyw7z0e5t1ck0ffszwwh3`,
+      center: [2.244501165260317, 48.25895909243698],
+      zoom: 7.489156596090959,
+      interactive: false
+    });
+    ccMap.classList.add("small");
+    const mapCanvas = document.querySelector('.mapboxgl-canvas');
+    mapCanvas.style.width = "100%";
+    mapCanvas.style.height = "100%";
+  }
+}
+
+
+
 
 const changeCcStyle = () => {
   if (yellowStyle) {
@@ -38,5 +61,6 @@ const addNameCc = () => {
   addName();
 };
 
+export { initCcMap };
 export { changeCcStyle };
 export { addNameCc };
