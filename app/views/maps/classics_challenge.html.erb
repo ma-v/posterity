@@ -14,16 +14,15 @@
                     <input id='tab-1' name='buttons' type='radio' disabled="true">
                     <label for='tab-1'>
                       <div class='app_inner__tab'>
-                        <h2><i id="cc-icon"><%= image_tag "logo-cc.png", class: "logo-cc"%></i>Poster Finisher 2019</h2>
+                        <h2><i id="cc-icon"><%= image_tag "logo-cc.png", class: "logo-cc"%></i>POSTER FINISHER 2019</h2>
                       </div>
                     </label>
                     <input id='tab-2' name='buttons' type='radio' checked>
                     <label for='tab-2'>
                       <div class='app_inner__tab'>
-                        <!-- <h2>Design</h2> -->
+                        <h2>La récompense</h2>
                         <div class='tab_right'>
                           <div class="m-3">
-                            <h2>La récompense</h2>
                             <p id="classic-challenge-text">Un joli cadeau à s'offrir que ce poster personnalisé, si vous avez aimé la saison 3 des Classics Challenge. Chez Posterity, on l'a roulée et on l’adorée. La procédure est hyper simple. Connectez-vous à votre Strava, sélectionnez vos activités, saisissez votre nom, c'est tout.</p>
                           <!-- <h3>Choisissez un style pour votre poster</h3> -->
                             <!-- <input class="btn btn-cc-yellow" id='ck2kdyw7z0e5t1ck0ffszwwh3' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="CC-yellow">
@@ -35,13 +34,13 @@
                                   <% @activities.first(100).each do |activity|%>
                                      <div class="content"><span class="btn btn-track activity-cc-btn p-2 m-2" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>" data-distance="<%= activity["distance"]%>" data-time="<%= activity["moving_time"]%>" data-speed="<%= activity["average_speed"] %>" data-elevation="<%= activity["total_elevation_gain"] %>"><%= activity["name"] %></span></div>
                                   <% end %>
-                                  <a href="#" id="loadMore" class="btn-posterity">Load More</a>
+                                  <a href="#" id="loadMoreCc" class="btn-posterity">Load More</a>
                                 </div>
                                 <div class="input-group-prepend fields-input title-map-input mt-3">
                                   <input class="ride-title form-control" placeholder="Ajoutez votre nom sur le poster" type="text" name="ride-name" value="<%= @user_name %>">
                                 </div>
                               <% else %>
-                                <h3>You have no recorded activities on this strava account</h3>
+                                <h3>Aucune activité publique liée à ce compte strava</h3>
                               <% end %>
                             <% else %>
                               <div class="row justify-content-center">
@@ -56,14 +55,17 @@
                         </div>
                       </div>
                     </label>
-                    <input id='tab-4' name='buttons' type='radio' disabled="true">
-                    <label for='tab-4'>
-                      <div class='app_inner__tab'>
-                        <h2>
-                          <div id="order-cc-button" class="btn-posterity">Commandez</div>
-                        </h2>
-                      </div>
-                    </label>
+                    <% if @activities %>
+                      <input id='tab-4' name='buttons' type='radio' disabled="true">
+                      <label for='tab-4'>
+                        <div class='app_inner__tab'>
+                          <h2>
+                            <h3>Format A3 - Papier d'Art Old Mill 300g - (livraison comprise)</h3>
+                            <div id="order-cc-button" class="btn-posterity">Commandez - 39.99€</div>
+                          </h2>
+                        </div>
+                      </label>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -77,9 +79,9 @@
                       <input id='tab-5' name='buttons' type='radio'>
                       <label for='tab-5'>
                         <div class='order'>
-                          <h2>Merci de renseigner vos informations pour finaliser la commande</h2>
+                          <h2>Renseignez vos informations pour finaliser la commande</h2>
                           <div class="row justify-content-center m-3 box-order">
-                            <div id="back-cc-button" class="btn-posterity"><i class="fas fa-arrow-left"></i> Back to custom</div>
+                            <div id="back-cc-button" class="btn-posterity"><i class="fas fa-arrow-left"></i>Retour à la personnalisation</div>
                             <%= simple_form_for(@map) do |f| %>
                               <%= f.input :format, :as => :hidden, :input_html => { :value => "30x45cm - 39€" } %>
                               <%= f.input :map_url, :as => :hidden, :input_html => { :value => "" } %>
@@ -101,7 +103,7 @@
                               <% end %>
                             <% end %>
                             <div class="checkout d-flex justify-content-around">
-                              <button class="btn-posterity order-btn" id="submit_cc_map">Get your poster</button>
+                              <button class="btn-posterity order-btn" id="submit_cc_map">Commandez - 39.99€</button>
                             </div>
                           </div>
                         </div>

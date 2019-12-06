@@ -188,7 +188,7 @@ if (submitMap) {
   submitMap.addEventListener('click', (event) => {
     let pdfFormat = "";
     if (ccMap) {
-      pdfFormat = "a2";
+      pdfFormat = "b3";
       printPdf.build()
       .format(pdfFormat)
       .portrait() // Unnecessary since it's the default but it's included for clarity.
