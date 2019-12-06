@@ -2,7 +2,11 @@
   <div class="container-fluid py-5">
     <div class="row">
       <div class="display-map col-5 my-auto ml-auto">
-        <div id="classics_challenge_map" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        <% if @activities %>
+          <div id="classics_challenge_map" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        <% else %>
+          <div id="classics_challenge_default"></div>
+        <% end %>
       </div>
       <div id="customize-map" class="col-5 my-auto mr-auto">
         <div class="tab-content" id="pills-tabContent">
