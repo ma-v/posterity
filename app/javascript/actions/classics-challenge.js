@@ -1,9 +1,22 @@
 import mapboxgl from 'mapbox-gl';
+import printPdf from 'mapbox-print-pdf';
+import mapboxDraw from '@mapbox/mapbox-gl-draw';
+import polyline from '@mapbox/polyline';
+import axios from 'axios';
+import { fieldsInputs } from '../actions/fields-input';
+import * as turf from '@turf/turf';
 
 let map = null;
 const ccMap = document.querySelector("#classics_challenge_map");
+let allCoordinates = [];
+let selectedCoordinates = [];
+let allPolylines = [];
+let selectedPolylines = [];
 const yellowStyle = document.querySelector(".btn-cc-yellow");
 const whiteStyle = document.querySelector(".btn-cc-white");
+document.dist = 0;
+document.elev = 0;
+document.time = 0;
 
 const initCcMap = () => {
   if (ccMap) {
@@ -19,8 +32,70 @@ const initCcMap = () => {
     const mapCanvas = document.querySelector('.mapboxgl-canvas');
     mapCanvas.style.width = "100%";
     mapCanvas.style.height = "100%";
+    let frame = document.querySelector('#classics_challenge_map');
+    frame.insertAdjacentHTML('beforeend', '<div class="classics_challenge_legend"><div class="name-map"></div><div class="info--cc-track"></div><div>');
+    frame.insertAdjacentHTML('beforeend', '<div class="classics_challenge_map_logo"><div>');
   }
+
+    selectRide();
 }
+
+const selectRide = () => {
+  document.querySelectorAll('.activity-cc-btn').forEach(activityBtn => {
+    const id = activityBtn.dataset.id
+    let polyline_i = activityBtn.dataset.polyline;
+    allCoordinates[id] = polyline.toGeoJSON(`${polyline_i}`).coordinates;
+    allPolylines[id] = polyline_i;
+  });
+
+  document.querySelectorAll('.activity-cc-btn').forEach(activityBtn => {
+    activityBtn.addEventListener("click", () => {
+      event.currentTarget.classList.toggle("pressed");
+      const id = activityBtn.dataset.id;
+
+      if (activityBtn.classList.contains("pressed")) {
+        document.dist += parseInt(activityBtn.dataset.distance);
+        document.elev += parseInt(activityBtn.dataset.elevation);
+        const curvedLine = turf.bezierSpline(turf.lineString(allCoordinates[id]), {
+          "resolution": 1000000,
+          "sharpness": 0
+        });
+        map.addLayer({
+          "id": `route_${id}`,
+          "type": "line",
+          "source": {
+            "type": "geojson",
+            "data": curvedLine
+          },
+          "layout": {
+            "line-join": "round",
+            "line-cap": "round",
+            "visibility": "visible"
+          },
+          "paint": {
+            "line-color": "#0E0000",
+            "line-width": 5
+          }
+        });
+      } else {
+        document.dist -= parseInt(activityBtn.dataset.distance);
+        document.elev -= parseInt(activityBtn.dataset.elevation);
+        document.time -= parseInt(activityBtn.dataset.time);
+        document.speed = (document.dist)/(document.time) || 0;
+        map.setLayoutProperty(`route_${id}`, 'visibility', 'none');
+        map.removeLayer(`route_${id}`);
+        map.removeSource(`route_${id}`);
+      }
+      selectedCoordinates = [];
+      selectedPolylines = [];
+      document.querySelectorAll('.activity-cc-btn.pressed').forEach(btn => {
+        let id = btn.dataset.id;
+        allCoordinates[id].forEach(c => selectedCoordinates.push(c));
+        selectedPolylines.push(allPolylines[id]);
+      })
+    });
+  });
+};
 
 
 
@@ -44,11 +119,6 @@ const changeCcStyle = () => {
 }
 
 const addNameCc = () => {
-  let frame = document.querySelector('#classics_challenge_map');
-  if (frame){
-    frame.insertAdjacentHTML('beforeend', '<div class="classics-challenge-name"><div class="name-map"></div><div>');
-  }
-
   const addName = () => {
     let nameFrame = document.querySelector('.name-map');
     let nameField = document.querySelector('.ride-title');

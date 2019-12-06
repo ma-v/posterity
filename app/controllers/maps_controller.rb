@@ -20,10 +20,24 @@ class MapsController < ApplicationController
 	end
 
 	def classics_challenge
-		@user = User.find_or_initialize_by(strava_id: "Unknown")
-		@user.save
-		@map = Map.new
-		@map.orders << Order.new
+		if (@token = params[:code])
+
+			@response = JSON.parse(RestClient.post("https://www.strava.com/oauth/token?client_id=38164&client_secret=0b227c9387f9b5a8ce9b9833387192004098d95c&code=#{@token}&grant_type=authorization_code", {}))
+			@access_token = @response["access_token"]
+			@athlete_id = @response["athlete"]["id"]
+			# @stats = JSON.parse(RestClient.get("https://www.strava.com/api/v3/athletes/#{@athlete_id}/stats?page=&per_page=", {Authorization: "Bearer #{@access_token}"}))
+			# @biggest_ride = @stats["biggest_ride_distance"]
+
+			@activities = JSON.parse(RestClient.get("https://www.strava.com/api/v3/athlete/activities?per_page=100", {Authorization: "Bearer #{@access_token}"}))
+			user_infos = JSON.parse(RestClient.get("https://www.strava.com/api/v3/athlete", {Authorization: "Bearer #{@access_token}"}))
+			@user_name = user_infos["username"]
+			@user = User.find_or_initialize_by(strava_id: "#{@athlete_id}")
+			@user.save
+			@map = Map.new
+			@map.orders << Order.new
+		else
+			@map = Map.new
+		end
 	end
 
 	def create

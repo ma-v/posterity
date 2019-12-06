@@ -13,6 +13,10 @@
         font-size: 16px;
     }
 
+    .tab_right {
+        width: 100%;
+    }
+
     #classic-challenge-text {
       font-family: "Roboto";
       font-weight: 100;
@@ -41,5 +45,29 @@
             padding-right: 24px;
     	}
 
+    }
+
+    .btn-track {
+      color: $gray;
+      border-color: #f6d500;
+      height: 30px;
+      width: 80px;
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline-block;
+      text-overflow: ellipsis;
+    	font-size: 7px;
+        &:hover {
+          background: #f6d500;
+          color: white;
+        }
+        &.pressed {
+        background: #f6d500;
+        color: white;
+        &:hover {
+          background: transparent;
+          color: #f6d500;
+          }
+        }
     }
 }
