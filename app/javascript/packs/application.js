@@ -27,5 +27,5 @@ initCcMap();
 import { changeCcStyle } from '../actions/classics-challenge';
 changeCcStyle();
 
-import { addNameCc } from '../actions/classics-challenge';
-addNameCc();
+// import { addNameCc } from '../actions/classics-challenge';
+// addNameCc();

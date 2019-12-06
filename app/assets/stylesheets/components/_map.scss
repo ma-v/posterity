@@ -119,7 +119,7 @@
 }
 
 .legend-name {
-    padding-bottom: -10px;
+    padding-top: 6px;
     text-align: left;
     color: #1D1F1F;
     font-family: "Roboto", "Helvetica", "sans-serif";
@@ -128,6 +128,26 @@
     padding-bottom: 27px;
     padding-left: 29px;
   }
+
+.legend-dist {
+    position: absolute;
+    top: 14px;
+    left: 172px;
+    color: #1D1F1F;
+    font-family: "Roboto", "Helvetica", "sans-serif";
+    font-weight: 300;
+    font-size: 8px;
+}
+
+.legend-elev {
+    position: absolute;
+    top: 46px;
+    left: 172px;
+    color: #1D1F1F;
+    font-family: "Roboto", "Helvetica", "sans-serif";
+    font-weight: 300;
+    font-size: 8px;
+}
 
 .fields-icon {
   height: 20px;

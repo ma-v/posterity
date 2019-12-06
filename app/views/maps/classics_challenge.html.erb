@@ -3,10 +3,6 @@
     <div class="row">
       <div class="display-map col-5 my-auto ml-auto">
         <div id="classics_challenge_map" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-        <div class="classics_challenge_lengend">
-          <div class="name-map"></div>
-          <div class="info--cc-track"></div>
-        </div>
       </div>
       <div id="customize-map" class="col-5 my-auto mr-auto">
         <div class="tab-content" id="pills-tabContent">
@@ -41,17 +37,17 @@
                                   <% end %>
                                   <a href="#" id="loadMore" class="btn-posterity">Load More</a>
                                 </div>
+                                <div class="input-group-prepend fields-input title-map-input mt-3">
+                                  <input class="ride-title form-control" placeholder="Ajoutez votre nom sur le poster" type="text" name="ride-name" value="<%= @user_name %>">
+                                </div>
                               <% else %>
                                 <h3>You have no recorded activities on this strava account</h3>
                               <% end %>
                             <% else %>
                               <div class="row justify-content-center">
-                                  <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/classics_challenge&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connect your strava</div></a>
+                                  <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/classics_challenge&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connectez votre Strava</div></a>
                               </div>
                             <% end %>
-                            </div>
-                            <div class="input-group-prepend fields-input title-map-input mt-3">
-                              <input class="ride-title form-control" placeholder="Ajoutez votre nom sur le poster" type="text" name="ride-name">
                             </div>
                             <%= simple_form_for(@map) do |f| %>
                               <%= f.input_field :format, :as => :hidden, collection: ['21x30cm - 25€', '30x45cm - 39€', '50x70cm - 55€'], class: 'value-format', :checked => ['30x45cm - 39€'].first %>

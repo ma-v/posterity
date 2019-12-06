@@ -33,11 +33,14 @@ const initCcMap = () => {
     mapCanvas.style.width = "100%";
     mapCanvas.style.height = "100%";
     let frame = document.querySelector('#classics_challenge_map');
-    frame.insertAdjacentHTML('beforeend', '<div class="classics_challenge_legend"><div class="name-map"></div><div class="info--cc-track"></div><div>');
+    frame.insertAdjacentHTML('beforeend', '<div class="classics_challenge_legend"><div class="name-map"></div><div class="cc-distance"></div><div class="cc-elev"></div><div>');
     frame.insertAdjacentHTML('beforeend', '<div class="classics_challenge_map_logo"><div>');
   }
 
     selectRide();
+    addDistCc();
+    addElevCc();
+    addNameCc();
 }
 
 const selectRide = () => {
@@ -60,6 +63,8 @@ const selectRide = () => {
           "resolution": 1000000,
           "sharpness": 0
         });
+        addDistCc();
+        addElevCc();
         map.addLayer({
           "id": `route_${id}`,
           "type": "line",
@@ -80,8 +85,8 @@ const selectRide = () => {
       } else {
         document.dist -= parseInt(activityBtn.dataset.distance);
         document.elev -= parseInt(activityBtn.dataset.elevation);
-        document.time -= parseInt(activityBtn.dataset.time);
-        document.speed = (document.dist)/(document.time) || 0;
+        addDistCc();
+        addElevCc();
         map.setLayoutProperty(`route_${id}`, 'visibility', 'none');
         map.removeLayer(`route_${id}`);
         map.removeSource(`route_${id}`);
@@ -123,6 +128,7 @@ const addNameCc = () => {
     let nameFrame = document.querySelector('.name-map');
     let nameField = document.querySelector('.ride-title');
     if (nameField) {
+      nameFrame.innerHTML = `<p class="legend-name">${nameField.value}</p>`;
       nameField.addEventListener('keyup', (event) => {
         nameFrame.innerHTML = `<p class="legend-name">${nameField.value}</p>`;
       });
@@ -131,6 +137,21 @@ const addNameCc = () => {
   addName();
 };
 
+const addDistCc = () => {
+  const addDist = () => {
+    let distFrame = document.querySelector('.cc-distance');
+    distFrame.innerHTML = `<p class="legend-dist">${Math.round(document.dist/1000)} KM</p>`;
+  };
+  addDist();
+};
+
+const addElevCc = () => {
+  const addElev = () => {
+    let elevFrame = document.querySelector('.cc-elev');
+    elevFrame.innerHTML = `<p class="legend-elev">${document.elev} M.</p>`;
+  };
+  addElev();
+};
+
 export { initCcMap };
 export { changeCcStyle };
-export { addNameCc };
