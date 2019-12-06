@@ -17,7 +17,7 @@
                         <h2><i id="cc-icon"><%= image_tag "logo-cc.png", class: "logo-cc"%></i>Poster Finisher 2019</h2>
                       </div>
                     </label>
-                    <input id='tab-2' name='buttons' type='radio' checked disabled="true">
+                    <input id='tab-2' name='buttons' type='radio' checked>
                     <label for='tab-2'>
                       <div class='app_inner__tab'>
                         <!-- <h2>Design</h2> -->
@@ -60,7 +60,7 @@
                     <label for='tab-4'>
                       <div class='app_inner__tab'>
                         <h2>
-                          <div id="order-button" class="btn-posterity">Commandez</div>
+                          <div id="order-cc-button" class="btn-posterity">Commandez</div>
                         </h2>
                       </div>
                     </label>
@@ -79,10 +79,10 @@
                         <div class='order'>
                           <h2>Merci de renseigner vos informations pour finaliser la commande</h2>
                           <div class="row justify-content-center m-3 box-order">
-                            <div id="back-button" class="btn-posterity"><i class="fas fa-arrow-left"></i> Back to custom</div>
+                            <div id="back-cc-button" class="btn-posterity"><i class="fas fa-arrow-left"></i> Back to custom</div>
                             <%= simple_form_for(@map) do |f| %>
                               <%= f.input :format, :as => :hidden, :input_html => { :value => "30x45cm - 39€" } %>
-                              <%= f.input :map_url, :as => :hidden, :input_html => { :value => "https://res.cloudinary.com/ma-v/image/upload/v1575553773/CC-AFFICHE-RECAP-V3_1_uo4q4o.jpg" } %>
+                              <%= f.input :map_url, :as => :hidden, :input_html => { :value => "" } %>
                               <%= f.input :title, :as => :hidden, :input_html => { :value => "" } %>
                               <%= f.input :distance, :as => :hidden, :input_html => { :value => "" } %>
                               <%= f.input :speed, :as => :hidden, :input_html => { :value => "" } %>
@@ -101,7 +101,7 @@
                               <% end %>
                             <% end %>
                             <div class="checkout d-flex justify-content-around">
-                              <button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
+                              <button class="btn-posterity order-btn" id="submit_cc_map">Get your poster</button>
                             </div>
                           </div>
                         </div>
