@@ -14,6 +14,25 @@
 }
 
 #classics_challenge_map {
+  width: 914px;//426px;
+  height: 1280px;//600px;
+  border: 15px solid black;
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: left !important;
+  position: relative;
+  // background: url("https://res.cloudinary.com/ma-v/image/upload/v1575553773/CC-AFFICHE-RECAP-V3_1_uo4q4o.jpg");
+  // background-size: cover;
+  // width: 426px;//426px;
+  // height: 600px;//600px;
+  // border: 15px solid black;
+  // border-radius: 2px;
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  // text-align: left !important;
+  // position: relative;
+}
+
+#classics_challenge_default {
   background: url("https://res.cloudinary.com/ma-v/image/upload/v1575553773/CC-AFFICHE-RECAP-V3_1_uo4q4o.jpg");
   background-size: cover;
   width: 426px;//426px;
@@ -23,6 +42,11 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   text-align: left !important;
   position: relative;
+}
+
+#classics_challenge_map.small {
+  width: 426px;
+  height: 600px;
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
@@ -75,6 +99,28 @@
     padding-top: 20px;
   }
 
+.classics_challenge_legend {
+  position: absolute;
+  bottom: 0px;
+  background: url("legende-CC.jpg");
+  background-size: 100%;
+  height: 66px;
+  width: 100%;
+  z-index: 1000;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.classics_challenge_map_logo {
+  position: absolute;
+  background: url("logo-map-cc.svg");
+  background-size: cover;
+  height: 85px;
+  width: 85px;
+  top: 200px;
+  left: 60px;
+}
+
 .classics-challenge-name {
   position: absolute;
   bottom: 0px;
@@ -85,7 +131,7 @@
 }
 
 .legend-name {
-    padding-bottom: -10px;
+    padding-top: 6px;
     text-align: left;
     color: #1D1F1F;
     font-family: "Roboto", "Helvetica", "sans-serif";
@@ -94,6 +140,26 @@
     padding-bottom: 27px;
     padding-left: 29px;
   }
+
+.legend-dist {
+    position: absolute;
+    top: 14px;
+    left: 172px;
+    color: #1D1F1F;
+    font-family: "Roboto", "Helvetica", "sans-serif";
+    font-weight: 300;
+    font-size: 8px;
+}
+
+.legend-elev {
+    position: absolute;
+    top: 46px;
+    left: 172px;
+    color: #1D1F1F;
+    font-family: "Roboto", "Helvetica", "sans-serif";
+    font-weight: 300;
+    font-size: 8px;
+}
 
 .fields-icon {
   height: 20px;

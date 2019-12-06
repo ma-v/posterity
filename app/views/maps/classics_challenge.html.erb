@@ -2,7 +2,11 @@
   <div class="container-fluid py-5">
     <div class="row">
       <div class="display-map col-5 my-auto ml-auto">
-        <div id="classics_challenge_map""></div>
+        <% if @activities %>
+          <div id="classics_challenge_map" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        <% else %>
+          <div id="classics_challenge_default"></div>
+        <% end %>
       </div>
       <div id="customize-map" class="col-5 my-auto mr-auto">
         <div class="tab-content" id="pills-tabContent">
@@ -14,22 +18,39 @@
                     <input id='tab-1' name='buttons' type='radio' disabled="true">
                     <label for='tab-1'>
                       <div class='app_inner__tab'>
-                        <h2><i id="cc-icon"><%= image_tag "logo-cc.png", class: "logo-cc"%></i>Poster Finisher 2019</h2>
+                        <h2><i id="cc-icon"><%= image_tag "logo-cc.png", class: "logo-cc"%></i>POSTER FINISHER 2019</h2>
                       </div>
                     </label>
-                    <input id='tab-2' name='buttons' type='radio' checked disabled="true">
+                    <input id='tab-2' name='buttons' type='radio' checked>
                     <label for='tab-2'>
                       <div class='app_inner__tab'>
-                        <!-- <h2>Design</h2> -->
+                        <h2>La récompense</h2>
                         <div class='tab_right'>
                           <div class="m-3">
-                            <h2>Récompense-toi</h2>
-                            <p id="classic-challenge-text">Félicitations, vous avez complété les 11 Classics Challenge de cette 3ème saison. Une très belle édition avec une grande classique, le Paris - Rouen, et un hors série un peu osé où vous avez pédalé jusqu'à Nevers en passant par Auxerre. On a voulu marquer le coup de manière un peu particulière et on vous propose de commander votre propre poster relatant tous ces exploits (il n'y avait malheureusement pas la place de noter toutes les boulangeries qui ont été cassées sur les routes par les pelotons !).</p>
+                            <p id="classic-challenge-text">Un joli cadeau à s'offrir que ce poster personnalisé, si vous avez aimé la saison 3 des Classics Challenge. Chez Posterity, on l'a roulée et on l’adorée. La procédure est hyper simple. Connectez-vous à votre Strava, sélectionnez vos activités, saisissez votre nom, c'est tout.</p>
                           <!-- <h3>Choisissez un style pour votre poster</h3> -->
                             <!-- <input class="btn btn-cc-yellow" id='ck2kdyw7z0e5t1ck0ffszwwh3' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="CC-yellow">
                             <input class="btn btn-cc-white" id='other' type='button' name='rtoggle' data-toggle="tooltip" data-placement="top" title="CC-white"> -->
-                            <div class="input-group-prepend fields-input title-map-input mt-3">
-                              <input class="ride-title form-control" placeholder="Ajoutez votre nom sur le poster" type="text" name="ride-name">
+                            <div class="row justify-content-center mr-0">
+                            <% if @activities %>
+                              <% if @activities.length > 0 %>
+                                <div class="traces-list flex-track">
+                                  <% @activities.first(100).each do |activity|%>
+                                     <div class="content"><span class="btn btn-track activity-cc-btn p-2 m-2" id="activity_<%= @activities.index(activity) + 1 %>" data-id="<%= @activities.index(activity) + 1 %>" data-toggle="tooltip" data-title="<%= activity["name"] %>"data-polyline="<%= activity['map']['summary_polyline'] %>" data-image="<%= activity["type"] %>" data-distance="<%= activity["distance"]%>" data-time="<%= activity["moving_time"]%>" data-speed="<%= activity["average_speed"] %>" data-elevation="<%= activity["total_elevation_gain"] %>"><%= activity["name"] %></span></div>
+                                  <% end %>
+                                  <a href="#" id="loadMoreCc" class="btn-posterity">Load More</a>
+                                </div>
+                                <div class="input-group-prepend fields-input title-map-input mt-3">
+                                  <input class="ride-title form-control" placeholder="Ajoutez votre nom sur le poster" type="text" name="ride-name" value="<%= @user_name %>">
+                                </div>
+                              <% else %>
+                                <h3>Aucune activité publique liée à ce compte strava</h3>
+                              <% end %>
+                            <% else %>
+                              <div class="row justify-content-center">
+                                  <a href="http://www.strava.com/oauth/authorize?client_id=38164&response_type=code&redirect_uri=<%= ENV["APP_HOST"] %>/maps/classics_challenge&approval_prompt=force&scope=read,activity:read"><div class="btn-posterity" id="test">Connectez votre Strava</div></a>
+                              </div>
+                            <% end %>
                             </div>
                             <%= simple_form_for(@map) do |f| %>
                               <%= f.input_field :format, :as => :hidden, collection: ['21x30cm - 25€', '30x45cm - 39€', '50x70cm - 55€'], class: 'value-format', :checked => ['30x45cm - 39€'].first %>
@@ -38,14 +59,17 @@
                         </div>
                       </div>
                     </label>
-                    <input id='tab-4' name='buttons' type='radio' disabled="true">
-                    <label for='tab-4'>
-                      <div class='app_inner__tab'>
-                        <h2>
-                          <div id="order-button" class="btn-posterity">Commander votre poster</div>
-                        </h2>
-                      </div>
-                    </label>
+                    <% if @activities %>
+                      <input id='tab-4' name='buttons' type='radio' disabled="true">
+                      <label for='tab-4'>
+                        <div class='app_inner__tab'>
+                          <h2>
+                            <h3>Format A3 - Papier d'Art Old Mill 300g - (livraison comprise)</h3>
+                            <div id="order-cc-button" class="btn-posterity">Commandez - 39.99€</div>
+                          </h2>
+                        </div>
+                      </label>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -59,12 +83,12 @@
                       <input id='tab-5' name='buttons' type='radio'>
                       <label for='tab-5'>
                         <div class='order'>
-                          <h2>Merci de renseigner vos informations pour finaliser la commande</h2>
+                          <h2>Renseignez vos informations pour finaliser la commande</h2>
                           <div class="row justify-content-center m-3 box-order">
-                            <div id="back-button" class="btn-posterity"><i class="fas fa-arrow-left"></i> Back to custom</div>
+                            <div id="back-cc-button" class="btn-posterity"><i class="fas fa-arrow-left"></i>Retour à la personnalisation</div>
                             <%= simple_form_for(@map) do |f| %>
                               <%= f.input :format, :as => :hidden, :input_html => { :value => "30x45cm - 39€" } %>
-                              <%= f.input :map_url, :as => :hidden, :input_html => { :value => "https://res.cloudinary.com/ma-v/image/upload/v1575553773/CC-AFFICHE-RECAP-V3_1_uo4q4o.jpg" } %>
+                              <%= f.input :map_url, :as => :hidden, :input_html => { :value => "" } %>
                               <%= f.input :title, :as => :hidden, :input_html => { :value => "" } %>
                               <%= f.input :distance, :as => :hidden, :input_html => { :value => "" } %>
                               <%= f.input :speed, :as => :hidden, :input_html => { :value => "" } %>
@@ -83,7 +107,7 @@
                               <% end %>
                             <% end %>
                             <div class="checkout d-flex justify-content-around">
-                              <button class="btn-posterity order-btn" id="submit_map">Get your poster</button>
+                              <button class="btn-posterity order-btn" id="submit_cc_map">Commandez - 39.99€</button>
                             </div>
                           </div>
                         </div>

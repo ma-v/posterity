@@ -11,12 +11,6 @@ animateTitle();
 import { initMap } from '../actions/init-map';
 initMap();
 
-import { changeCcStyle } from '../actions/classics-challenge';
-changeCcStyle();
-
-import { addNameCc } from '../actions/classics-challenge';
-addNameCc();
-
 import { displayActivities } from '../actions/display-activities';
 displayActivities();
 
@@ -25,3 +19,13 @@ switchToCheckout();
 
 import { loadLoader } from '../actions/loader';
 loadLoader();
+
+//CLASSIC CHALLENGE
+import { initCcMap } from '../actions/classics-challenge';
+initCcMap();
+
+import { changeCcStyle } from '../actions/classics-challenge';
+changeCcStyle();
+
+// import { addNameCc } from '../actions/classics-challenge';
+// addNameCc();
