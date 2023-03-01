@@ -2,7 +2,7 @@
   "name": "rides",
   "private": true,
   "dependencies": {
-    "@mapbox/mapbox-gl-draw": "^1.1.2",
+    "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@mapbox/polyline": "^1.1.0",
     "@rails/webpacker": "^4.0.7",
     "@turf/turf": "^5.1.6",
@@ -13,7 +13,7 @@
     "jquery": "^3.4.1",
     "leaflet": "^1.5.1",
     "leaflet-easyprint": "^2.1.9",
-    "mapbox-gl": "^1.2.1",
+    "mapbox-gl": "^1.13.3",
     "mapbox-print-pdf": "^0.4.3",
     "polyline-encoded": "0.0.8",
     "popper.js": "^1.15.0",
